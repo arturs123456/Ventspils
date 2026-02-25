@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="lv"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ventspils Facebook 2025 — Kopējais Pārskats</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #060911;
+  --surface-1: #131820;
+  --surface-2: #1A2030;
+  --surface-3: #232B3B;
+  --border: rgba(255,255,255,0.05);
+  --border-hover: rgba(255,255,255,0.12);
+  --text-1: #F0F2F5;
+  --text-2: #8B95A5;
+  --text-2b: #A8B2C1;
+  --text-3: #5A6577;
+  --accent: #1877F2;
+  --accent-hover: #4293F5;
+  --accent-dim: rgba(24,119,242,0.12);
+  --green: #34D399;
+  --green-dim: rgba(52,211,153,0.12);
+  --red: #F87171;
+  --red-dim: rgba(248,113,113,0.12);
+  --orange: #FBBF24;
+  --orange-dim: rgba(251,191,36,0.12);
+  --purple: #A78BFA;
+  --purple-dim: rgba(167,139,250,0.12);
+  --chart-grid: rgba(255,255,255,0.04);
+  --shadow-1: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+  --shadow-2: 0 4px 16px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.3);
+  --radius-card: 20px;
+  --radius-btn: 12px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--bg);
+  background-image:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(24,119,242,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(167,139,250,0.05) 0%, transparent 60%);
+  background-attachment:fixed;
+  color:var(--text-1);line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+body::after{
+  content:'';position:fixed;top:0;left:0;width:100%;height:100%;
+  opacity:0.015;pointer-events:none;z-index:9999;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.container{max-width:1280px;margin:0 auto;padding:0 48px 120px}
+.hero{padding:100px 48px 80px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:900px;height:600px;background:radial-gradient(ellipse,rgba(24,119,242,0.12) 0%,rgba(167,139,250,0.06) 40%,transparent 70%);animation:heroGlow 8s ease-in-out infinite alternate;pointer-events:none}
+@keyframes heroGlow{0%{opacity:0.8;transform:translateX(-50%) scale(1)}100%{opacity:1;transform:translateX(-50%) scale(1.15)}}
+.hero h1{font-family:'Space Grotesk',sans-serif;font-size:3.4em;font-weight:700;letter-spacing:-0.05em;line-height:1.1;margin-bottom:16px}
+.hero h1 span{background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.subtitle{color:var(--text-2b);font-size:1.15em;letter-spacing:0.02em;opacity:0.7}
+
+/* KPI */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-bottom:80px}
+.kpi{background:rgba(19,24,32,0.6);backdrop-filter:blur(16px);border-radius:20px;padding:28px 24px;border:1px solid rgba(255,255,255,0.05);box-shadow:0 4px 24px rgba(0,0,0,0.2),inset 0 1px 0 rgba(255,255,255,0.03);position:relative;overflow:hidden;text-align:center;transition:all .3s ease}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(24,119,242,0.2),transparent)}
+.kpi:hover{border-color:rgba(24,119,242,0.15);box-shadow:0 8px 32px rgba(0,0,0,0.3),0 0 0 1px rgba(24,119,242,0.08);transform:translateY(-4px)}
+.kpi .label{font-size:0.72em;letter-spacing:2px;color:var(--text-3);text-transform:uppercase;font-weight:600}
+.kpi .value{font-size:2.2em;font-weight:800;margin:10px 0;background:linear-gradient(135deg,var(--text-1),var(--text-2b));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-variant-numeric:tabular-nums}
+.kpi .sub{font-size:0.78em;color:var(--text-2)}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.kpi{animation:fadeInUp 0.6s ease-out both}
+.kpi:nth-child(1){animation-delay:0.05s}.kpi:nth-child(2){animation-delay:0.1s}.kpi:nth-child(3){animation-delay:0.15s}.kpi:nth-child(4){animation-delay:0.2s}.kpi:nth-child(5){animation-delay:0.25s}.kpi:nth-child(6){animation-delay:0.3s}.kpi:nth-child(7){animation-delay:0.35s}.kpi:nth-child(8){animation-delay:0.4s}
+
+/* Section */
+.stitle{font-family:'Space Grotesk',sans-serif;font-size:1.8em;font-weight:700;color:var(--text-1);letter-spacing:-0.02em;margin-bottom:20px;padding-left:4px}
+.stitle .num{font-size:0.6em;color:rgba(24,119,242,0.4);margin-right:10px;font-weight:700}
+.sdesc{color:var(--text-2b);font-size:0.92em;line-height:1.65;max-width:600px;margin-bottom:20px;padding-left:4px}
+.section{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);margin-bottom:100px}
+.section.visible{opacity:1;transform:translateY(0)}
+.cs{background:rgba(19,24,32,0.5);backdrop-filter:blur(12px);border-radius:20px;padding:32px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 2px 16px rgba(0,0,0,0.15),inset 0 1px 0 rgba(255,255,255,0.02);transition:all .3s ease}
+.cs:hover{border-color:rgba(255,255,255,0.08);box-shadow:0 8px 32px rgba(0,0,0,0.25)}
+.ch{display:flex;justify-content:flex-end;align-items:center;gap:8px;margin-bottom:16px}
+.cc button{padding:6px 16px;border-radius:12px;cursor:pointer;font-size:0.76em;font-weight:500;font-family:'Inter',sans-serif;transition:all .2s;border:1px solid var(--border);background:var(--surface-2);color:var(--text-2)}
+.cc button.active{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 0 20px rgba(24,119,242,0.25)}
+.cc button:hover:not(.active){border-color:var(--border-hover);color:var(--text-1)}
+.cw{position:relative;height:420px}.cw.tall{height:580px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+
+/* Tables */
+table{width:100%;border-collapse:collapse;font-size:0.85em;margin-top:8px}
+th,td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--border)}
+th{color:var(--text-3);font-weight:600;font-size:0.72em;text-transform:uppercase;letter-spacing:1px;border-bottom:2px solid rgba(24,119,242,0.1)}
+td{font-variant-numeric:tabular-nums;color:var(--text-2b)}
+tr:hover td{background:rgba(24,119,242,0.03)}
+a{color:var(--accent);text-decoration:none;transition:color .2s}a:hover{color:var(--accent-hover)}
+
+/* Badges */
+.b{display:inline-block;padding:4px 14px;border-radius:14px;font-size:0.76em;font-weight:600}
+.bg{background:var(--green-dim);color:var(--green)}
+.br{background:var(--red-dim);color:var(--red)}
+.bb{background:var(--accent-dim);color:var(--accent)}
+.bo{background:var(--orange-dim);color:var(--orange)}
+
+/* Section divider */
+.sd2{font-family:'Space Grotesk',sans-serif;text-align:center;font-size:1.5em;font-weight:700;color:var(--text-2);letter-spacing:-0.01em;margin:100px 0 60px;padding:24px 0;position:relative}
+.sd2::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:80px;height:3px;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--purple))}
+
+/* Conclusions */
+.con-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:1400px;margin:0 auto}
+.con{background:rgba(19,24,32,0.5);backdrop-filter:blur(12px);border-radius:20px;padding:32px;border:1px solid rgba(255,255,255,0.04);border-left:4px solid var(--accent);box-shadow:0 2px 16px rgba(0,0,0,0.15);transition:all .5s cubic-bezier(.16,1,.3,1);opacity:0;transform:translateY(30px)}
+.con.visible{opacity:1;transform:translateY(0)}
+.con:hover{border-color:rgba(255,255,255,0.06);box-shadow:0 8px 32px rgba(0,0,0,0.25);transform:translateY(-3px)}
+.con h3{margin-bottom:14px;color:var(--accent);font-size:1.15em;font-weight:700}
+.con p{color:var(--text-2b);font-size:0.92em;margin-bottom:10px;line-height:1.7}
+.hl{color:var(--text-1);font-weight:600}.st{color:var(--orange);font-weight:700}
+.good{border-left-color:var(--green)}.good h3{color:var(--green)}
+.bad{border-left-color:var(--red)}.bad h3{color:var(--red)}
+.tip{border-left-color:var(--orange)}.tip h3{color:var(--orange)}
+
+/* Sticky nav */
+.nav{position:sticky;top:0;z-index:100;background:rgba(6,9,17,0.85);backdrop-filter:blur(16px);padding:14px 48px;display:flex;align-items:center;justify-content:center;gap:12px;border-bottom:1px solid var(--border);font-size:0.82em;flex-wrap:wrap}
+.nav a{color:var(--accent);text-decoration:none;font-weight:600;transition:color .2s;white-space:nowrap}.nav a:hover{color:var(--accent-hover)}
+.nav .nav-title{color:var(--text-1);font-family:'Space Grotesk',sans-serif;font-size:1.05em;font-weight:700}
+.nav .nav-sep{color:var(--text-3);margin:0 4px}
+
+/* Acc bar */
+.acc-bar{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 14px;margin:0 auto 48px;max-width:1280px;padding:24px 32px;border-radius:20px;background:rgba(19,24,32,0.5);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.04)}
+.acc-bar a{font-size:0.76em;padding:6px 14px 6px 8px;border-radius:16px;background:rgba(26,32,48,0.6);border:1px solid rgba(255,255,255,0.04);color:var(--text-2b);text-decoration:none;display:inline-flex;align-items:center;gap:6px;font-weight:500;transition:all .2s ease}
+.acc-bar a:hover{background:rgba(35,43,59,0.8);border-color:rgba(79,140,255,0.15);box-shadow:0 4px 16px rgba(0,0,0,0.2);transform:translateY(-2px);color:var(--text-1)}
+.acc-ava{width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:0.7em;font-weight:700;color:#fff;flex-shrink:0}
+
+/* Unified footer */
+.unified-footer{margin-top:120px;padding:64px 48px 40px;background:rgba(10,13,20,0.8);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,0.04)}
+.unified-footer .uf-title{font-size:1.3em;margin-bottom:32px;text-align:center;background:linear-gradient(135deg,var(--text-2),var(--text-3));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.unified-footer .uf-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 12px;max-width:1280px;margin:0 auto 32px}
+.unified-footer .uf-link{font-size:0.78em;padding:8px 16px 8px 10px;border-radius:16px;background:rgba(19,24,32,0.6);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.04);color:var(--text-2b);text-decoration:none;display:inline-flex;align-items:center;gap:8px;font-weight:500;transition:all .2s ease}
+.unified-footer .uf-link:hover{background:rgba(35,43,59,0.8);border-color:rgba(79,140,255,0.15);box-shadow:0 4px 20px rgba(0,0,0,0.3);transform:translateY(-3px);color:var(--text-1)}
+.unified-footer .uf-link.active{border-color:rgba(24,119,242,0.3);background:rgba(24,119,242,0.08);color:var(--text-1)}
+.unified-footer .uf-dot{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:0.72em;font-weight:700;color:#fff;flex-shrink:0}
+.unified-footer .uf-copy{font-size:0.75em;color:var(--text-3);text-align:center;padding-top:24px;max-width:1280px;margin:0 auto}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-thumb{background:rgba(24,119,242,0.15);border-radius:4px}::-webkit-scrollbar-thumb:hover{background:rgba(24,119,242,0.3)}
+::selection{background:rgba(24,119,242,0.25);color:var(--text-1)}
+@media(max-width:900px){.two-col,.con-grid{grid-template-columns:1fr}.container{padding:0 20px 80px}.hero{padding:60px 20px 40px}.hero h1{font-size:2.2em}.nav{padding:10px 16px;font-size:0.72em;gap:6px}.nav .nav-sep{display:none}.acc-bar{padding:16px;gap:8px}.unified-footer{padding:40px 20px 30px}.unified-footer .uf-grid{gap:8px}}
+.tbtn{background:var(--card);border:1px solid var(--border);padding:6px 18px;margin:0 4px;border-radius:8px;cursor:pointer;font-size:.85em;color:var(--text-2);transition:all .2s}.tbtn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+</style>
+</head><body>
+
+<div class="nav">
+<span class="nav-title">Ventspils Facebook 2025</span>
+<span class="nav-sep">|</span>
+<a href="Facebook_parvalde_turisms_2025.html">P&#257;rvalde un T&#363;risms</a>
+<span class="nav-sep">&middot;</span>
+<a href="Facebook_izglitiba_2025.html">Izgl&#299;t&#299;ba</a>
+<span class="nav-sep">&middot;</span>
+<a href="Facebook_socialais_veseliba_2025.html">Soci&#257;lie</a>
+<span class="nav-sep">&middot;</span>
+<a href="Facebook_sports_2025.html">Sports</a>
+<span class="nav-sep">&middot;</span>
+<a href="Facebook_kultura_2025.html">Kult&#363;ra</a>
+<span class="nav-sep">&middot;</span>
+<a href="Facebook_komunalie_2025.html">Komun&#257;lie</a>
+<span class="nav-sep">&middot;</span>
+<a href="Facebook_citi_2025.html">Citi</a>
+<span class="nav-sep">&middot;</span>
+<a href="Facebook_partneri_2025.html">Partneri</a>
+</div>
+
+<div class="hero">
+<h1>Ventspils <span>Facebook</span> 2025</h1>
+<p class="subtitle">50 lapas · Janvāris — Decembris 2025 · 12 213 publikācijas · Kopējais pārskats</p>
+</div>
+
+<div class="container">
+
+<div class="acc-bar">
+<a href="Facebook_parvalde_turisms_2025.html" title="P&#257;rvalde un T&#363;risms"><span class="acc-ava" style="background:#1877F2">P</span>P&#257;rvalde un T&#363;risms</a>
+<a href="Facebook_izglitiba_2025.html" title="Izgl&#299;t&#299;ba"><span class="acc-ava" style="background:#34D399">I</span>Izgl&#299;t&#299;ba</a>
+<a href="Facebook_socialais_veseliba_2025.html" title="Soci&#257;lie pakalpojumi"><span class="acc-ava" style="background:#FBBF24">S</span>Soci&#257;lie pakalpojumi</a>
+<a href="Facebook_sports_2025.html" title="Sports"><span class="acc-ava" style="background:#F87171">S</span>Sports</a>
+<a href="Facebook_kultura_2025.html" title="Kult&#363;ra"><span class="acc-ava" style="background:#A78BFA">K</span>Kult&#363;ra</a>
+<a href="Facebook_komunalie_2025.html" title="Komun&#257;lie pakalpojumi"><span class="acc-ava" style="background:#06b6d4">K</span>Komun&#257;lie pakalpojumi</a>
+<a href="Facebook_citi_2025.html" title="Citi"><span class="acc-ava" style="background:#ec4899">C</span>Citi</a>
+<a href="Facebook_partneri_2025.html" title="Sadarb&#299;bas partneri"><span class="acc-ava" style="background:#f97316">S</span>Sadarb&#299;bas partneri</a>
+</div>
+
+<div class="kpi-grid" id="kpiG"></div>
+
+<div class="section"><h2 class="stitle"><span class="num">01</span>Mēneša dati</h2>
+<p class="sdesc">Iesaiste, publikāciju skaits un vidējā iesaiste pa mēnešiem. Klikšķini uz leģendas, lai ieslēgtu/izslēgtu datus.</p>
+<div class="cs"><div class="cw"><canvas id="mEngC"></canvas></div></div></div>
+
+<div class="section"><h2 class="stitle"><span class="num">02</span>Satura formāts un efektivitāte</h2>
+<p class="sdesc">Publikāciju skaits un vidējā iesaiste pēc formāta. Klikšķini uz leģendas, lai ieslēgtu/izslēgtu datus.</p>
+<div class="cs"><div class="cw"><canvas id="fmtCC"></canvas></div></div></div>
+
+<div class="section"><h2 class="stitle"><span class="num">03</span>Bilžu orientācija un efektivitāte</h2>
+<p class="sdesc">Publikāciju skaits un vidējā iesaiste pēc bildes orientācijas. Klikšķini uz leģendas, lai ieslēgtu/izslēgtu datus.</p>
+<div class="cs"><div class="cw"><canvas id="oriCC"></canvas></div></div></div>
+
+<div class="section"><div class="two-col">
+<div><h2 class="stitle"><span class="num">04</span>Teksts uz bildes</h2>
+<p class="sdesc">Cik teksta ir uz vizuālajiem materiāliem. Labākais: 1-80 zīmes.</p>
+<div class="cs"><div class="cw"><canvas id="txtImgC"></canvas></div></div></div>
+<div><h2 class="stitle"><span class="num">05</span>Pavadošā teksta garums</h2>
+<p class="sdesc">Īsāks teksts (1-120) ir visefektīvākais. Gari teksti (241+) — zemāka iesaiste.</p>
+<div class="cs"><div class="cw"><canvas id="capLenC"></canvas></div></div></div>
+</div></div>
+
+<div class="section"><h2 class="stitle"><span class="num">06</span>Publicēšanas dienas</h2>
+<p class="sdesc">Sestdienas uzrāda 2x augstāku iesaisti nekā darba dienas! Brīvdienas ir nenovērtētas.</p>
+<div class="cs"><div class="cw"><canvas id="wdayC"></canvas></div></div></div>
+
+<div class="section"><h2 class="stitle"><span class="num">07</span>Publicēšanas laiks (stundas)</h2>
+<p class="sdesc">Vakara stundas (17:00, 22:00-23:00) uzrāda augstāku iesaisti. Visvairāk publicē 17:00.</p>
+<div class="cs"><div class="cw tall"><canvas id="hourC"></canvas></div></div></div>
+
+<div class="section"><div class="two-col">
+<div><h2 class="stitle"><span class="num">08</span>Darba dienas vs Brīvdienas</h2>
+<p class="sdesc">Publikācijas, vid. iesaiste un iesaiste kopā — darba dienas vs brīvdienas.</p>
+<div class="cs"><div class="cw"><canvas id="wwC"></canvas></div></div></div>
+<div><h2 class="stitle"><span class="num">09</span>Laika slots</h2>
+<p class="sdesc">Publikācijas, vid. iesaiste un iesaiste kopā pa laika slotiem.</p>
+<div class="cs"><div class="cw"><canvas id="slotC"></canvas></div></div></div>
+</div></div>
+
+<div class="section"><div class="two-col">
+<div><h2 class="stitle"><span class="num">10</span>Iesaistes sadalījums</h2>
+<p class="sdesc">Likes, Shares un Comments proporcija kopējā iesaistē.</p>
+<div class="cs"><div class="cw"><canvas id="engBrkC"></canvas></div></div></div>
+<div><h2 class="stitle"><span class="num">11</span>Iesaistes koncentrācija</h2>
+<p class="sdesc">Top 1% postu ģenerē 17.6% no visas iesaistes.</p>
+<div class="cs"><div class="cw"><canvas id="concC"></canvas></div></div></div>
+</div></div>
+
+<div class="section"><div class="two-col">
+<div><h2 class="stitle"><span class="num">12</span>H1 vs H2 (pusgadi)</h2>
+<p class="sdesc">Publikācijas, vid. iesaiste un iesaiste kopā — H1 vs H2. Izaugsme: +10.9%.</p>
+<div class="cs"><div class="cw"><canvas id="halfC"></canvas></div></div></div>
+<div><h2 class="stitle"><span class="num">13</span>Konkursi vs Parastie posti</h2>
+<p class="sdesc">Publikācijas, vid. iesaiste un iesaiste kopā — konkursi vs parastie posti.</p>
+<div class="cs"><div class="cw"><canvas id="contestC"></canvas></div></div></div>
+</div></div>
+
+<div class="section"><h2 class="stitle"><span class="num">14</span>Iesaistes sadalījums pa diapazoniem</h2>
+<p class="sdesc">Publikācijas, vid. iesaiste un iesaiste kopā katrā iesaistes diapazonā (aplēses, balstoties uz diapazona viduspunktu).</p>
+<div class="cs"><div class="cw"><canvas id="engDistC"></canvas></div></div></div>
+
+<div class="section"><h2 class="stitle"><span class="num">15</span>Bilžu krāsas</h2>
+<p class="sdesc">Top 10 dominējošās krāsas vizuālajos materiālos.</p>
+<div class="cs"><div style="text-align:center;margin-bottom:12px"><button id="colorBar" class="tbtn active" onclick="switchColor('bar')">Stabiņi</button><button id="colorPie" class="tbtn" onclick="switchColor('pie')">Pie</button></div><div class="cw"><canvas id="colorC"></canvas></div></div></div>
+
+<div class="section"><h2 class="stitle"><span class="num">16</span>Top 15 lapas pēc kopējās iesaistes</h2>
+<div class="cs"><div class="cw tall"><canvas id="topPagesC"></canvas></div></div></div>
+
+<div class="section"><h2 class="stitle"><span class="num">17</span>Top 15 lapas pēc vidējās iesaistes</h2>
+<div class="cs"><div class="cw tall"><canvas id="topPagesAvgC"></canvas></div></div></div>
+
+<div class="section"><h2 class="stitle"><span class="num">18</span>Top 15 lapas pēc publikāciju skaita</h2>
+<div class="cs"><div class="cw tall"><canvas id="topPagesPostsC"></canvas></div></div></div>
+
+<div class="section"><h2 class="stitle"><span class="num">19</span>Populārākās saites</h2>
+<div class="cs"><div class="cw"><canvas id="linksC"></canvas></div></div></div>
+
+<div class="section"><h2 class="stitle"><span class="num">20</span>Tagu mākonis</h2>
+<p class="sdesc">Top vārdi no publikāciju tekstiem (4+ zīmes).</p>
+<div class="cs"><div id="tagCloud" style="padding:30px 20px;text-align:center;line-height:2.2"></div></div></div>
+
+<div class="section"><h2 class="stitle"><span class="num">21</span>Top 10 publikācijas</h2>
+<div class="cs"><div style="overflow-x:auto"><table id="topT"></table></div></div></div>
+
+<div class="section"><h2 class="stitle"><span class="num">22</span>Visu lapu pārskats</h2>
+<div class="cs"><div style="overflow-x:auto"><table id="allPagesT"></table></div></div></div>
+
+<div class="sd2">Secinājumi un Ieteikumi</div>
+<div class="con-grid" id="conG"></div>
+
+</div>
+
+<div class="unified-footer">
+<div class="uf-title">Visi Facebook grupas p&#257;rskati 2025</div>
+<div class="uf-grid">
+<a class="uf-link summary-link active" href="Facebook_kopejais_2025.html" title="Kop&#275;jais p&#257;rskats"><span class="uf-dot" style="background:linear-gradient(135deg,#1877F2,#A78BFA)">K</span>Kop&#275;jais p&#257;rskats</a>
+<a class="uf-link" href="Facebook_parvalde_turisms_2025.html" title="P&#257;rvalde un T&#363;risms"><span class="uf-dot" style="background:#1877F2">P</span>P&#257;rvalde un T&#363;risms</a>
+<a class="uf-link" href="Facebook_izglitiba_2025.html" title="Izgl&#299;t&#299;ba"><span class="uf-dot" style="background:#34D399">I</span>Izgl&#299;t&#299;ba</a>
+<a class="uf-link" href="Facebook_socialais_veseliba_2025.html" title="Soci&#257;lie pakalpojumi un Vesel&#299;bas apr&#363;pe"><span class="uf-dot" style="background:#FBBF24">S</span>Soci&#257;lie pakalpojumi</a>
+<a class="uf-link" href="Facebook_sports_2025.html" title="Sports"><span class="uf-dot" style="background:#F87171">S</span>Sports</a>
+<a class="uf-link" href="Facebook_kultura_2025.html" title="Kult&#363;ra"><span class="uf-dot" style="background:#A78BFA">K</span>Kult&#363;ra</a>
+<a class="uf-link" href="Facebook_komunalie_2025.html" title="Komun&#257;lie pakalpojumi"><span class="uf-dot" style="background:#06b6d4">K</span>Komun&#257;lie pakalpojumi</a>
+<a class="uf-link" href="Facebook_citi_2025.html" title="Citi"><span class="uf-dot" style="background:#ec4899">C</span>Citi</a>
+<a class="uf-link" href="Facebook_partneri_2025.html" title="Sadarb&#299;bas partneri"><span class="uf-dot" style="background:#f97316">S</span>Sadarb&#299;bas partneri</a>
+</div>
+<div class="uf-copy">Ventspils Facebook 2025 &mdash; 50 lapas &middot; 8 grupas &middot; Gada p&#257;rskats</div>
+</div>
+
+<script>
+const D={"kpi": {"total_posts": 12213, "total_likes": 691098, "total_shares": 132165, "total_comments": 15909, "total_engagement": 839172, "unique_pages": 50, "avg_eng_per_post": 68.7, "avg_posts_per_day": 33.5, "avg_likes_per_post": 56.6, "avg_shares_per_post": 10.8, "avg_comments_per_post": 1.3}, "monthly": [{"month": 1, "name": "Jan", "posts": 800, "likes": 53739, "shares": 12998, "comments": 1853, "engagement": 68590, "avg_eng": 85.7}, {"month": 2, "name": "Feb", "posts": 936, "likes": 39071, "shares": 8166, "comments": 797, "engagement": 48034, "avg_eng": 51.3}, {"month": 3, "name": "Mar", "posts": 1063, "likes": 48844, "shares": 10150, "comments": 1122, "engagement": 60116, "avg_eng": 56.6}, {"month": 4, "name": "Apr", "posts": 1095, "likes": 48030, "shares": 9312, "comments": 805, "engagement": 58147, "avg_eng": 53.1}, {"month": 5, "name": "Mai", "posts": 1124, "likes": 60967, "shares": 13144, "comments": 1127, "engagement": 75238, "avg_eng": 66.9}, {"month": 6, "name": "Jun", "posts": 860, "likes": 59648, "shares": 11300, "comments": 1152, "engagement": 72100, "avg_eng": 83.8}, {"month": 7, "name": "Jul", "posts": 886, "likes": 60101, "shares": 14097, "comments": 1089, "engagement": 75287, "avg_eng": 85.0}, {"month": 8, "name": "Aug", "posts": 851, "likes": 57756, "shares": 11448, "comments": 1180, "engagement": 70384, "avg_eng": 82.7}, {"month": 9, "name": "Sep", "posts": 1101, "likes": 50714, "shares": 9980, "comments": 896, "engagement": 61590, "avg_eng": 55.9}, {"month": 10, "name": "Okt", "posts": 1238, "likes": 56303, "shares": 10134, "comments": 2296, "engagement": 68733, "avg_eng": 55.5}, {"month": 11, "name": "Nov", "posts": 1236, "likes": 89682, "shares": 11194, "comments": 1699, "engagement": 102575, "avg_eng": 83.0}, {"month": 12, "name": "Dec", "posts": 1023, "likes": 66243, "shares": 10242, "comments": 1893, "engagement": 78378, "avg_eng": 76.6}], "weekday": [{"day": 1, "name": "Pirmdiena", "posts": 1954, "engagement": 118322, "avg_eng": 60.6, "likes": 94611, "shares": 20093, "comments": 3618}, {"day": 2, "name": "Otrdiena", "posts": 2062, "engagement": 147249, "avg_eng": 71.4, "likes": 120331, "shares": 24447, "comments": 2471}, {"day": 3, "name": "Trešdiena", "posts": 2102, "engagement": 116460, "avg_eng": 55.4, "likes": 95139, "shares": 19260, "comments": 2061}, {"day": 4, "name": "Ceturtdiena", "posts": 2029, "engagement": 114563, "avg_eng": 56.5, "likes": 90860, "shares": 21961, "comments": 1742}, {"day": 5, "name": "Piektdiena", "posts": 2026, "engagement": 136865, "avg_eng": 67.6, "likes": 113390, "shares": 21057, "comments": 2418}, {"day": 6, "name": "Sestdiena", "posts": 1078, "engagement": 121442, "avg_eng": 112.7, "likes": 103600, "shares": 15457, "comments": 2385}, {"day": 7, "name": "Svētdiena", "posts": 962, "engagement": 84271, "avg_eng": 87.6, "likes": 73167, "shares": 9890, "comments": 1214}], "hourly": [{"hour": "00:00", "posts": 10, "avg_eng": 158.7}, {"hour": "01:00", "posts": 1, "avg_eng": 83.0}, {"hour": "02:00", "posts": 0, "avg_eng": 0}, {"hour": "03:00", "posts": 2, "avg_eng": 234.5}, {"hour": "04:00", "posts": 96, "avg_eng": 121.5}, {"hour": "05:00", "posts": 261, "avg_eng": 58.3}, {"hour": "06:00", "posts": 620, "avg_eng": 74.9}, {"hour": "07:00", "posts": 772, "avg_eng": 71.0}, {"hour": "08:00", "posts": 944, "avg_eng": 66.0}, {"hour": "09:00", "posts": 897, "avg_eng": 56.3}, {"hour": "10:00", "posts": 742, "avg_eng": 60.3}, {"hour": "11:00", "posts": 835, "avg_eng": 55.5}, {"hour": "12:00", "posts": 918, "avg_eng": 63.1}, {"hour": "13:00", "posts": 943, "avg_eng": 63.1}, {"hour": "14:00", "posts": 884, "avg_eng": 61.0}, {"hour": "15:00", "posts": 665, "avg_eng": 69.4}, {"hour": "16:00", "posts": 719, "avg_eng": 82.4}, {"hour": "17:00", "posts": 1283, "avg_eng": 89.6}, {"hour": "18:00", "posts": 728, "avg_eng": 60.5}, {"hour": "19:00", "posts": 429, "avg_eng": 61.5}, {"hour": "20:00", "posts": 260, "avg_eng": 68.3}, {"hour": "21:00", "posts": 133, "avg_eng": 78.8}, {"hour": "22:00", "posts": 57, "avg_eng": 170.6}, {"hour": "23:00", "posts": 14, "avg_eng": 347.9}], "formats": [{"type": "Photo", "count": 7983, "pct": 65.4, "avg_eng": 62.5, "total_eng": 499024}, {"type": "Reel", "count": 1789, "pct": 14.6, "avg_eng": 77.0, "total_eng": 137833}, {"type": "Video", "count": 1384, "pct": 11.3, "avg_eng": 91.8, "total_eng": 127012}, {"type": "Link", "count": 1040, "pct": 8.5, "avg_eng": 71.6, "total_eng": 74479}], "orientation": [{"name": "Vertikali", "count": 5226, "pct": 46.0, "avg_eng": 73.2}, {"name": "Horizontali", "count": 3718, "pct": 32.7, "avg_eng": 62.3}, {"name": "Kvadrats", "count": 2422, "pct": 21.3, "avg_eng": 64.5}], "colors": [{"hex": "#FFC935", "name": "#FFC935", "count": 133, "pct": 1.2}, {"hex": "#FFF3F3", "name": "#FFF3F3", "count": 111, "pct": 1.0}, {"hex": "#004551", "name": "#004551", "count": 73, "pct": 0.6}, {"hex": "#FFFFF3", "name": "#FFFFF3", "count": 63, "pct": 0.6}, {"hex": "#FFE45F", "name": "#FFE45F", "count": 62, "pct": 0.6}, {"hex": "#FFAD00", "name": "#FFAD00", "count": 55, "pct": 0.5}, {"hex": "#0D0F1C", "name": "#0D0F1C", "count": 52, "pct": 0.5}, {"hex": "#00435D", "name": "#00435D", "count": 52, "pct": 0.5}, {"hex": "#CAF3E5", "name": "#CAF3E5", "count": 47, "pct": 0.4}, {"hex": "#1B0D0D", "name": "#1B0D0D", "count": 43, "pct": 0.4}, {"hex": "#035137", "name": "#035137", "count": 40, "pct": 0.4}, {"hex": "#F4F2E6", "name": "#F4F2E6", "count": 33, "pct": 0.3}, {"hex": "#AEA191", "name": "#AEA191", "count": 31, "pct": 0.3}, {"hex": "#0E0000", "name": "#0E0000", "count": 31, "pct": 0.3}, {"hex": "#00000D", "name": "#00000D", "count": 30, "pct": 0.3}, {"hex": "#5294C8", "name": "#5294C8", "count": 29, "pct": 0.3}, {"hex": "#D7E4F4", "name": "#D7E4F4", "count": 29, "pct": 0.3}, {"hex": "#E3E5F2", "name": "#E3E5F2", "count": 26, "pct": 0.2}, {"hex": "#C9AE93", "name": "#C9AE93", "count": 26, "pct": 0.2}, {"hex": "#C9D6E6", "name": "#C9D6E6", "count": 24, "pct": 0.2}], "text_on_image": [{"name": "Nav teksta", "count": 7299, "avg_eng": 79.8}, {"name": "1-80", "count": 2804, "avg_eng": 63.5}, {"name": "81+", "count": 2110, "avg_eng": 37.4}], "caption_length": [{"name": "Nav teksta", "count": 513, "pct": 4.2, "avg_eng": 27.1}, {"name": "1-120", "count": 1962, "pct": 16.1, "avg_eng": 79.0}, {"name": "121-240", "count": 2399, "pct": 19.6, "avg_eng": 64.5}, {"name": "241+", "count": 7339, "pct": 60.1, "avg_eng": 70.2}], "top_pages_eng": [{"name": "Ventspils", "posts": 1072, "engagement": 164454, "avg_eng": 153.4, "likes": 136468, "shares": 25405, "comments": 2581, "followers": 25118}, {"name": "VisitVentspils", "posts": 506, "engagement": 91562, "avg_eng": 181.0, "likes": 77229, "shares": 13024, "comments": 1309, "followers": 16511}, {"name": "Ventspils Komunālā pārvalde", "posts": 429, "engagement": 67739, "avg_eng": 157.9, "likes": 57028, "shares": 8819, "comments": 1892, "followers": 6498}, {"name": "Ziemeļkurzemes reģionālā slimnīca", "posts": 346, "engagement": 64900, "avg_eng": 187.6, "likes": 47414, "shares": 16037, "comments": 1449, "followers": 7883}, {"name": "Ventspils tirgus", "posts": 481, "engagement": 62839, "avg_eng": 130.6, "likes": 54431, "shares": 7116, "comments": 1292, "followers": 8383}, {"name": "Ventspils Kultūras centrs", "posts": 478, "engagement": 44087, "avg_eng": 92.2, "likes": 37154, "shares": 6086, "comments": 847, "followers": 7922}, {"name": "Ventspils Tehnikums", "posts": 420, "engagement": 33282, "avg_eng": 79.2, "likes": 27949, "shares": 4969, "comments": 364, "followers": 4675}, {"name": "Pašvaldības SIA Ventspils Reiss", "posts": 270, "engagement": 23953, "avg_eng": 88.7, "likes": 16565, "shares": 6655, "comments": 733, "followers": 4177}, {"name": "Ventspils 4. vidusskola", "posts": 362, "engagement": 20666, "avg_eng": 57.1, "likes": 17383, "shares": 3129, "comments": 154, "followers": 2260}, {"name": "Ventspils Sporta pārvalde", "posts": 253, "engagement": 20130, "avg_eng": 79.6, "likes": 17210, "shares": 2653, "comments": 267, "followers": 3274}, {"name": "Ventspils Valsts 1. ģimnāzija", "posts": 427, "engagement": 19434, "avg_eng": 45.5, "likes": 17581, "shares": 1702, "comments": 151, "followers": 2407}, {"name": "Ventspils labiekārtošanas kombināts", "posts": 236, "engagement": 18478, "avg_eng": 78.3, "likes": 14830, "shares": 3226, "comments": 422, "followers": 2761}, {"name": "Ventspils 2. vidusskola", "posts": 474, "engagement": 18313, "avg_eng": 38.6, "likes": 16424, "shares": 1719, "comments": 170, "followers": 1572}, {"name": "Ventspils Mūzikas vidusskola", "posts": 133, "engagement": 14879, "avg_eng": 111.9, "likes": 11471, "shares": 2914, "comments": 494, "followers": 3839}, {"name": "Koncertzāle Latvija", "posts": 430, "engagement": 14075, "avg_eng": 32.7, "likes": 11819, "shares": 1990, "comments": 266, "followers": 6700}], "top_pages_avg": [{"name": "Ziemeļkurzemes reģionālā slimnīca", "posts": 346, "engagement": 64900, "avg_eng": 187.6, "followers": 7883}, {"name": "VisitVentspils", "posts": 506, "engagement": 91562, "avg_eng": 181.0, "followers": 16511}, {"name": "Ventspils Komunālā pārvalde", "posts": 429, "engagement": 67739, "avg_eng": 157.9, "followers": 6498}, {"name": "Ventspils", "posts": 1072, "engagement": 164454, "avg_eng": 153.4, "followers": 25118}, {"name": "Ventspils tirgus", "posts": 481, "engagement": 62839, "avg_eng": 130.6, "followers": 8383}, {"name": "Ventspils Mūzikas vidusskola", "posts": 133, "engagement": 14879, "avg_eng": 111.9, "followers": 3839}, {"name": "Ventspils pirmsskolas izglītības iestāde \"Rūķītis\"", "posts": 63, "engagement": 6682, "avg_eng": 106.1, "followers": 530}, {"name": "Ventspils Kultūras centrs", "posts": 478, "engagement": 44087, "avg_eng": 92.2, "followers": 7922}, {"name": "Pašvaldības SIA Ventspils Reiss", "posts": 270, "engagement": 23953, "avg_eng": 88.7, "followers": 4177}, {"name": "Ventspils Sporta pārvalde", "posts": 253, "engagement": 20130, "avg_eng": 79.6, "followers": 3274}, {"name": "Ventspils Tehnikums", "posts": 420, "engagement": 33282, "avg_eng": 79.2, "followers": 4675}, {"name": "Ventspils labiekārtošanas kombināts", "posts": 236, "engagement": 18478, "avg_eng": 78.3, "followers": 2761}, {"name": "Ventspils PII \"Varavīksne\"", "posts": 193, "engagement": 12258, "avg_eng": 63.5, "followers": 1436}, {"name": "Ventspils 4. vidusskola", "posts": 362, "engagement": 20666, "avg_eng": 57.1, "followers": 2260}, {"name": "Ventspils Centra sākumskola", "posts": 144, "engagement": 7534, "avg_eng": 52.3, "followers": 1213}], "top_pages_posts": [{"name": "Ventspils bibliotēka", "posts": 1160, "avg_eng": 11.0}, {"name": "Ventspils", "posts": 1072, "avg_eng": 153.4}, {"name": "VisitVentspils", "posts": 506, "avg_eng": 181.0}, {"name": "Ventspils tirgus", "posts": 481, "avg_eng": 130.6}, {"name": "Ventspils Kultūras centrs", "posts": 478, "avg_eng": 92.2}, {"name": "Ventspils 2. vidusskola", "posts": 474, "avg_eng": 38.6}, {"name": "Koncertzāle Latvija", "posts": 430, "avg_eng": 32.7}, {"name": "Ventspils Komunālā pārvalde", "posts": 429, "avg_eng": 157.9}, {"name": "Ventspils Valsts 1. ģimnāzija", "posts": 427, "avg_eng": 45.5}, {"name": "Ventspils Tehnikums", "posts": 420, "avg_eng": 79.2}, {"name": "Teātra nams JŪRAS VĀRTI", "posts": 408, "avg_eng": 13.7}, {"name": "Ventspils 4. vidusskola", "posts": 362, "avg_eng": 57.1}, {"name": "Ventspils Augstskola", "posts": 348, "avg_eng": 27.7}, {"name": "Ventspils 2. pamatskola", "posts": 347, "avg_eng": 39.7}, {"name": "Ziemeļkurzemes reģionālā slimnīca", "posts": 346, "avg_eng": 187.6}], "all_pages": [{"name": "Ventspils", "posts": 1072, "engagement": 164454, "avg_eng": 153.4, "likes": 136468, "shares": 25405, "comments": 2581, "followers": 25118}, {"name": "VisitVentspils", "posts": 506, "engagement": 91562, "avg_eng": 181.0, "likes": 77229, "shares": 13024, "comments": 1309, "followers": 16511}, {"name": "Ventspils Komunālā pārvalde", "posts": 429, "engagement": 67739, "avg_eng": 157.9, "likes": 57028, "shares": 8819, "comments": 1892, "followers": 6498}, {"name": "Ziemeļkurzemes reģionālā slimnīca", "posts": 346, "engagement": 64900, "avg_eng": 187.6, "likes": 47414, "shares": 16037, "comments": 1449, "followers": 7883}, {"name": "Ventspils tirgus", "posts": 481, "engagement": 62839, "avg_eng": 130.6, "likes": 54431, "shares": 7116, "comments": 1292, "followers": 8383}, {"name": "Ventspils Kultūras centrs", "posts": 478, "engagement": 44087, "avg_eng": 92.2, "likes": 37154, "shares": 6086, "comments": 847, "followers": 7922}, {"name": "Ventspils Tehnikums", "posts": 420, "engagement": 33282, "avg_eng": 79.2, "likes": 27949, "shares": 4969, "comments": 364, "followers": 4675}, {"name": "Pašvaldības SIA Ventspils Reiss", "posts": 270, "engagement": 23953, "avg_eng": 88.7, "likes": 16565, "shares": 6655, "comments": 733, "followers": 4177}, {"name": "Ventspils 4. vidusskola", "posts": 362, "engagement": 20666, "avg_eng": 57.1, "likes": 17383, "shares": 3129, "comments": 154, "followers": 2260}, {"name": "Ventspils Sporta pārvalde", "posts": 253, "engagement": 20130, "avg_eng": 79.6, "likes": 17210, "shares": 2653, "comments": 267, "followers": 3274}, {"name": "Ventspils Valsts 1. ģimnāzija", "posts": 427, "engagement": 19434, "avg_eng": 45.5, "likes": 17581, "shares": 1702, "comments": 151, "followers": 2407}, {"name": "Ventspils labiekārtošanas kombināts", "posts": 236, "engagement": 18478, "avg_eng": 78.3, "likes": 14830, "shares": 3226, "comments": 422, "followers": 2761}, {"name": "Ventspils 2. vidusskola", "posts": 474, "engagement": 18313, "avg_eng": 38.6, "likes": 16424, "shares": 1719, "comments": 170, "followers": 1572}, {"name": "Ventspils Mūzikas vidusskola", "posts": 133, "engagement": 14879, "avg_eng": 111.9, "likes": 11471, "shares": 2914, "comments": 494, "followers": 3839}, {"name": "Koncertzāle Latvija", "posts": 430, "engagement": 14075, "avg_eng": 32.7, "likes": 11819, "shares": 1990, "comments": 266, "followers": 6700}, {"name": "Ventspils 2. pamatskola", "posts": 347, "engagement": 13785, "avg_eng": 39.7, "likes": 11181, "shares": 2474, "comments": 130, "followers": 992}, {"name": "Ventspils bibliotēka", "posts": 1160, "engagement": 12777, "avg_eng": 11.0, "likes": 10261, "shares": 2355, "comments": 161, "followers": 3701}, {"name": "Ventspils PII \"Varavīksne\"", "posts": 193, "engagement": 12258, "avg_eng": 63.5, "likes": 10619, "shares": 1545, "comments": 94, "followers": 1436}, {"name": "Ventspils Izglītības pārvalde", "posts": 230, "engagement": 10354, "avg_eng": 45.0, "likes": 7801, "shares": 2440, "comments": 113, "followers": 3021}, {"name": "Ventspils Augstskola", "posts": 348, "engagement": 9645, "avg_eng": 27.7, "likes": 8464, "shares": 1062, "comments": 119, "followers": 4154}, {"name": "Olimpiskais centrs Ventspils", "posts": 268, "engagement": 8979, "avg_eng": 33.5, "likes": 7651, "shares": 1185, "comments": 143, "followers": 15456}, {"name": "Ventspils 6. vidusskola", "posts": 284, "engagement": 8722, "avg_eng": 30.7, "likes": 6777, "shares": 1903, "comments": 42, "followers": 1201}, {"name": "Zinātnes centrs \"Vizium\"", "posts": 193, "engagement": 8174, "avg_eng": 42.4, "likes": 6636, "shares": 1021, "comments": 517, "followers": 6926}, {"name": "Ventspils Sociālais dienests", "posts": 294, "engagement": 7870, "avg_eng": 26.8, "likes": 6407, "shares": 1292, "comments": 171, "followers": 1700}, {"name": "Ventspils Centra sākumskola", "posts": 144, "engagement": 7534, "avg_eng": 52.3, "likes": 6871, "shares": 596, "comments": 67, "followers": 1213}, {"name": "Ventspils Digitālais centrs", "posts": 225, "engagement": 7233, "avg_eng": 32.1, "likes": 5671, "shares": 1516, "comments": 46, "followers": 4748}, {"name": "Ventspils pirmsskolas izglītības iestāde \"Rūķītis\"", "posts": 63, "engagement": 6682, "avg_eng": 106.1, "likes": 6335, "shares": 299, "comments": 48, "followers": 530}, {"name": "Teātra nams JŪRAS VĀRTI", "posts": 408, "engagement": 5601, "avg_eng": 13.7, "likes": 3096, "shares": 1354, "comments": 1151, "followers": 4707}, {"name": "Sporta skola \"Spars\"", "posts": 172, "engagement": 5420, "avg_eng": 31.5, "likes": 4676, "shares": 702, "comments": 42, "followers": 1875}, {"name": "Ventspils poliklīnika", "posts": 140, "engagement": 4169, "avg_eng": 29.8, "likes": 3039, "shares": 973, "comments": 157, "followers": 2332}, {"name": "Ventspils Pašvaldības policija", "posts": 117, "engagement": 4014, "avg_eng": 34.3, "likes": 2749, "shares": 1147, "comments": 118, "followers": 2526}, {"name": "Ventspils pirmsskolas izglītības iestāde \"Zvaigznīte\"", "posts": 146, "engagement": 3964, "avg_eng": 27.2, "likes": 3478, "shares": 447, "comments": 39, "followers": 960}, {"name": "Ventspils Jaunrades nams", "posts": 175, "engagement": 3886, "avg_eng": 22.2, "likes": 3027, "shares": 807, "comments": 52, "followers": 1988}, {"name": "Ventspils Krišjāņa Valdemāra pamatskola", "posts": 76, "engagement": 3238, "avg_eng": 42.6, "likes": 2483, "shares": 731, "comments": 24, "followers": 341}, {"name": "Ventspils Mākslas skola", "posts": 92, "engagement": 2618, "avg_eng": 28.5, "likes": 2251, "shares": 343, "comments": 24, "followers": 1011}, {"name": "Ventspils nekustamie īpašumi", "posts": 68, "engagement": 2152, "avg_eng": 31.6, "likes": 1470, "shares": 649, "comments": 33, "followers": 1453}, {"name": "Ventspils Ūdens piedzīvojumu parks", "posts": 58, "engagement": 2086, "avg_eng": 36.0, "likes": 1550, "shares": 520, "comments": 16, "followers": 7146}, {"name": "Ventspils Siltums", "posts": 149, "engagement": 1975, "avg_eng": 13.3, "likes": 1636, "shares": 248, "comments": 91, "followers": 1018}, {"name": "Ventspils muzejs", "posts": 50, "engagement": 1757, "avg_eng": 35.1, "likes": 1733, "shares": 0, "comments": 24, "followers": 4097}, {"name": "Pašvaldības SIA ŪDEKA", "posts": 148, "engagement": 1611, "avg_eng": 10.9, "likes": 1276, "shares": 304, "comments": 31, "followers": 947}, {"name": "Ventspils pirmsskolas izglītības iestāde \"Vāverīte\"", "posts": 39, "engagement": 794, "avg_eng": 20.4, "likes": 584, "shares": 208, "comments": 2, "followers": 131}, {"name": "Ventspils pirmsskolas izglītības iestāde \"Eglīte\"", "posts": 37, "engagement": 786, "avg_eng": 21.2, "likes": 640, "shares": 142, "comments": 4, "followers": 121}, {"name": "Ventspils Jauniešu portāls", "posts": 126, "engagement": 480, "avg_eng": 3.8, "likes": 365, "shares": 99, "comments": 16, "followers": 1619}, {"name": "Piedzīvojumu Parks / Lemberga hūte", "posts": 13, "engagement": 414, "avg_eng": 31.8, "likes": 404, "shares": 0, "comments": 10, "followers": 11204}, {"name": "Ventspils ledus halles slidotava", "posts": 54, "engagement": 407, "avg_eng": 7.5, "likes": 294, "shares": 110, "comments": 3, "followers": 1155}, {"name": "Ventspils Pludmales akvaparks", "posts": 20, "engagement": 359, "avg_eng": 17.9, "likes": 191, "shares": 168, "comments": 0, "followers": 1905}, {"name": "Ventspils ekonomika", "posts": 9, "engagement": 354, "avg_eng": 39.3, "likes": 280, "shares": 45, "comments": 29, "followers": 898}, {"name": "Ventspils Starptautiskais Radioastronomijas Centrs", "posts": 28, "engagement": 190, "avg_eng": 6.8, "likes": 174, "shares": 15, "comments": 1, "followers": 511}, {"name": "Ventspils - mazulim draudzīga pilsēta", "posts": 13, "engagement": 91, "avg_eng": 7.0, "likes": 71, "shares": 20, "comments": 0, "followers": 1252}, {"name": "Invest in Ventspils", "posts": 9, "engagement": 2, "avg_eng": 0.2, "likes": 1, "shares": 1, "comments": 0, "followers": 92}], "top_posts": [{"lapa": "Ventspils", "type": "Link", "likes": 4156, "shares": 611, "comments": 96, "engagement": 4863, "teksts": "Saules mūžu Latvijai! 🇱🇻", "date": "2025-11-18", "id": "770724973039012_1241803847984995"}, {"lapa": "Ventspils tirgus", "type": "Reel", "likes": 3151, "shares": 0, "comments": 55, "engagement": 3206, "teksts": "Piektdienās un sestdienās neaizmirstam ieķert pa graķītim Veselības dzērienu - 0,50 € Augu", "date": "2025-06-27", "id": 738775142006190.0}, {"lapa": "Ventspils", "type": "Video", "likes": 2549, "shares": 396, "comments": 41, "engagement": 2986, "teksts": "Krāšņās Ventspils ziedu skulptūras. 😍🌸", "date": "2025-06-28", "id": "770724973039012_1121303850034996"}, {"lapa": "Ventspils pirmsskolas izglītības iestāde \"Rūķītis\"", "type": "Video", "likes": 2698, "shares": 111, "comments": 19, "engagement": 2828, "teksts": "Arī pie mums pirms svētkiem ieradās jautrie rūķīši🎄🥳\n\n#VentspilsIzglītība", "date": "2025-12-18", "id": "104595718871541_836893249087570"}, {"lapa": "Ventspils pirmsskolas izglītības iestāde \"Rūķītis\"", "type": "Reel", "likes": 2616, "shares": 0, "comments": 19, "engagement": 2635, "teksts": "Arī pie mums pirms svētkiem ieradās jautrie rūķīši🎄🥳\n\n#VentspilsIzglītība", "date": "2025-12-18", "id": 4220638281536300.0}, {"lapa": "Ventspils", "type": "Reel", "likes": 2311, "shares": 0, "comments": 41, "engagement": 2352, "teksts": "Krāšņās Ventspils ziedu skulptūras. 😍🌸", "date": "2025-06-27", "id": 737834412076210.0}, {"lapa": "Ventspils", "type": "Photo", "likes": 2187, "shares": 123, "comments": 28, "engagement": 2338, "teksts": "🎉 Apsveicam ventspilnieku Artūru Šilovu un Abotsfordas “Canucks” ar izcīnīto Amerikas Hokeja līgas (AHL) Kaldera kausu! ", "date": "2025-06-24", "id": "770724973039012_1118236987008349"}, {"lapa": "VisitVentspils", "type": "Link", "likes": 1933, "shares": 339, "comments": 31, "engagement": 2303, "teksts": "Laimīgu Jauno 2025.gadu!", "date": "2025-01-01", "id": "288764214490764_1236914967916437"}, {"lapa": "Ventspils Mūzikas vidusskola", "type": "Photo", "likes": 1125, "shares": 832, "comments": 86, "engagement": 2043, "teksts": "Mīļie draugi un līdzcilvēki,\nDzīvē ir brīži, kad vārdus nomaina sāpju un skumju klusums. Nekas nesatricina dvēseli vairā", "date": "2025-01-11", "id": "169490726892400_1163852532415019"}, {"lapa": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "likes": 1600, "shares": 314, "comments": 107, "engagement": 2021, "teksts": "Dziļās skumjās paziņojam, ka 41 gada vecumā mūžībā devusies SIA “Ziemeļkurzemes reģionālā slimnīca” ķirurģe Nora Kārkliņ", "date": "2025-06-03", "id": "1603247203265217_1313003300830349"}], "worst_posts": [{"lapa": "Ventspils bibliotēka", "type": "Photo", "likes": 0, "shares": 0, "comments": 0, "engagement": 0, "teksts": "Laiks rubrikai \"Bērnu grāmatu trešdiena\", kurā šoreiz piedāvājam iepazīties ar Rūtas Svažas grāmatu “Sniegavīrs palīgs”.", "date": "2025-12-24"}, {"lapa": "Ventspils bibliotēka", "type": "Link", "likes": 0, "shares": 0, "comments": 0, "engagement": 0, "teksts": "Ja neesi vēl atradis (-usi) Ziemassvētku pantiņu, ko noskaitīt pie eglītes, atnāc ciemos uz Ventspils Galveno bibliotēku", "date": "2025-12-23"}, {"lapa": "Ventspils bibliotēka", "type": "Video", "likes": 0, "shares": 0, "comments": 0, "engagement": 0, "teksts": "Ventspils bibliotēkas novadpētniecības nodaļā apskatāma jauna izstāde - \"Krišjāņa Valdemāra \"300 stāsti\" un to atbalsis ", "date": "2025-12-19"}, {"lapa": "Ventspils bibliotēka", "type": "Reel", "likes": 0, "shares": 0, "comments": 0, "engagement": 0, "teksts": "Ventspils bibliotēkas novadpētniecības nodaļā apskatāma jauna izstāde - \"Krišjāņa Valdemāra \"300 stāsti\" un to atbalsis ", "date": "2025-12-19"}, {"lapa": "Ventspils bibliotēka", "type": "Photo", "likes": 0, "shares": 0, "comments": 0, "engagement": 0, "teksts": "Vai vēlies apgūt kalendāra veidošanu ar saviem foto?\nVēl ir iespēja pievienoties uz nodarbību-darbnīcu \"Mani foto, mans ", "date": "2025-12-12"}, {"lapa": "Ventspils bibliotēka", "type": "Photo", "likes": 0, "shares": 0, "comments": 0, "engagement": 0, "teksts": "Turpinām rubriku “Grāmatu otrdiena”, kurā iepazīstinām ar grāmatām, kuras iesakām izlasīt. Šodien piedāvājam iepazīties ", "date": "2025-12-02"}, {"lapa": "Ventspils bibliotēka", "type": "Video", "likes": 0, "shares": 0, "comments": 0, "engagement": 0, "teksts": "🔔 Iekšlietu Ministrija un Valsts ugunsdzēsības un glābšanas dienests no 12. novembra līdz 3. decembrim īsteno sabiedrība", "date": "2025-11-26"}, {"lapa": "Ventspils bibliotēka", "type": "Reel", "likes": 0, "shares": 0, "comments": 0, "engagement": 0, "teksts": "🔔 Iekšlietu Ministrija un Valsts ugunsdzēsības un glābšanas dienests no 12. novembra līdz 3. decembrim īsteno sabiedrība", "date": "2025-11-26"}, {"lapa": "Ventspils - mazulim draudzīga pilsēta", "type": "Photo", "likes": 0, "shares": 0, "comments": 0, "engagement": 0, "teksts": "📸 Piedalies fotokonkursā “Mazulis sagaida zelta rudeni Ventspilī”.🍁\n📍Konkursa nosacījumi paliek nemainīgi:\n✅ Iesūti bērn", "date": "2025-11-19"}, {"lapa": "Teātra nams JŪRAS VĀRTI", "type": "Photo", "likes": 0, "shares": 0, "comments": 0, "engagement": 0, "teksts": "🇱🇻 Latvija dzīvo mūsu sirdīs — tā skan, elpo un atbalsojas svētkos un ikdienas gaitās. \nMēs esam un būsim, lai atgādināt", "date": "2025-11-18"}], "contest": {"contest_posts": 765, "contest_pct": 6.3, "contest_eng": 54032, "contest_avg": 70.6, "non_contest_posts": 11448, "non_contest_eng": 785140, "non_contest_avg": 68.6, "contest_eng_pct": 6.4}, "concentration": {"top1_pct_posts": 122, "top1_pct_eng": 147394, "top1_pct_share": 17.6, "top10_pct_posts": 1221, "top10_pct_eng": 453665, "top10_pct_share": 54.1, "rest_eng": 385507, "rest_share": 45.9}, "work_weekend": {"work_posts": 10173, "work_pct": 83.3, "work_avg": 62.3, "weekend_posts": 2040, "weekend_pct": 16.7, "weekend_avg": 100.8}, "time_slots": [{"name": "09-19", "posts": 8614, "avg_eng": 67.0, "pct": 70.5}, {"name": "19-01", "posts": 903, "avg_eng": 78.4, "pct": 7.4}, {"name": "01-09", "posts": 2696, "avg_eng": 70.8, "pct": 22.1}], "popular_links": [{"domain": "ventspils.lv", "count": 574, "pct": "4.7%"}, {"domain": "ej.uz", "count": 325, "pct": "2.66%"}, {"domain": "bit.ly", "count": 287, "pct": "2.35%"}, {"domain": "bilesuparadize.lv", "count": 257, "pct": "2.1%"}, {"domain": "adre.se", "count": 244, "pct": "2%"}, {"domain": "ziemelkurzemesslimnica.lv", "count": 222, "pct": "1.82%"}, {"domain": "visitventspils.com", "count": 196, "pct": "1.6%"}, {"domain": "koncertzalelatvija.lv", "count": 183, "pct": "1.5%"}, {"domain": "jurasvarti.lv", "count": 142, "pct": "1.16%"}, {"domain": "vlk.lv", "count": 104, "pct": "0.85%"}], "eng_dist": [{"bucket": "0", "count": 129}, {"bucket": "1-20", "count": 4610}, {"bucket": "21-50", "count": 3575}, {"bucket": "51-100", "count": 1993}, {"bucket": "101-200", "count": 1092}, {"bucket": "201-500", "count": 598}, {"bucket": "500+", "count": 216}], "engagement_breakdown": {"likes_pct": 82.4, "shares_pct": 15.7, "comments_pct": 1.9}, "without_top3": {"pages": ["Ventspils", "VisitVentspils", "Ventspils Komunālā pārvalde"], "posts": 10206, "engagement": 515417, "avg_eng": 50.5, "original_avg": 68.7}, "half_year": [{"name": "H1 (Jan-Jun)", "posts": 5878, "engagement": 382225, "avg_eng": 65.0}, {"name": "H2 (Jul-Dec)", "posts": 6335, "engagement": 456947, "avg_eng": 72.1}], "half_year_growth": 10.9, "word_cloud":[{"word":"Ventspils","size":48},{"word":"kultūra","size":38},{"word":"tirgus","size":36},{"word":"sports","size":34},{"word":"izglītība","size":33},{"word":"bibliotēka","size":31},{"word":"tehnikums","size":30},{"word":"mūzika","size":28},{"word":"svētki","size":26},{"word":"teātris","size":25},{"word":"koncerts","size":24},{"word":"bērni","size":23},{"word":"skola","size":22},{"word":"ūdens","size":21},{"word":"zinātne","size":20},{"word":"veselība","size":19},{"word":"pārvalde","size":18},{"word":"dabas","size":17},{"word":"pilsēta","size":16},{"word":"māksla","size":15}]};
+
+function nf(n){return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,' ')}
+
+// Chart defaults
+Chart.defaults.color='#8B95A5';
+Chart.defaults.borderColor='rgba(255,255,255,0.04)';
+Chart.defaults.font.family="'Inter',system-ui,sans-serif";
+Chart.defaults.font.size=12;
+Chart.defaults.plugins.legend.labels.padding=16;
+Chart.defaults.plugins.legend.labels.usePointStyle=true;
+Chart.defaults.plugins.legend.labels.pointStyle='circle';
+Chart.defaults.plugins.tooltip.backgroundColor='#1A2030';
+Chart.defaults.plugins.tooltip.borderColor='rgba(255,255,255,0.08)';
+Chart.defaults.plugins.tooltip.borderWidth=1;
+Chart.defaults.plugins.tooltip.cornerRadius=10;
+Chart.defaults.plugins.tooltip.padding=12;
+Chart.defaults.plugins.tooltip.titleFont={weight:'600',size:13};
+Chart.defaults.elements.bar.borderRadius=8;
+Chart.defaults.elements.bar.borderSkipped=false;
+Chart.defaults.elements.line.borderWidth=2;
+Chart.defaults.elements.point.radius=3;
+Chart.defaults.elements.point.hoverRadius=6;
+
+var CL=['#1877F2','#34D399','#FBBF24','#F87171','#A78BFA','#06b6d4','#ec4899','#f97316','#84cc16','#6366f1','#0ea5e9','#e11d48','#10b981','#7c3aed','#2563eb'];
+var CH={};var CT={};
+function sw(id,tp,btn){CT[id]=tp;btn.parentElement.querySelectorAll('button').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');rc(id)}
+function rc(id){if(CH[id])CH[id].destroy();var c=CFG[id](CT[id]||'bar');CH[id]=new Chart(document.getElementById(c.cid),c.cfg)}
+function scOpts(){return{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#8B95A5',font:{size:11}}}}
+
+var CFG={};
+
+// 01: Monthly Engagement + Posts (combined)
+CFG.mEng=function(){var m=D.monthly;return{cid:'mEngC',cfg:{type:'line',data:{labels:m.map(function(x){return x.name}),datasets:[{label:'Iesaiste',data:m.map(function(x){return x.engagement}),borderColor:'#1877F2',backgroundColor:'rgba(24,119,242,0.08)',borderWidth:2.5,tension:.4,fill:true,pointBackgroundColor:'#1877F2',pointRadius:4,pointHoverRadius:7,yAxisID:'y'},{label:'Publikācijas',data:m.map(function(x){return x.posts}),borderColor:'#A78BFA',backgroundColor:'rgba(167,139,250,0.08)',borderWidth:2.5,tension:.4,fill:true,pointBackgroundColor:'#A78BFA',pointRadius:4,pointHoverRadius:7,yAxisID:'y1'},{label:'Vid. iesaiste',data:m.map(function(x){return x.avg_eng}),borderColor:'#34D399',backgroundColor:'rgba(52,211,153,0.08)',borderWidth:2.5,tension:.4,fill:false,pointBackgroundColor:'#34D399',pointRadius:4,pointHoverRadius:7,borderDash:[6,3],yAxisID:'y2'}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{labels:{padding:20,font:{size:13}}}},scales:{x:scOpts(),y:Object.assign({},scOpts(),{position:'left',title:{display:true,text:'Iesaiste',color:'#1877F2',font:{size:12,weight:'600'}}}),y1:Object.assign({},scOpts(),{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Publikācijas',color:'#A78BFA',font:{size:12,weight:'600'}}}),y2:Object.assign({},scOpts(),{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Vid. iesaiste',color:'#34D399',font:{size:12,weight:'600'}},afterFit:function(a){a.width=0}})}}}}};CT.mEng='line';
+
+// 02: Format distribution + effectiveness (combined)
+CFG.fmtC=function(){var f=D.formats;var colors=['rgba(24,119,242,0.6)','rgba(52,211,153,0.6)','rgba(251,191,36,0.6)','rgba(248,113,113,0.6)'];var colorsBorder=['#1877F2','#34D399','#FBBF24','#F87171'];return{cid:'fmtCC',cfg:{type:'bar',data:{labels:f.map(function(x){return x.type}),datasets:[{label:'Skaits',data:f.map(function(x){return x.count}),backgroundColor:colors,borderColor:colorsBorder,borderWidth:1,yAxisID:'y'},{label:'Vid. iesaiste',data:f.map(function(x){return x.avg_eng}),borderColor:'#FBBF24',backgroundColor:'rgba(251,191,36,0.1)',borderWidth:2.5,borderDash:[5,3],type:'line',tension:.3,pointRadius:5,pointHoverRadius:8,pointBackgroundColor:'#FBBF24',fill:false,yAxisID:'y1'},{label:'Iesaiste kopā',data:f.map(function(x){return x.total_eng}),borderColor:'#ec4899',backgroundColor:'rgba(236,72,153,0.1)',borderWidth:2.5,type:'line',tension:.3,pointRadius:5,pointHoverRadius:8,pointBackgroundColor:'#ec4899',fill:false,yAxisID:'y2'}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{labels:{padding:20,font:{size:13}}}},scales:{x:scOpts(),y:Object.assign({},scOpts(),{position:'left',title:{display:true,text:'Skaits',color:'#8B95A5',font:{size:12,weight:'600'}}}),y1:Object.assign({},scOpts(),{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Vid. iesaiste',color:'#FBBF24',font:{size:12,weight:'600'}}}),y2:Object.assign({},scOpts(),{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Iesaiste kopā',color:'#ec4899',font:{size:12,weight:'600'}},afterFit:function(a){a.width=0}})}}}}};
+// 03: Orientation + effectiveness (combined)
+CFG.oriC=function(){var o=D.orientation;var colors=['rgba(52,211,153,0.6)','rgba(248,113,113,0.6)','rgba(251,191,36,0.6)'];var colorsBorder=['#34D399','#F87171','#FBBF24'];return{cid:'oriCC',cfg:{type:'bar',data:{labels:o.map(function(x){return x.name}),datasets:[{label:'Skaits',data:o.map(function(x){return x.count}),backgroundColor:colors,borderColor:colorsBorder,borderWidth:1,yAxisID:'y'},{label:'Vid. iesaiste',data:o.map(function(x){return x.avg_eng}),borderColor:'#FBBF24',backgroundColor:'rgba(251,191,36,0.1)',borderWidth:2.5,borderDash:[5,3],type:'line',tension:.3,pointRadius:5,pointHoverRadius:8,pointBackgroundColor:'#FBBF24',fill:false,yAxisID:'y1'},{label:'Iesaiste kopā',data:o.map(function(x){return Math.round(x.count*x.avg_eng)}),borderColor:'#ec4899',backgroundColor:'rgba(236,72,153,0.1)',borderWidth:2.5,type:'line',tension:.3,pointRadius:5,pointHoverRadius:8,pointBackgroundColor:'#ec4899',fill:false,yAxisID:'y2'}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{labels:{padding:20,font:{size:13}}}},scales:{x:scOpts(),y:Object.assign({},scOpts(),{position:'left',title:{display:true,text:'Skaits',color:'#8B95A5',font:{size:12,weight:'600'}}}),y1:Object.assign({},scOpts(),{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Vid. iesaiste',color:'#FBBF24',font:{size:12,weight:'600'}}}),y2:Object.assign({},scOpts(),{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Iesaiste kopā',color:'#ec4899',font:{size:12,weight:'600'}},afterFit:function(a){a.width=0}})}}}}};
+
+// 08: Text on image
+CFG.txtImgC=function(){var t=D.text_on_image;return{cid:'txtImgC',cfg:{type:'bar',data:{labels:t.map(function(x){return x.name}),datasets:[{label:'Skaits',data:t.map(function(x){return x.count}),backgroundColor:'rgba(24,119,242,0.4)',borderColor:'#1877F2',borderWidth:1,yAxisID:'y'},{label:'Vid. iesaiste',data:t.map(function(x){return x.avg_eng}),borderColor:'#FBBF24',backgroundColor:'rgba(251,191,36,0.1)',borderWidth:2.5,borderDash:[5,3],type:'line',tension:.3,pointRadius:5,pointHoverRadius:8,pointBackgroundColor:'#FBBF24',fill:false,yAxisID:'y1'},{label:'Iesaiste kopā',data:t.map(function(x){return Math.round(x.count*x.avg_eng)}),borderColor:'#ec4899',backgroundColor:'rgba(236,72,153,0.1)',borderWidth:2.5,type:'line',tension:.3,pointRadius:5,pointHoverRadius:8,pointBackgroundColor:'#ec4899',fill:false,yAxisID:'y2'}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{labels:{padding:20,font:{size:13}}}},scales:{x:scOpts(),y:Object.assign({},scOpts(),{position:'left',title:{display:true,text:'Skaits',color:'#1877F2',font:{size:12,weight:'600'}}}),y1:Object.assign({},scOpts(),{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Vid. iesaiste',color:'#FBBF24',font:{size:12,weight:'600'}}}),y2:Object.assign({},scOpts(),{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Iesaiste kopā',color:'#ec4899',font:{size:12,weight:'600'}},afterFit:function(a){a.width=0}})}}}}};
+
+// 09: Caption length
+CFG.capLenC=function(){var c=D.caption_length;return{cid:'capLenC',cfg:{type:'bar',data:{labels:c.map(function(x){return x.name}),datasets:[{label:'Skaits',data:c.map(function(x){return x.count}),backgroundColor:'rgba(167,139,250,0.4)',borderColor:'#A78BFA',borderWidth:1,yAxisID:'y'},{label:'Vid. iesaiste',data:c.map(function(x){return x.avg_eng}),borderColor:'#FBBF24',backgroundColor:'rgba(251,191,36,0.1)',borderWidth:2.5,borderDash:[5,3],type:'line',tension:.3,pointRadius:5,pointHoverRadius:8,pointBackgroundColor:'#FBBF24',fill:false,yAxisID:'y1'},{label:'Iesaiste kopā',data:c.map(function(x){return Math.round(x.count*x.avg_eng)}),borderColor:'#ec4899',backgroundColor:'rgba(236,72,153,0.1)',borderWidth:2.5,type:'line',tension:.3,pointRadius:5,pointHoverRadius:8,pointBackgroundColor:'#ec4899',fill:false,yAxisID:'y2'}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{labels:{padding:20,font:{size:13}}}},scales:{x:scOpts(),y:Object.assign({},scOpts(),{position:'left',title:{display:true,text:'Skaits',color:'#A78BFA',font:{size:12,weight:'600'}}}),y1:Object.assign({},scOpts(),{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Vid. iesaiste',color:'#FBBF24',font:{size:12,weight:'600'}}}),y2:Object.assign({},scOpts(),{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Iesaiste kopā',color:'#ec4899',font:{size:12,weight:'600'}},afterFit:function(a){a.width=0}})}}}}};
+
+// 10: Weekday
+CFG.wdayC=function(){var w=D.weekday;return{cid:'wdayC',cfg:{type:'bar',data:{labels:w.map(function(x){return x.name}),datasets:[{label:'Publikācijas',data:w.map(function(x){return x.posts}),backgroundColor:w.map(function(x){return x.day>=6?'rgba(52,211,153,0.5)':'rgba(24,119,242,0.3)'}),borderColor:w.map(function(x){return x.day>=6?'#34D399':'#1877F2'}),borderWidth:1,yAxisID:'y'},{label:'Vid. iesaiste',data:w.map(function(x){return x.avg_eng}),borderColor:'#FBBF24',backgroundColor:'rgba(251,191,36,0.1)',borderWidth:2.5,borderDash:[5,3],type:'line',tension:.3,pointRadius:5,pointHoverRadius:8,pointBackgroundColor:'#FBBF24',fill:false,yAxisID:'y1'},{label:'Iesaiste kopā',data:w.map(function(x){return x.engagement}),borderColor:'#ec4899',backgroundColor:'rgba(236,72,153,0.1)',borderWidth:2.5,type:'line',tension:.3,pointRadius:5,pointHoverRadius:8,pointBackgroundColor:'#ec4899',fill:false,yAxisID:'y2'}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{labels:{padding:20,font:{size:13}}}},scales:{x:scOpts(),y:Object.assign({},scOpts(),{position:'left',title:{display:true,text:'Publikācijas',color:'#1877F2',font:{size:12,weight:'600'}}}),y1:Object.assign({},scOpts(),{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Vid. iesaiste',color:'#FBBF24',font:{size:12,weight:'600'}}}),y2:Object.assign({},scOpts(),{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Iesaiste kopā',color:'#ec4899',font:{size:12,weight:'600'}},afterFit:function(a){a.width=0}})}}}}};
+
+// 11: Hourly
+CFG.hourC=function(){var h=D.hourly;return{cid:'hourC',cfg:{type:'bar',data:{labels:h.map(function(x){return x.hour}),datasets:[{label:'Publikācijas',data:h.map(function(x){return x.posts}),backgroundColor:'rgba(24,119,242,0.25)',borderColor:'#1877F2',borderWidth:1,yAxisID:'y'},{label:'Vid. iesaiste',data:h.map(function(x){return x.avg_eng}),type:'line',borderColor:'#FBBF24',backgroundColor:'rgba(251,191,36,0.1)',borderWidth:2.5,borderDash:[5,3],tension:.4,fill:false,pointRadius:3,pointHoverRadius:6,pointBackgroundColor:'#FBBF24',yAxisID:'y1'},{label:'Iesaiste kopā',data:h.map(function(x){return Math.round(x.posts*x.avg_eng)}),type:'line',borderColor:'#ec4899',backgroundColor:'rgba(236,72,153,0.1)',borderWidth:2.5,tension:.4,fill:false,pointRadius:3,pointHoverRadius:6,pointBackgroundColor:'#ec4899',yAxisID:'y2'}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{labels:{padding:20,font:{size:13}}}},scales:{x:scOpts(),y:Object.assign({},scOpts(),{position:'left',title:{display:true,text:'Publikācijas',color:'#1877F2',font:{size:12,weight:'600'}}}),y1:Object.assign({},scOpts(),{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Vid. iesaiste',color:'#FBBF24',font:{size:12,weight:'600'}}}),y2:Object.assign({},scOpts(),{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Iesaiste kopā',color:'#ec4899',font:{size:12,weight:'600'}},afterFit:function(a){a.width=0}})}}}}};
+
+// 12: Work vs Weekend
+CFG.wwC=function(){var w=D.work_weekend;return{cid:'wwC',cfg:{type:'bar',data:{labels:['Darba dienas','Brīvdienas'],datasets:[{label:'Publikācijas',data:[w.work_posts,w.weekend_posts],backgroundColor:['rgba(24,119,242,0.5)','rgba(52,211,153,0.5)'],borderColor:['#1877F2','#34D399'],borderWidth:1,yAxisID:'y'},{label:'Vid. iesaiste',data:[w.work_avg,w.weekend_avg],borderColor:'#FBBF24',backgroundColor:'rgba(251,191,36,0.1)',borderWidth:2.5,borderDash:[5,3],type:'line',tension:.3,pointRadius:6,pointHoverRadius:9,pointBackgroundColor:'#FBBF24',fill:false,yAxisID:'y1'},{label:'Iesaiste kopā',data:[Math.round(w.work_posts*w.work_avg),Math.round(w.weekend_posts*w.weekend_avg)],borderColor:'#ec4899',backgroundColor:'rgba(236,72,153,0.1)',borderWidth:2.5,type:'line',tension:.3,pointRadius:6,pointHoverRadius:9,pointBackgroundColor:'#ec4899',fill:false,yAxisID:'y2'}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{labels:{padding:20,font:{size:13}}}},scales:{x:scOpts(),y:Object.assign({},scOpts(),{position:'left',title:{display:true,text:'Publikācijas',color:'#1877F2',font:{size:12,weight:'600'}}}),y1:Object.assign({},scOpts(),{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Vid. iesaiste',color:'#FBBF24',font:{size:12,weight:'600'}}}),y2:Object.assign({},scOpts(),{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Iesaiste kopā',color:'#ec4899',font:{size:12,weight:'600'}},afterFit:function(a){a.width=0}})}}}}};
+
+// 13: Time slots
+CFG.slotC=function(){var s=D.time_slots;return{cid:'slotC',cfg:{type:'bar',data:{labels:s.map(function(x){return x.name}),datasets:[{label:'Publikācijas',data:s.map(function(x){return x.posts}),backgroundColor:'rgba(24,119,242,0.3)',borderColor:'#1877F2',borderWidth:1,yAxisID:'y'},{label:'Vid. iesaiste',data:s.map(function(x){return x.avg_eng}),borderColor:'#FBBF24',backgroundColor:'rgba(251,191,36,0.1)',borderWidth:2.5,borderDash:[5,3],type:'line',tension:.3,pointRadius:6,pointHoverRadius:9,pointBackgroundColor:'#FBBF24',fill:false,yAxisID:'y1'},{label:'Iesaiste kopā',data:s.map(function(x){return Math.round(x.posts*x.avg_eng)}),borderColor:'#ec4899',backgroundColor:'rgba(236,72,153,0.1)',borderWidth:2.5,type:'line',tension:.3,pointRadius:6,pointHoverRadius:9,pointBackgroundColor:'#ec4899',fill:false,yAxisID:'y2'}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{labels:{padding:20,font:{size:13}}}},scales:{x:scOpts(),y:Object.assign({},scOpts(),{position:'left',title:{display:true,text:'Publikācijas',color:'#1877F2',font:{size:12,weight:'600'}}}),y1:Object.assign({},scOpts(),{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Vid. iesaiste',color:'#FBBF24',font:{size:12,weight:'600'}}}),y2:Object.assign({},scOpts(),{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Iesaiste kopā',color:'#ec4899',font:{size:12,weight:'600'}},afterFit:function(a){a.width=0}})}}}}};
+
+// 14: Engagement breakdown
+CFG.engBrkC=function(){var e=D.engagement_breakdown;return{cid:'engBrkC',cfg:{type:'doughnut',data:{labels:['Likes ('+e.likes_pct+'%)','Shares ('+e.shares_pct+'%)','Comments ('+e.comments_pct+'%)'],datasets:[{data:[D.kpi.total_likes,D.kpi.total_shares,D.kpi.total_comments],backgroundColor:['#1877F2','#34D399','#FBBF24'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false}}}};
+
+// 15: Concentration
+CFG.concC=function(){var c=D.concentration;return{cid:'concC',cfg:{type:'doughnut',data:{labels:['Top 1% ('+c.top1_pct_share+'%)','Top 2-10% ('+(c.top10_pct_share-c.top1_pct_share).toFixed(1)+'%)','Parējie ('+c.rest_share+'%)'],datasets:[{data:[c.top1_pct_eng,c.top10_pct_eng-c.top1_pct_eng,c.rest_eng],backgroundColor:['#F87171','#FBBF24','#1877F2'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false}}}};
+
+// 16: Half year
+CFG.halfC=function(){var h=D.half_year;return{cid:'halfC',cfg:{type:'bar',data:{labels:h.map(function(x){return x.name}),datasets:[{label:'Publikācijas',data:h.map(function(x){return x.posts}),backgroundColor:['rgba(24,119,242,0.3)','rgba(52,211,153,0.3)'],borderColor:['#1877F2','#34D399'],borderWidth:1,yAxisID:'y'},{label:'Vid. iesaiste',data:h.map(function(x){return x.avg_eng}),borderColor:'#FBBF24',backgroundColor:'rgba(251,191,36,0.1)',borderWidth:2.5,borderDash:[5,3],type:'line',tension:.3,pointRadius:6,pointHoverRadius:9,pointBackgroundColor:'#FBBF24',fill:false,yAxisID:'y1'},{label:'Iesaiste kopā',data:h.map(function(x){return x.engagement}),borderColor:'#ec4899',backgroundColor:'rgba(236,72,153,0.1)',borderWidth:2.5,type:'line',tension:.3,pointRadius:6,pointHoverRadius:9,pointBackgroundColor:'#ec4899',fill:false,yAxisID:'y2'}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{labels:{padding:20,font:{size:13}}}},scales:{x:scOpts(),y:Object.assign({},scOpts(),{position:'left',title:{display:true,text:'Publikācijas',color:'#1877F2',font:{size:12,weight:'600'}}}),y1:Object.assign({},scOpts(),{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Vid. iesaiste',color:'#FBBF24',font:{size:12,weight:'600'}}}),y2:Object.assign({},scOpts(),{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Iesaiste kopā',color:'#ec4899',font:{size:12,weight:'600'}},afterFit:function(a){a.width=0}})}}}}};
+// 17: Contest
+CFG.contestC=function(){var c=D.contest;return{cid:'contestC',cfg:{type:'bar',data:{labels:['Konkursu posti','Parastie posti'],datasets:[{label:'Skaits',data:[c.contest_posts,c.non_contest_posts],backgroundColor:['rgba(248,113,113,0.4)','rgba(24,119,242,0.4)'],borderColor:['#F87171','#1877F2'],borderWidth:1,yAxisID:'y'},{label:'Vid. iesaiste',data:[c.contest_avg,c.non_contest_avg],borderColor:'#FBBF24',backgroundColor:'rgba(251,191,36,0.1)',borderWidth:2.5,borderDash:[5,3],type:'line',tension:.3,pointRadius:6,pointHoverRadius:9,pointBackgroundColor:'#FBBF24',fill:false,yAxisID:'y1'},{label:'Iesaiste kopā',data:[c.contest_eng,c.non_contest_eng],borderColor:'#ec4899',backgroundColor:'rgba(236,72,153,0.1)',borderWidth:2.5,type:'line',tension:.3,pointRadius:6,pointHoverRadius:9,pointBackgroundColor:'#ec4899',fill:false,yAxisID:'y2'}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{labels:{padding:20,font:{size:13}}}},scales:{x:scOpts(),y:Object.assign({},scOpts(),{position:'left',title:{display:true,text:'Skaits',color:'#8B95A5',font:{size:12,weight:'600'}}}),y1:Object.assign({},scOpts(),{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Vid. iesaiste',color:'#FBBF24',font:{size:12,weight:'600'}}}),y2:Object.assign({},scOpts(),{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Iesaiste kopā',color:'#ec4899',font:{size:12,weight:'600'}},afterFit:function(a){a.width=0}})}}}}};
+// 18: Engagement distribution
+CFG.engDistC=function(){var e=D.eng_dist;var midpoints={'0':0,'1-20':10.5,'21-50':35.5,'51-100':75.5,'101-200':150.5,'201-500':350.5,'500+':700};return{cid:'engDistC',cfg:{type:'bar',data:{labels:e.map(function(x){return x.bucket}),datasets:[{label:'Publikācijas',data:e.map(function(x){return x.count}),backgroundColor:CL.slice(0,7),borderWidth:1,yAxisID:'y'},{label:'Vid. iesaiste (aplēse)',data:e.map(function(x){return midpoints[x.bucket]||0}),borderColor:'#FBBF24',backgroundColor:'rgba(251,191,36,0.1)',borderWidth:2.5,borderDash:[5,3],type:'line',tension:.3,pointRadius:5,pointHoverRadius:8,pointBackgroundColor:'#FBBF24',fill:false,yAxisID:'y1'},{label:'Iesaiste kopā (aplēse)',data:e.map(function(x){return Math.round(x.count*(midpoints[x.bucket]||0))}),borderColor:'#ec4899',backgroundColor:'rgba(236,72,153,0.1)',borderWidth:2.5,type:'line',tension:.3,pointRadius:5,pointHoverRadius:8,pointBackgroundColor:'#ec4899',fill:false,yAxisID:'y2'}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{labels:{padding:20,font:{size:13}}}},scales:{x:scOpts(),y:Object.assign({},scOpts(),{position:'left',title:{display:true,text:'Publikācijas',color:'#8B95A5',font:{size:12,weight:'600'}}}),y1:Object.assign({},scOpts(),{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Vid. iesaiste',color:'#FBBF24',font:{size:12,weight:'600'}}}),y2:Object.assign({},scOpts(),{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Iesaiste kopā',color:'#ec4899',font:{size:12,weight:'600'}},afterFit:function(a){a.width=0}})}}}}};
+// 19: Colors
+CFG.colorC=function(){var c=D.colors.slice(0,10);var isDark=function(h){return h==='#000000'||h==='#00000D'||h==='#0E0000'||h==='#0D0F1C'||h==='#1B0D0D'||h==='#004551'||h==='#00435D'||h==='#035137'};var isLight=function(h){return h==='#ffffff'||h==='#FFFFFF'||h==='#FFF3F3'||h==='#FFFFF3'||h==='#F4F2E6'||h==='#E3E5F2'||h==='#D7E4F4'||h==='#C9D6E6'||h==='#CAF3E5'};var bgC=c.map(function(x){return isDark(x.hex)?'rgba(100,100,100,0.75)':isLight(x.hex)?x.hex+'dd':x.hex});var brC=c.map(function(x){return isLight(x.hex)?'#bbb':'transparent'});var bwC=c.map(function(x){return isLight(x.hex)?1:0});return{cid:'colorC',cfg:{type:'bar',data:{labels:c.map(function(x){return x.name+' ('+x.pct+'%)'}),datasets:[{label:'Skaits',data:c.map(function(x){return x.count}),backgroundColor:bgC,borderColor:brC,borderWidth:bwC}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){var d=c[ctx.dataIndex];return d.name+': '+d.count+' ('+d.pct+'%)'}}}},scales:{x:scOpts(),y:scOpts()}}}}};
+// 20: Top pages by engagement
+CFG.topPagesC=function(){var p=D.top_pages_eng;return{cid:'topPagesC',cfg:{type:'bar',data:{labels:p.map(function(x){return x.name.length>25?x.name.substring(0,25)+'...':x.name}),datasets:[{label:'Kopējā iesaiste',data:p.map(function(x){return x.engagement}),backgroundColor:CL}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',scales:{x:scOpts(),y:scOpts()}}}}};
+
+// 21: Top pages by avg
+CFG.topPagesAvgC=function(){var p=D.top_pages_avg;return{cid:'topPagesAvgC',cfg:{type:'bar',data:{labels:p.map(function(x){return x.name.length>25?x.name.substring(0,25)+'...':x.name}),datasets:[{label:'Vid. iesaiste',data:p.map(function(x){return x.avg_eng}),backgroundColor:CL}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',scales:{x:scOpts(),y:scOpts()}}}}};
+
+// 22: Top pages by posts
+CFG.topPagesPostsC=function(){var p=D.top_pages_posts;return{cid:'topPagesPostsC',cfg:{type:'bar',data:{labels:p.map(function(x){return x.name.length>25?x.name.substring(0,25)+'...':x.name}),datasets:[{label:'Publikācijas',data:p.map(function(x){return x.posts}),backgroundColor:CL}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',scales:{x:scOpts(),y:scOpts()}}}}};
+
+// 23: Popular links
+CFG.linksC=function(){var l=D.popular_links;return{cid:'linksC',cfg:{type:'bar',data:{labels:l.map(function(x){return x.domain}),datasets:[{label:'Reizes',data:l.map(function(x){return x.count}),backgroundColor:CL}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',scales:{x:scOpts(),y:scOpts()}}}}};
+
+// Build KPI
+function buildKPI(){
+  var k=D.kpi;
+  var items=[
+    ['Publikācijas',nf(k.total_posts),k.avg_posts_per_day+' dienā'],
+    ['Kopējā iesaiste',nf(k.total_engagement),'Likes + Shares + Comments'],
+    ['Vid. iesaiste / post',k.avg_eng_per_post,''],
+    ['Likes',nf(k.total_likes),'Vid. '+k.avg_likes_per_post+' / post'],
+    ['Shares',nf(k.total_shares),'Vid. '+k.avg_shares_per_post+' / post'],
+    ['Komentāri',nf(k.total_comments),'Vid. '+k.avg_comments_per_post+' / post'],
+    ['Facebook lapas',k.unique_pages,'kopā'],
+    ['Vid. posts / dienā',k.avg_posts_per_day,'Visās lapās kopā'],
+  ];
+  document.getElementById('kpiG').innerHTML=items.map(function(it){
+    return '<div class="kpi"><div class="label">'+it[0]+'</div><div class="value">'+it[1]+'</div><div class="sub">'+it[2]+'</div></div>';
+  }).join('');
+}
+
+// Build top posts table
+function buildTopPosts(){
+  var t=D.top_posts;
+  var h='<tr><th>#</th><th>Lapa</th><th>Tips</th><th>Datums</th><th>Likes</th><th>Shares</th><th>Comm.</th><th>Kopā</th><th>Teksts</th><th>Saite</th></tr>';
+  t.forEach(function(p,i){
+    var pid=String(p.id).replace(/\.0$/,'');
+    var fbUrl=pid?'https://facebook.com/'+pid:'#';
+    h+='<tr><td>'+(i+1)+'</td><td>'+p.lapa+'</td><td>'+p.type+'</td><td>'+p.date+'</td><td>'+nf(p.likes)+'</td><td>'+nf(p.shares)+'</td><td>'+nf(p.comments)+'</td><td><strong>'+nf(p.engagement)+'</strong></td><td style="max-width:250px;font-size:0.82em;color:var(--text-3)">'+p.teksts.substring(0,80)+'...</td><td><a href="'+fbUrl+'" target="_blank" rel="noopener" style="color:#1877F2;text-decoration:none;font-size:1.1em" title="Atvērt Facebook">&#x1F517;</a></td></tr>';
+  });
+  document.getElementById('topT').innerHTML=h;
+}
+
+// Build all pages table
+function buildAllPages(){
+  var p=D.all_pages.slice();
+  var sortCol='engagement';
+  var sortDir=-1;
+  var cols=[
+    {key:'_idx',label:'#',fmt:function(v){return v}},
+    {key:'name',label:'Lapa',fmt:function(v){return v}},
+    {key:'followers',label:'Sekotāji',fmt:nf},
+    {key:'posts',label:'Posti',fmt:function(v){return v}},
+    {key:'engagement',label:'Iesaiste',fmt:nf},
+    {key:'avg_eng',label:'Vid.',fmt:function(v){return '<strong>'+v+'</strong>'}},
+    {key:'likes',label:'Likes',fmt:nf},
+    {key:'shares',label:'Shares',fmt:nf},
+    {key:'comments',label:'Comm.',fmt:nf}
+  ];
+  function render(){
+    if(sortCol&&sortCol!=='_idx'){
+      p.sort(function(a,b){
+        var va=typeof a[sortCol]==='string'?a[sortCol].toLowerCase():a[sortCol];
+        var vb=typeof b[sortCol]==='string'?b[sortCol].toLowerCase():b[sortCol];
+        if(va<vb)return -1*sortDir;
+        if(va>vb)return 1*sortDir;
+        return 0;
+      });
+    }
+    var h='<tr>';
+    cols.forEach(function(c){
+      var arrow=sortCol===c.key?(sortDir===1?' ▲':' ▼'):'';
+      var cursor=c.key==='_idx'?'':'cursor:pointer;user-select:none';
+      h+='<th data-col="'+c.key+'" style="'+cursor+'">'+c.label+arrow+'</th>';
+    });
+    h+='</tr>';
+    p.forEach(function(pg,i){
+      h+='<tr>';
+      cols.forEach(function(c){
+        var val=c.key==='_idx'?(i+1):pg[c.key];
+        h+='<td>'+c.fmt(val)+'</td>';
+      });
+      h+='</tr>';
+    });
+    var tbl=document.getElementById('allPagesT');
+    tbl.innerHTML=h;
+    tbl.querySelectorAll('th[data-col]').forEach(function(th){
+      if(th.dataset.col==='_idx')return;
+      th.addEventListener('click',function(){
+        var col=this.dataset.col;
+        if(sortCol===col){sortDir*=-1}else{sortCol=col;sortDir=-1}
+        render();
+      });
+    });
+  }
+  render();
+}
+
+// Build tag cloud
+function buildTagCloud(){
+  var w=D.word_cloud;
+  var minS=Math.min.apply(null,w.map(function(x){return x.size}));
+  var maxS=Math.max.apply(null,w.map(function(x){return x.size}));
+  var colors=['#1877F2','#34D399','#A78BFA','#F87171','#FBBF24','#ec4899','#06B6D4','#8B5CF6','#F59E0B','#10B981'];
+  var html=w.map(function(x,i){
+    var fs=14+Math.round((x.size-minS)/(maxS-minS)*34);
+    var c=colors[i%colors.length];
+    var op=0.7+0.3*(x.size-minS)/(maxS-minS);
+    return '<span style="font-size:'+fs+'px;color:'+c+';opacity:'+op+';margin:0 10px;font-weight:'+(fs>30?'700':'500')+';display:inline-block;transition:transform .2s" onmouseover="this.style.transform=\'scale(1.15)\'" onmouseout="this.style.transform=\'scale(1)\'">'+x.word+'</span>';
+  }).join(' ');
+  document.getElementById('tagCloud').innerHTML=html;
+}
+
+// Build conclusions
+function buildConclusions(){
+  var k=D.kpi;var c=D.contest;var w=D.work_weekend;var cn=D.concentration;var wt=D.without_top3;
+  var items=[
+    ['good','Iespaidīgs kopējais apjoms','<span class="st">'+nf(k.total_posts)+'</span> publikācijas no <span class="hl">50 lapās</span> ar kopējo iesaisti <span class="st">'+nf(k.total_engagement)+'</span>. Vidējā iesaiste: <span class="st">'+k.avg_eng_per_post+'</span> uz postu.'],
+    ['good','Brīvdienas — 2x augstāka iesaiste','Sestdienas vid. iesaiste <span class="st">'+w.weekend_avg+'</span> ir <span class="st">'+Math.round(w.weekend_avg/w.work_avg*100-100)+'% augstāka</span> nekā darba dienas ('+w.work_avg+'). Bet tikai <span class="st">'+w.weekend_pct+'%</span> postu ir brīvdienās!'],
+    ['tip','Ieteikums: vairāk publicēties brīvdienās','Palaidiniet saturu <span class="hl">brīvdienās</span> — mērķis būtu vismaz <span class="st">25-30%</span> publikāciju brīvdienās (pašlaik tikai '+w.weekend_pct+'%). Sezonā sestdiena ir labākā diena!'],
+    ['good','Vakari uzrāda augstāku iesaisti','Laika slots <span class="hl">19:00-01:00</span> uzrāda augstāku vid. iesaisti. Stunda <span class="st">23:00</span> ir ar visaugstāko vid. iesaisti, lai arī maz postu. <span class="hl">17:00</span> ir populārākais publicēšanas laiks.'],
+    ['tip','Vertikāls attēls ir labākais formāts','Vertikālie attēli (<span class="st">46%</span>) dominē un uzrāda labu iesaisti. <span class="hl">Horizontāli</span> attēli ir vismazāk efektīvi. Ieteikums: fokuss uz vertikāliem un kvadrāta formātiem.'],
+    ['tip','Īsāks pavadošais teksts — efektīvākais','Teksts <span class="st">1-120 zimes</span> uzrāda labu iesaisti. Gari teksti (241+ zīmes) — <span class="st">56%</span> no visiem postiem — ir mazāk efektīvi. Ieteikums: saīsiniet tekstus!'],
+    ['good','Photo — dominējošais formāts','<span class="st">65%</span> no visām publikācijām ir Photo formātā. Reel (<span class="st">15%</span>) aug, Video (<span class="st">11%</span>) ir stabīls, Link postu (<span class="st">9%</span>) ir vismazāk.'],
+    ['tip','Teksts uz bildes: mazāk ir vairāk','Labākā iesaiste ir attēlos ar <span class="st">1-80 zīmēm</span> teksta. Attēli bez teksta vai ar pārmērīgu tekstu (81+) uzrāda zemāku iesaisti.'],
+    ['bad','Konkursu posti nepalielina iesaisti','Konkursu postu vid. iesaiste (<span class="st">'+c.contest_avg+'</span>) ir <span class="st">zemāka</span> nekā parastu postu ('+c.non_contest_avg+'). Konkursi veido tikai '+c.contest_pct+'% no postiem.'],
+    ['good','Iesaistes koncentrācija','Top <span class="st">1%</span> postu ('+cn.top1_pct_posts+') ģenerē <span class="st">'+cn.top1_pct_share+'%</span> no visas iesaistes. Top 10% — <span class="st">'+cn.top10_pct_share+'%</span>. Pārējie 90% — tikai '+cn.rest_share+'%.'],
+    ['good','H2 uzrāda augstāku vid. iesaisti','2. pusgads (Jul-Dec) uzrāda vid. iesaisti <span class="st">'+D.half_year[1].avg_eng+'</span>, kas ir <span class="st">'+D.half_year_growth+'%</span> salīdzinājumā ar H1 ('+D.half_year[0].avg_eng+').'],
+    ['good','Top 3 lapas dominē','<span class="hl">'+wt.pages[0]+'</span>, <span class="hl">'+wt.pages[1]+'</span> un <span class="hl">'+wt.pages[2]+'</span> kopā veido lielu daļu no kopējās iesaistes. Bez viņām vid. iesaiste ir <span class="st">'+wt.avg_eng+'</span> (vs '+wt.original_avg+' ar visām).'],
+    ['tip','Publicēšanas konsekvence pa mēnešiem','Oktobrī/Novembrī visvairāk postu (~1236), bet vasarā mazāk (~860). Ieteikums: palīdzināt konsekvenci, jo vasarā iesaiste ir augstāka bet postu mazāk.'],
+    ['good','Likes dominē iesaisti','Likes veido <span class="st">'+D.engagement_breakdown.likes_pct+'%</span>, Shares <span class="st">'+D.engagement_breakdown.shares_pct+'%</span>, Comments tikai <span class="st">'+D.engagement_breakdown.comments_pct+'%</span>. Shares ir lielākā vērtība — tie izplata saturu tālāk.'],
+    ['tip','Ieteikums: stimulēt vairāk Shares','Shares ir <span class="st">'+D.engagement_breakdown.shares_pct+'%</span> — tā ir organiskā izplatība. Veidojiet saturu, ko cilvēki vēlas dalīties — <span class="hl">emocionālus stāstus, vizuālus foto, lokālo lepnumu</span>.'],
+    ['tip','Vairāk Reel formātā','Reel ir tikai <span class="st">15%</span> no visa satura, bet platformas algoritms to prioritizē. Ieteikums: palielināt Reel daļu līdz <span class="st">25-30%</span> 2026. gadā.'],
+    ['good','Ventspils lapa — Nr.1 pēc iesaistes','<span class="hl">Ventspils</span> lapa ar 1 072 postiem un 164 454 kopējo iesaisti ir absolūtais līderis. Vid. iesaiste: <span class="st">153.4</span>.'],
+    ['good','Ziemeļkurzemes slimnīca — augstākā vid. iesaiste','Ar vid. <span class="st">187.6</span> uz postu, slimnīca uzrāda visaugstāko efektivitāti no visām 50 lapām.'],
+    ['good','VisitVentspils — Nr.2 abās kategorijās','Ar <span class="st">91 562</span> kopējo iesaisti un vid. <span class="st">181.0</span> uz postu, <span class="hl">VisitVentspils</span> ir vienīgā lapa, kas ir TOP 2 gan pēc kopējās, gan pēc vidējās iesaistes vienlaicīgi.'],
+    ['good','Teātra nams JŪRAS VĀRTI — komentāru līderis','<span class="st">20.5%</span> no kopējās iesaistes ir komentāri (<span class="st">1 151</span>) — ar milzīgu pārsvaru pār citām lapām (nākamā ir tikai 6.3%). Komentāri ir augstākā auditorijas iesaistīšanās forma.'],
+    ['good','Komunālā pārvalde — ar maziem sekotājiem, lieli rezultāti','Ar tikai <span class="st">6 498</span> sekotājiem, <span class="hl">Komunālā pārvalde</span> ir Nr.3 pēc kopējās iesaistes (<span class="st">67 739</span>) — pierādījums, ka arī ar mazu auditoriju var sasniegt izcilus rezultātus.'],
+    ['tip','Mazās lapas — nepietiekams saturs','9 lapas publicē mazāk par <span class="st">50 postiem gadā</span> (mazāk par 1x nedēļā). Tām jāpalielina regularitāte.'],
+    ['tip','Rīcības plāns 2026','<p>1. Palielināt brīvdienu saturu līdz 25%+</p><p>2. Fokuss uz vakara publicēšanu (17-22)</p><p>3. Vertikāli + īsāks teksts = labākais formuls</p><p>4. Reel daļu palielināt līdz 25-30%</p><p>5. Stimulēt Shares ar emocionāliem stāstiem</p>'],
+  ];
+  var g=document.getElementById('conG');
+  g.innerHTML=items.map(function(it){
+    return '<div class="con '+it[0]+'"><h3>'+it[1]+'</h3><p>'+it[2]+'</p></div>';
+  }).join('');
+}
+
+// Color chart toggle (bar <-> pie)
+var colorChartInstance=null;
+function switchColor(mode){
+  var c=D.colors.slice(0,10);
+  var isDark=function(h){return h==='#000000'||h==='#00000D'||h==='#0E0000'||h==='#0D0F1C'||h==='#1B0D0D'||h==='#004551'||h==='#00435D'||h==='#035137'};
+  var isLight=function(h){return h==='#ffffff'||h==='#FFFFFF'||h==='#FFF3F3'||h==='#FFFFF3'||h==='#F4F2E6'||h==='#E3E5F2'||h==='#D7E4F4'||h==='#C9D6E6'||h==='#CAF3E5'};
+  var bgC=c.map(function(x){return isDark(x.hex)?'rgba(100,100,100,0.75)':isLight(x.hex)?x.hex+'dd':x.hex});
+  var brC=c.map(function(x){return isLight(x.hex)?'#bbb':'transparent'});
+  var bwC=c.map(function(x){return isLight(x.hex)?1:0});
+  var canvas=document.getElementById('colorC');
+  if(CH.colorC){CH.colorC.destroy();CH.colorC=null}
+  if(colorChartInstance){colorChartInstance.destroy()}
+  document.getElementById('colorBar').className=mode==='bar'?'tbtn active':'tbtn';
+  document.getElementById('colorPie').className=mode==='pie'?'tbtn active':'tbtn';
+  if(mode==='pie'){
+    colorChartInstance=new Chart(canvas,{type:'pie',data:{labels:c.map(function(x){return x.name+' ('+x.pct+'%)'}),datasets:[{data:c.map(function(x){return x.count}),backgroundColor:bgC,borderColor:brC,borderWidth:bwC}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:11},padding:8}},tooltip:{callbacks:{label:function(ctx){var d=c[ctx.dataIndex];return d.name+': '+d.count+' ('+d.pct+'%)'}}}}}});
+  } else {
+    colorChartInstance=new Chart(canvas,{type:'bar',data:{labels:c.map(function(x){return x.name+' ('+x.pct+'%)'}),datasets:[{label:'Skaits',data:c.map(function(x){return x.count}),backgroundColor:bgC,borderColor:brC,borderWidth:bwC}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){var d=c[ctx.dataIndex];return d.name+': '+d.count+' ('+d.pct+'%)'}}}},scales:{x:scOpts(),y:scOpts()}}});
+  }
+}
+
+// Scroll animations
+function initScroll(){
+  var obs=new IntersectionObserver(function(e){e.forEach(function(en){if(en.isIntersecting)en.target.classList.add('visible')});},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.section,.con').forEach(function(el){obs.observe(el)});
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  buildKPI();
+  Object.keys(CFG).forEach(function(id){rc(id)});
+  buildTopPosts();
+  buildAllPages();
+  buildTagCloud();
+  buildConclusions();
+  document.querySelectorAll('.con').forEach(function(el,i){el.style.transitionDelay=(i*0.06)+'s'});
+  initScroll();
+});
+</script>
+</body></html>

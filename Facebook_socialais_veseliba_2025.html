@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="lv"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sociālie pakalpojumi un Veselības aprūpe — Facebook 2025</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #060911;
+  --surface-1: #131820;
+  --surface-2: #1A2030;
+  --surface-3: #232B3B;
+  --border: rgba(255,255,255,0.05);
+  --border-hover: rgba(255,255,255,0.12);
+  --text-1: #F0F2F5;
+  --text-2: #8B95A5;
+  --text-2b: #A8B2C1;
+  --text-3: #5A6577;
+  --accent: #1877F2;
+  --accent-hover: #4293F5;
+  --accent-dim: rgba(24,119,242,0.12);
+  --green: #34D399;
+  --green-dim: rgba(52,211,153,0.12);
+  --red: #F87171;
+  --red-dim: rgba(248,113,113,0.12);
+  --orange: #FBBF24;
+  --orange-dim: rgba(251,191,36,0.12);
+  --purple: #A78BFA;
+  --purple-dim: rgba(167,139,250,0.12);
+  --chart-grid: rgba(255,255,255,0.04);
+  --radius-card: 20px;
+  --radius-btn: 12px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--bg);
+  background-image:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(24,119,242,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(52,211,153,0.05) 0%, transparent 60%);
+  background-attachment:fixed;
+  color:var(--text-1);line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+body::after{
+  content:'';position:fixed;top:0;left:0;width:100%;height:100%;
+  opacity:0.015;pointer-events:none;z-index:9999;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.nav{position:sticky;top:0;z-index:100;background:rgba(6,9,17,0.85);backdrop-filter:blur(16px);padding:14px 48px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--border);font-size:0.82em;flex-wrap:wrap}
+.nav a{color:var(--accent);text-decoration:none;font-weight:600;display:flex;align-items:center;gap:6px;transition:color .2s;white-space:nowrap}.nav a:hover{color:var(--accent-hover)}
+.nav .acc-name{color:var(--text-1);font-family:'Space Grotesk',sans-serif;font-size:1.05em;font-weight:700}
+.nav-pn{display:flex;gap:16px;align-items:center}
+.unified-footer{margin-top:120px;padding:64px 48px 40px;background:rgba(10,13,20,0.8);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,0.04)}
+.unified-footer .uf-title{font-size:1.3em;margin-bottom:32px;text-align:center;background:linear-gradient(135deg,var(--text-2),var(--text-3));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.unified-footer .uf-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 12px;max-width:1280px;margin:0 auto 32px}
+.unified-footer .uf-link{font-size:0.78em;padding:8px 16px 8px 10px;border-radius:16px;background:rgba(19,24,32,0.6);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.04);color:var(--text-2b);text-decoration:none;display:inline-flex;align-items:center;gap:8px;font-weight:500;transition:all .2s ease}
+.unified-footer .uf-link:hover{background:rgba(35,43,59,0.8);border-color:rgba(79,140,255,0.15);box-shadow:0 4px 20px rgba(0,0,0,0.3);transform:translateY(-3px);color:var(--text-1)}
+.unified-footer .uf-link.active{border-color:rgba(24,119,242,0.3);background:rgba(24,119,242,0.08);color:var(--text-1)}
+.unified-footer .uf-dot{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:0.72em;font-weight:700;color:#fff;flex-shrink:0}
+.unified-footer .uf-copy{font-size:0.75em;color:var(--text-3);text-align:center;padding-top:24px;max-width:1280px;margin:0 auto}
+.container{max-width:1400px;margin:0 auto;padding:0 48px 120px}
+.hero{padding:80px 48px 60px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:900px;height:600px;background:radial-gradient(ellipse,rgba(24,119,242,0.12) 0%,rgba(52,211,153,0.08) 40%,transparent 70%);animation:heroGlow 8s ease-in-out infinite alternate;pointer-events:none}
+@keyframes heroGlow{0%{opacity:0.8;transform:translateX(-50%) scale(1)}100%{opacity:1;transform:translateX(-50%) scale(1.15)}}
+.hero h1{font-family:'Space Grotesk',sans-serif;font-size:2.8em;font-weight:700;letter-spacing:-0.04em;line-height:1.1;margin-bottom:12px}
+.hero h1 span{background:linear-gradient(135deg,#1877F2,#34D399);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.subtitle{color:var(--text-2b);font-size:1.05em;opacity:0.7}
+.group-badge{display:inline-block;padding:6px 20px;border-radius:20px;background:linear-gradient(135deg,rgba(24,119,242,0.15),rgba(52,211,153,0.15));border:1px solid rgba(255,255,255,0.08);font-size:0.85em;font-weight:600;color:var(--text-2b);margin-top:16px}
+
+/* KPI grid */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:18px;margin-bottom:60px}
+.kpi{background:rgba(19,24,32,0.6);backdrop-filter:blur(16px);border-radius:20px;padding:22px 18px;border:1px solid rgba(255,255,255,0.05);box-shadow:0 4px 24px rgba(0,0,0,0.2),inset 0 1px 0 rgba(255,255,255,0.03);text-align:center;transition:all .3s ease;animation:fadeInUp 0.6s ease-out both}
+.kpi:hover{border-color:rgba(24,119,242,0.15);transform:translateY(-4px)}
+.kpi .label{font-size:0.72em;letter-spacing:2px;color:var(--text-3);text-transform:uppercase;font-weight:600}
+.kpi .value{font-size:1.65em;font-weight:800;margin:8px 0;background:linear-gradient(135deg,var(--text-1),var(--text-2b));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-variant-numeric:tabular-nums;white-space:nowrap}
+.kpi .sub{font-size:0.7em;color:var(--text-2)}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.kpi:nth-child(1){animation-delay:.05s}.kpi:nth-child(2){animation-delay:.1s}.kpi:nth-child(3){animation-delay:.15s}.kpi:nth-child(4){animation-delay:.2s}.kpi:nth-child(5){animation-delay:.25s}.kpi:nth-child(6){animation-delay:.3s}
+
+/* Compare table */
+.compare-table{width:100%;border-collapse:collapse;font-size:0.85em}
+.compare-table th{padding:14px 16px;text-align:center;font-weight:700;font-size:0.85em;border-bottom:2px solid rgba(24,119,242,0.15)}
+.compare-table td{padding:12px 16px;text-align:center;border-bottom:1px solid var(--border);font-variant-numeric:tabular-nums}
+.compare-table .cm-label{text-align:left;color:var(--text-2);font-weight:500;font-size:0.9em}
+.compare-table tr:hover td{background:rgba(24,119,242,0.03)}
+
+/* Section styles */
+.stitle{font-family:'Space Grotesk',sans-serif;font-size:1.7em;font-weight:700;color:var(--text-1);letter-spacing:-0.02em;margin-bottom:16px;padding-left:4px}
+.stitle .num{font-size:0.6em;color:rgba(24,119,242,0.4);margin-right:10px;font-weight:700}
+.sdesc{color:var(--text-2b);font-size:0.9em;line-height:1.65;max-width:700px;margin-bottom:16px;padding-left:4px}
+.section{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);margin-bottom:80px}
+.section.visible{opacity:1;transform:translateY(0)}
+.cs{background:rgba(19,24,32,0.5);backdrop-filter:blur(12px);border-radius:20px;padding:28px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 2px 16px rgba(0,0,0,0.15),inset 0 1px 0 rgba(255,255,255,0.02);transition:all .3s ease}
+.cs:hover{border-color:rgba(255,255,255,0.08)}
+.cw{position:relative;height:380px}.cw.tall{height:520px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.hm-wrap{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+.bg-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+table{width:100%;border-collapse:collapse;font-size:0.82em;margin-top:8px}
+th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--border)}
+th{color:var(--text-3);font-weight:600;font-size:0.72em;text-transform:uppercase;letter-spacing:1px;border-bottom:2px solid rgba(24,119,242,0.1)}
+td{font-variant-numeric:tabular-nums;color:var(--text-2b)}
+tr:hover td{background:rgba(24,119,242,0.03)}
+a{color:var(--accent);text-decoration:none}a:hover{color:var(--accent-hover)}
+.b{display:inline-block;padding:3px 12px;border-radius:12px;font-size:0.74em;font-weight:600}
+.bg{background:var(--green-dim);color:var(--green)}.br{background:var(--red-dim);color:var(--red)}.bb{background:var(--accent-dim);color:var(--accent)}.bo{background:var(--orange-dim);color:var(--orange)}
+.sd2{font-family:'Space Grotesk',sans-serif;text-align:center;font-size:1.4em;font-weight:700;color:var(--text-2);letter-spacing:-0.01em;margin:80px 0 50px;padding:20px 0;position:relative}
+.sd2::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:80px;height:3px;border-radius:2px;background:linear-gradient(90deg,#1877F2,#34D399)}
+.con-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:1400px;margin:0 auto}
+.con{background:rgba(19,24,32,0.5);backdrop-filter:blur(12px);border-radius:20px;padding:28px;border:1px solid rgba(255,255,255,0.04);border-left:4px solid var(--accent);box-shadow:0 2px 16px rgba(0,0,0,0.15);transition:all .5s cubic-bezier(.16,1,.3,1);opacity:0;transform:translateY(30px)}
+.con.visible{opacity:1;transform:translateY(0)}
+.con:hover{transform:translateY(-3px)}
+.con h3{margin-bottom:12px;color:var(--accent);font-size:1.1em;font-weight:700}
+.con p{color:var(--text-2b);font-size:0.88em;margin-bottom:8px;line-height:1.7}
+.hl{color:var(--text-1);font-weight:600}.st{color:var(--orange);font-weight:700}
+.good{border-left-color:var(--green)}.good h3{color:var(--green)}
+.bad{border-left-color:var(--red)}.bad h3{color:var(--red)}
+.tip{border-left-color:var(--orange)}.tip h3{color:var(--orange)}
+.hm-grid{display:grid;grid-template-columns:40px repeat(24,1fr);gap:2px;font-size:0.65em}
+.hm-cell{border-radius:4px;text-align:center;padding:4px 2px;font-weight:500;min-height:28px;display:flex;align-items:center;justify-content:center}
+.hm-label{color:var(--text-3);font-weight:600;display:flex;align-items:center;justify-content:center;font-size:0.9em}
+.cc button{padding:5px 14px;border-radius:12px;cursor:pointer;font-size:0.74em;font-weight:500;font-family:'Inter',sans-serif;transition:all .2s;border:1px solid var(--border);background:var(--surface-2);color:var(--text-2)}
+.cc button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.cc button:hover:not(.active){border-color:var(--border-hover);color:var(--text-1)}
+.ch{display:flex;justify-content:flex-end;align-items:center;gap:8px;margin-bottom:12px}
+.legend-inline{display:flex;gap:20px;margin-bottom:12px;padding-left:4px;flex-wrap:wrap}
+.legend-dot{width:12px;height:12px;border-radius:50%;display:inline-block;margin-right:6px;vertical-align:middle}
+.legend-item{font-size:0.82em;color:var(--text-2b);font-weight:500}
+.winner{display:inline-block;padding:2px 8px;border-radius:8px;font-size:0.65em;font-weight:700;margin-left:8px;vertical-align:middle}
+.winner-yes{background:var(--green-dim);color:var(--green)}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-thumb{background:rgba(24,119,242,0.15);border-radius:4px}
+::selection{background:rgba(24,119,242,0.25);color:var(--text-1)}
+@media(max-width:900px){.two-col,.con-grid,.hm-wrap,.bg-wrap{grid-template-columns:1fr}.container{padding:0 20px 80px}.hero{padding:60px 20px 40px}.hero h1{font-size:2em}.nav{padding:10px 16px;font-size:0.75em}.unified-footer{padding:40px 20px 30px}.unified-footer .uf-grid{gap:8px}}
+</style>
+</head><body>
+
+<div class="nav">
+<a href="Facebook_kopejais_2025.html">&larr; Kop&#275;jais</a>
+<div class="nav-pn">
+<a href="Facebook_izglitiba_2025.html">&larr; Izglītība</a>
+<span class="acc-name">Sociālie pakalpojumi un Veselības aprūpe</span>
+<a href="Facebook_sports_2025.html">Sports &rarr;</a>
+</div>
+</div>
+
+<div class="hero">
+<h1><span>Sociālie pakalpojumi un Veselības aprūpe</span></h1>
+<p class="subtitle">Facebook 2025 &middot; Grupu sal&#299;dzin&#257;jums &middot; Janv&#257;ris &#8212; Decembris</p>
+<div class="group-badge">Soc. dienests &middot; Slimnīca &middot; Poliklīnika</div>
+</div>
+
+<div class="container">
+<div class="kpi-grid" id="kpiG"></div>
+
+<div class="legend-inline"><span class="legend-item"><span class="legend-dot" style="background:#1877F2"></span>Soc. dienests</span><span class="legend-item"><span class="legend-dot" style="background:#34D399"></span>Slimnīca</span><span class="legend-item"><span class="legend-dot" style="background:#FBBF24"></span>Poliklīnika</span></div>
+
+<div class="section"><h2 class="stitle"><span class="num">01</span>Lapu sal&#299;dzin&#257;jums</h2>
+<p class="sdesc">Visu 3 lapu galven&#257;s metrikas &#8212; &#9733; apz&#299;m&#275; lab&#257;ko rezult&#257;tu.</p>
+<div class="cs" id="compareG"></div></div>
+
+<div class="section"><h2 class="stitle"><span class="num">02</span>Kop&#275;j&#257; iesaiste pa m&#275;ne&#353;iem</h2>
+<p class="sdesc">Visu 3 lapu kop&#275;j&#257; iesaiste (likes+shares+comments) katr&#257; m&#275;nes&#299;.</p>
+<div class="cs"><div class="cw" style="height:420px"><canvas id="mEngC"></canvas></div></div></div>
+
+<div class="section"><h2 class="stitle"><span class="num">03</span>Vid&#275;j&#257; iesaiste pa m&#275;ne&#353;iem</h2>
+<p class="sdesc">Vid&#275;j&#257; iesaiste uz vienu publik&#257;ciju katr&#257; m&#275;nes&#299;.</p>
+<div class="cs"><div class="cw" style="height:380px"><canvas id="mAvgC"></canvas></div></div></div>
+
+<div class="section"><div class="two-col">
+<div><h2 class="stitle"><span class="num">04</span>Form&#257;tu sadal&#299;jums</h2>
+<p class="sdesc">Publik&#257;ciju skaits pa form&#257;tiem.</p>
+<div class="cs"><div class="cw"><canvas id="fmtC"></canvas></div></div></div>
+<div><h2 class="stitle"><span class="num">05</span>Form&#257;tu efektivit&#257;te</h2>
+<p class="sdesc">Vid&#275;j&#257; iesaiste p&#275;c form&#257;ta.</p>
+<div class="cs"><div class="cw"><canvas id="fmtEffC"></canvas></div></div></div>
+</div></div>
+
+<div class="section"><div class="two-col">
+<div><h2 class="stitle"><span class="num">06</span>Bil&#382;u orient&#257;cija</h2>
+<div class="cs"><div class="cw"><canvas id="oriC"></canvas></div></div></div>
+<div><h2 class="stitle"><span class="num">07</span>Teksta garums</h2>
+<p class="sdesc">Vid&#275;j&#257; iesaiste p&#275;c pavado&#353;&#257; teksta garuma.</p>
+<div class="cs"><div class="cw"><canvas id="capC"></canvas></div></div></div>
+</div></div>
+
+<div class="section"><h2 class="stitle"><span class="num">08</span>Iesaiste p&#275;c ned&#275;&#316;as dien&#257;m</h2>
+<div class="cs"><div class="cw"><canvas id="wdayC"></canvas></div></div></div>
+
+<div class="section"><h2 class="stitle"><span class="num">09</span>Iesaiste pa stund&#257;m</h2>
+<div class="cs"><div class="cw tall"><canvas id="hourC"></canvas></div></div></div>
+
+<div class="section"><h2 class="stitle"><span class="num">10</span>Darba dienas vs Br&#299;vdienas</h2>
+<div class="cs"><div class="cw"><canvas id="wwC"></canvas></div></div></div>
+
+<div class="section"><h2 class="stitle"><span class="num">11</span>Karstuma kartes</h2>
+<p class="sdesc">Vid&#275;j&#257; iesaiste pa ned&#275;&#316;as dien&#257;m un stund&#257;m &#8212; za&#316;&#353; = lab&#257;kais, sarkans = slikt&#257;kais.</p>
+<div class="cs"><div class="hm-wrap"><div><h4 style="color:#1877F2;margin-bottom:8px;font-family:Space Grotesk,sans-serif;font-size:0.95em">Soc. dienests</h4><div class="hm-grid" id="hm0"></div></div>
+<div><h4 style="color:#34D399;margin-bottom:8px;font-family:Space Grotesk,sans-serif;font-size:0.95em">Slimnīca</h4><div class="hm-grid" id="hm1"></div></div>
+<div><h4 style="color:#FBBF24;margin-bottom:8px;font-family:Space Grotesk,sans-serif;font-size:0.95em">Poliklīnika</h4><div class="hm-grid" id="hm2"></div></div>
+</div></div></div>
+
+<div class="sd2">Papildu Anal&#299;ze</div>
+
+<div class="section"><h2 class="stitle"><span class="num">12</span>Iesaistes sadal&#299;jums</h2>
+<p class="sdesc">Cik publik&#257;ciju iekr&#299;t katr&#257; iesaistes diapazon&#257;.</p>
+<div class="cs"><div class="cw"><canvas id="engDistC"></canvas></div></div></div>
+
+<div class="section"><div class="two-col">
+<div><h2 class="stitle"><span class="num">13</span>H1 vs H2 sal&#299;dzin&#257;jums</h2>
+<div class="cs"><div class="cw"><canvas id="halfC"></canvas></div></div></div>
+<div><h2 class="stitle"><span class="num">14</span>Konkursi vs Parastie</h2>
+<div class="cs"><div class="cw"><canvas id="contestC"></canvas></div></div></div>
+</div></div>
+
+<div class="section"><h2 class="stitle"><span class="num">15</span>Satura t&#275;mas</h2>
+<p class="sdesc">T&#275;mu klasifik&#257;cija un vid&#275;j&#257; iesaiste.</p>
+<div class="cs"><div class="cw tall"><canvas id="themesC"></canvas></div></div></div>
+
+<div class="section"><h2 class="stitle"><span class="num">16</span>Bie&#382;&#257;kie v&#257;rdu p&#257;ri</h2>
+<p class="sdesc">Top 10 bie&#382;&#257;k lietotie 2 v&#257;rdu p&#257;ri katr&#257; lap&#257;.</p>
+<div class="cs"><div class="bg-wrap"><div id="bg0"></div><div id="bg1"></div><div id="bg2"></div></div></div></div>
+
+<div class="section"><h2 class="stitle"><span class="num">17</span>Popul&#257;r&#257;k&#257;s saites</h2>
+<p class="sdesc">Bie&#382;&#257;k izmantotie dom&#275;ni satur&#257;.</p>
+<div class="cs"><div id="saitesG"></div></div></div>
+
+<div class="sd2">Top Ieraksti</div>
+
+<div class="section"><h2 class="stitle"><span class="num">18</span>Top 20 publik&#257;cijas</h2>
+<div class="cs"><div class="ch"><div class="cc"><button class="active" onclick="sortTop('engagement',this)">Iesaiste</button><button onclick="sortTop('likes',this)">Likes</button><button onclick="sortTop('shares',this)">Shares</button><button onclick="sortTop('comments',this)">Comments</button></div></div><div style="overflow-x:auto"><table id="topT"></table></div></div></div>
+
+<div class="section"><h2 class="stitle"><span class="num">19</span>Zem&#257;k&#257; iesaiste</h2>
+<div class="cs"><div style="overflow-x:auto"><table id="worstT"></table></div></div></div>
+
+<div class="sd2">Secin&#257;jumi un Ieteikumi</div>
+<div class="con-grid" id="conG"></div>
+
+</div>
+
+<div class="unified-footer">
+<div class="uf-title">Visi Facebook grupas p&#257;rskati 2025</div>
+<div class="uf-grid">
+<a class="uf-link summary-link" href="Facebook_kopejais_2025.html" title="Kop&#275;jais p&#257;rskats"><span class="uf-dot" style="background:linear-gradient(135deg,#1877F2,#A78BFA)">K</span>Kop&#275;jais p&#257;rskats</a>
+<a class="uf-link" href="Facebook_parvalde_turisms_2025.html" title="Pārvalde un Tūrisms"><span class="uf-dot" style="background:#1877F2">P</span>Pārvalde un Tūrisms</a>
+<a class="uf-link" href="Facebook_izglitiba_2025.html" title="Izglītība"><span class="uf-dot" style="background:#34D399">I</span>Izglītība</a>
+<a class="uf-link active" href="Facebook_socialais_veseliba_2025.html" title="Sociālie pakalpojumi un Veselības aprūpe"><span class="uf-dot" style="background:#FBBF24">S</span>Sociālie pakalpojumi un Veselības aprūpe</a>
+<a class="uf-link" href="Facebook_sports_2025.html" title="Sports"><span class="uf-dot" style="background:#F87171">S</span>Sports</a>
+<a class="uf-link" href="Facebook_kultura_2025.html" title="Kultūra"><span class="uf-dot" style="background:#A78BFA">K</span>Kultūra</a>
+<a class="uf-link" href="Facebook_komunalie_2025.html" title="Komunālie pakalpojumi"><span class="uf-dot" style="background:#06b6d4">K</span>Komunālie pakalpojumi</a>
+<a class="uf-link" href="Facebook_citi_2025.html" title="Citi"><span class="uf-dot" style="background:#ec4899">C</span>Citi</a>
+<a class="uf-link" href="Facebook_partneri_2025.html" title="Sadarbības partneri"><span class="uf-dot" style="background:#f97316">S</span>Sadarbības partneri</a>
+</div>
+<div class="uf-copy">Ventspils Facebook 2025 &mdash; 8 grupas &middot; 31 lapa &middot; Grupu p&#257;rskati</div>
+</div>
+
+<script>
+
+const D={"pages": {"Ventspils Sociālais dienests": {"kpi": {"page": "Ventspils Sociālais dienests", "total_posts": 294, "total_likes": 6407, "total_shares": 1292, "total_comments": 171, "total_engagement": 7870, "avg_eng": 26.8, "median_eng": 14, "viral_count": 12, "viral_pct": 4.1}, "monthly": [{"month": 1, "name": "Jan", "posts": 28, "engagement": 666, "avg_eng": 23.8}, {"month": 2, "name": "Feb", "posts": 17, "engagement": 353, "avg_eng": 20.8}, {"month": 3, "name": "Mar", "posts": 26, "engagement": 686, "avg_eng": 26.4}, {"month": 4, "name": "Apr", "posts": 38, "engagement": 643, "avg_eng": 16.9}, {"month": 5, "name": "Mai", "posts": 28, "engagement": 543, "avg_eng": 19.4}, {"month": 6, "name": "Jun", "posts": 19, "engagement": 599, "avg_eng": 31.5}, {"month": 7, "name": "Jul", "posts": 19, "engagement": 231, "avg_eng": 12.2}, {"month": 8, "name": "Aug", "posts": 24, "engagement": 352, "avg_eng": 14.7}, {"month": 9, "name": "Sep", "posts": 22, "engagement": 1635, "avg_eng": 74.3}, {"month": 10, "name": "Okt", "posts": 25, "engagement": 1069, "avg_eng": 42.8}, {"month": 11, "name": "Nov", "posts": 20, "engagement": 334, "avg_eng": 16.7}, {"month": 12, "name": "Dec", "posts": 28, "engagement": 759, "avg_eng": 27.1}], "half_year": [{"name": "H1", "posts": 156, "avg_eng": 22.4}, {"name": "H2", "posts": 138, "avg_eng": 31.7}], "weekday": [{"day": 1, "name": "Pirmdiena", "posts": 56, "avg_eng": 16.5}, {"day": 2, "name": "Otrdiena", "posts": 39, "avg_eng": 24.4}, {"day": 3, "name": "Trešdiena", "posts": 53, "avg_eng": 32.2}, {"day": 4, "name": "Ceturtdiena", "posts": 42, "avg_eng": 18.4}, {"day": 5, "name": "Piektdiena", "posts": 55, "avg_eng": 48.6}, {"day": 6, "name": "Sestdiena", "posts": 14, "avg_eng": 20.3}, {"day": 7, "name": "Svētdiena", "posts": 35, "avg_eng": 16.0}], "work_weekend": {"work_posts": 245, "work_pct": 83.3, "work_avg": 28.7, "weekend_posts": 49, "weekend_pct": 16.7, "weekend_avg": 17.2}, "hourly": [{"hour": "00:00", "posts": 0, "avg_eng": 0}, {"hour": "01:00", "posts": 0, "avg_eng": 0}, {"hour": "02:00", "posts": 0, "avg_eng": 0}, {"hour": "03:00", "posts": 0, "avg_eng": 0}, {"hour": "04:00", "posts": 0, "avg_eng": 0}, {"hour": "05:00", "posts": 1, "avg_eng": 6.0}, {"hour": "06:00", "posts": 3, "avg_eng": 34.0}, {"hour": "07:00", "posts": 14, "avg_eng": 12.5}, {"hour": "08:00", "posts": 21, "avg_eng": 76.0}, {"hour": "09:00", "posts": 12, "avg_eng": 12.8}, {"hour": "10:00", "posts": 7, "avg_eng": 41.3}, {"hour": "11:00", "posts": 25, "avg_eng": 12.4}, {"hour": "12:00", "posts": 36, "avg_eng": 22.9}, {"hour": "13:00", "posts": 29, "avg_eng": 33.2}, {"hour": "14:00", "posts": 22, "avg_eng": 23.0}, {"hour": "15:00", "posts": 17, "avg_eng": 49.5}, {"hour": "16:00", "posts": 25, "avg_eng": 20.2}, {"hour": "17:00", "posts": 23, "avg_eng": 16.4}, {"hour": "18:00", "posts": 27, "avg_eng": 23.9}, {"hour": "19:00", "posts": 19, "avg_eng": 19.4}, {"hour": "20:00", "posts": 11, "avg_eng": 17.4}, {"hour": "21:00", "posts": 2, "avg_eng": 5.5}, {"hour": "22:00", "posts": 0, "avg_eng": 0}, {"hour": "23:00", "posts": 0, "avg_eng": 0}], "heatmap": [{"day": 1, "hour": 0, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 1, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 2, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 3, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 4, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 5, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 6, "posts": 1, "avg_eng": 26.0}, {"day": 1, "hour": 7, "posts": 4, "avg_eng": 8.5}, {"day": 1, "hour": 8, "posts": 2, "avg_eng": 8.0}, {"day": 1, "hour": 9, "posts": 2, "avg_eng": 14.0}, {"day": 1, "hour": 10, "posts": 1, "avg_eng": 10.0}, {"day": 1, "hour": 11, "posts": 5, "avg_eng": 11.2}, {"day": 1, "hour": 12, "posts": 7, "avg_eng": 13.0}, {"day": 1, "hour": 13, "posts": 7, "avg_eng": 41.4}, {"day": 1, "hour": 14, "posts": 9, "avg_eng": 15.6}, {"day": 1, "hour": 15, "posts": 4, "avg_eng": 14.5}, {"day": 1, "hour": 16, "posts": 1, "avg_eng": 15.0}, {"day": 1, "hour": 17, "posts": 6, "avg_eng": 6.3}, {"day": 1, "hour": 18, "posts": 5, "avg_eng": 19.4}, {"day": 1, "hour": 19, "posts": 2, "avg_eng": 12.5}, {"day": 1, "hour": 20, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 21, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 22, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 23, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 0, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 1, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 2, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 3, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 4, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 5, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 6, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 7, "posts": 2, "avg_eng": 13.5}, {"day": 2, "hour": 8, "posts": 5, "avg_eng": 11.0}, {"day": 2, "hour": 9, "posts": 2, "avg_eng": 13.0}, {"day": 2, "hour": 10, "posts": 1, "avg_eng": 151.0}, {"day": 2, "hour": 11, "posts": 3, "avg_eng": 17.3}, {"day": 2, "hour": 12, "posts": 4, "avg_eng": 66.2}, {"day": 2, "hour": 13, "posts": 2, "avg_eng": 4.5}, {"day": 2, "hour": 14, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 15, "posts": 1, "avg_eng": 0.0}, {"day": 2, "hour": 16, "posts": 5, "avg_eng": 7.6}, {"day": 2, "hour": 17, "posts": 4, "avg_eng": 19.8}, {"day": 2, "hour": 18, "posts": 4, "avg_eng": 28.2}, {"day": 2, "hour": 19, "posts": 5, "avg_eng": 25.6}, {"day": 2, "hour": 20, "posts": 1, "avg_eng": 7.0}, {"day": 2, "hour": 21, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 22, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 23, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 0, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 1, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 2, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 3, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 4, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 5, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 6, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 7, "posts": 1, "avg_eng": 17.0}, {"day": 3, "hour": 8, "posts": 4, "avg_eng": 13.5}, {"day": 3, "hour": 9, "posts": 3, "avg_eng": 18.7}, {"day": 3, "hour": 10, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 11, "posts": 4, "avg_eng": 12.0}, {"day": 3, "hour": 12, "posts": 6, "avg_eng": 12.0}, {"day": 3, "hour": 13, "posts": 4, "avg_eng": 37.0}, {"day": 3, "hour": 14, "posts": 1, "avg_eng": 11.0}, {"day": 3, "hour": 15, "posts": 4, "avg_eng": 158.5}, {"day": 3, "hour": 16, "posts": 4, "avg_eng": 49.2}, {"day": 3, "hour": 17, "posts": 4, "avg_eng": 21.8}, {"day": 3, "hour": 18, "posts": 9, "avg_eng": 26.6}, {"day": 3, "hour": 19, "posts": 7, "avg_eng": 18.7}, {"day": 3, "hour": 20, "posts": 1, "avg_eng": 9.0}, {"day": 3, "hour": 21, "posts": 1, "avg_eng": 2.0}, {"day": 3, "hour": 22, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 23, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 0, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 1, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 2, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 3, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 4, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 5, "posts": 1, "avg_eng": 6.0}, {"day": 4, "hour": 6, "posts": 1, "avg_eng": 46.0}, {"day": 4, "hour": 7, "posts": 4, "avg_eng": 13.8}, {"day": 4, "hour": 8, "posts": 2, "avg_eng": 8.5}, {"day": 4, "hour": 9, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 10, "posts": 1, "avg_eng": 20.0}, {"day": 4, "hour": 11, "posts": 3, "avg_eng": 8.7}, {"day": 4, "hour": 12, "posts": 7, "avg_eng": 19.6}, {"day": 4, "hour": 13, "posts": 2, "avg_eng": 9.0}, {"day": 4, "hour": 14, "posts": 2, "avg_eng": 8.5}, {"day": 4, "hour": 15, "posts": 2, "avg_eng": 17.0}, {"day": 4, "hour": 16, "posts": 8, "avg_eng": 19.4}, {"day": 4, "hour": 17, "posts": 3, "avg_eng": 12.7}, {"day": 4, "hour": 18, "posts": 3, "avg_eng": 45.3}, {"day": 4, "hour": 19, "posts": 2, "avg_eng": 32.0}, {"day": 4, "hour": 20, "posts": 1, "avg_eng": 3.0}, {"day": 4, "hour": 21, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 22, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 23, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 0, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 1, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 2, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 3, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 4, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 5, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 6, "posts": 1, "avg_eng": 30.0}, {"day": 5, "hour": 7, "posts": 3, "avg_eng": 14.0}, {"day": 5, "hour": 8, "posts": 6, "avg_eng": 235.3}, {"day": 5, "hour": 9, "posts": 1, "avg_eng": 17.0}, {"day": 5, "hour": 10, "posts": 3, "avg_eng": 31.3}, {"day": 5, "hour": 11, "posts": 7, "avg_eng": 13.4}, {"day": 5, "hour": 12, "posts": 6, "avg_eng": 27.2}, {"day": 5, "hour": 13, "posts": 10, "avg_eng": 40.2}, {"day": 5, "hour": 14, "posts": 4, "avg_eng": 38.0}, {"day": 5, "hour": 15, "posts": 5, "avg_eng": 22.2}, {"day": 5, "hour": 16, "posts": 2, "avg_eng": 11.5}, {"day": 5, "hour": 17, "posts": 3, "avg_eng": 26.0}, {"day": 5, "hour": 18, "posts": 1, "avg_eng": 11.0}, {"day": 5, "hour": 19, "posts": 2, "avg_eng": 5.5}, {"day": 5, "hour": 20, "posts": 1, "avg_eng": 34.0}, {"day": 5, "hour": 21, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 22, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 23, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 0, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 1, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 2, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 3, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 4, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 5, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 6, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 7, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 8, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 9, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 10, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 11, "posts": 1, "avg_eng": 3.0}, {"day": 6, "hour": 12, "posts": 2, "avg_eng": 16.5}, {"day": 6, "hour": 13, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 14, "posts": 3, "avg_eng": 39.0}, {"day": 6, "hour": 15, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 16, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 17, "posts": 1, "avg_eng": 7.0}, {"day": 6, "hour": 18, "posts": 1, "avg_eng": 14.0}, {"day": 6, "hour": 19, "posts": 1, "avg_eng": 10.0}, {"day": 6, "hour": 20, "posts": 4, "avg_eng": 22.8}, {"day": 6, "hour": 21, "posts": 1, "avg_eng": 9.0}, {"day": 6, "hour": 22, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 23, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 0, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 1, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 2, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 3, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 4, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 5, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 6, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 7, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 8, "posts": 2, "avg_eng": 21.0}, {"day": 7, "hour": 9, "posts": 4, "avg_eng": 6.8}, {"day": 7, "hour": 10, "posts": 1, "avg_eng": 14.0}, {"day": 7, "hour": 11, "posts": 2, "avg_eng": 16.0}, {"day": 7, "hour": 12, "posts": 4, "avg_eng": 16.2}, {"day": 7, "hour": 13, "posts": 4, "avg_eng": 24.2}, {"day": 7, "hour": 14, "posts": 3, "avg_eng": 23.0}, {"day": 7, "hour": 15, "posts": 1, "avg_eng": 4.0}, {"day": 7, "hour": 16, "posts": 5, "avg_eng": 15.6}, {"day": 7, "hour": 17, "posts": 2, "avg_eng": 25.5}, {"day": 7, "hour": 18, "posts": 4, "avg_eng": 8.8}, {"day": 7, "hour": 19, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 20, "posts": 3, "avg_eng": 15.7}, {"day": 7, "hour": 21, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 22, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 23, "posts": 0, "avg_eng": 0}], "formats": [{"type": "Photo", "count": 222, "pct": 75.5, "avg_eng": 21.0}, {"type": "Reel", "count": 34, "pct": 11.6, "avg_eng": 42.3}, {"type": "Video", "count": 34, "pct": 11.6, "avg_eng": 50.0}, {"type": "Link", "count": 3, "pct": 1.0, "avg_eng": 1.7}, {"type": "Other", "count": 1, "pct": 0.3, "avg_eng": 71.0}], "orientation": [{"name": "Horizontāli", "count": 30, "pct": 10.3, "avg_eng": 23.5}, {"name": "Vertikāli", "count": 84, "pct": 29.0, "avg_eng": 46.3}, {"name": "Kvadrāts", "count": 0, "pct": 0.0, "avg_eng": 0}], "caption_length": [{"name": "Nav teksta", "count": 22, "pct": 7.5, "avg_eng": 20.4}, {"name": "1-120", "count": 46, "pct": 15.6, "avg_eng": 24.0}, {"name": "121-240", "count": 69, "pct": 23.5, "avg_eng": 30.7}, {"name": "241+", "count": 157, "pct": 53.4, "avg_eng": 26.7}], "eng_dist": [{"bucket": "0", "count": 3, "pct": 1.0}, {"bucket": "1-50", "count": 265, "pct": 90.1}, {"bucket": "51-100", "count": 19, "pct": 6.5}, {"bucket": "101-200", "count": 3, "pct": 1.0}, {"bucket": "201-500", "count": 2, "pct": 0.7}, {"bucket": "500+", "count": 2, "pct": 0.7}], "contest": {"count": 17, "pct": 5.8, "avg_eng": 7.5, "non_avg": 28.0}, "themes": [{"name": "Sociālais", "count": 127, "pct": 43.2, "avg_eng": 30.4}, {"name": "Pasākumi", "count": 124, "pct": 42.2, "avg_eng": 30.5}, {"name": "Daba/Vide", "count": 63, "pct": 21.4, "avg_eng": 19.8}, {"name": "Uzņēmējdarbība", "count": 39, "pct": 13.3, "avg_eng": 25.1}, {"name": "Izglītība", "count": 33, "pct": 11.2, "avg_eng": 56.1}, {"name": "Kultūra", "count": 29, "pct": 9.9, "avg_eng": 39.7}, {"name": "Infrastruktūra", "count": 19, "pct": 6.5, "avg_eng": 11.8}, {"name": "Sports", "count": 15, "pct": 5.1, "avg_eng": 29.7}], "bigrams": [{"phrase": "sociālās aprūpes", "count": 22}, {"phrase": "sociālais dienests", "count": 20}, {"phrase": "aprūpes nama", "count": 19}, {"phrase": "eiro apmērā", "count": 17}, {"phrase": "sociālajā dienestā", "count": 16}, {"phrase": "sociālā dienesta", "count": 15}, {"phrase": "nama selga", "count": 15}, {"phrase": "raiņa ielā", "count": 12}, {"phrase": "aprūpes namā", "count": 11}, {"phrase": "bsac namiņš", "count": 11}], "top_posts": [{"page": "Ventspils Sociālais dienests", "type": "Video", "likes": 632, "shares": 24, "comments": 4, "engagement": 660, "teksts": "📌Nodevām pēdējo -  sesto, mobilo ratiņkrēslu kāpurķēžu pacēlāju klientei un veicam ierīces lietošanas apmācību.\n✅Atveseļ", "date": "2025-09-19", "url": "https://www.facebook.com/1658554464438817_1245701234262845"}, {"page": "Ventspils Sociālais dienests", "type": "Reel", "likes": 617, "shares": 0, "comments": 4, "engagement": 621, "teksts": "📌Nodevām pēdējo -  sesto, mobilo ratiņkrēslu kāpurķēžu pacēlāju klientei un veicam ierīces lietošanas apmācību.\n✅Atveseļ", "date": "2025-09-19", "url": "https://www.facebook.com/1119200053727693"}, {"page": "Ventspils Sociālais dienests", "type": "Video", "likes": 305, "shares": 18, "comments": 1, "engagement": 324, "teksts": "📌Atzīmējot Starptautisko senioru dienu, Ventspils Kultūras centrā uz pusgada kopsapulci un senioru dienas balli pulcējās", "date": "2025-10-01", "url": "https://www.facebook.com/1658554464438817_1256854616480840"}, {"page": "Ventspils Sociālais dienests", "type": "Reel", "likes": 299, "shares": 0, "comments": 1, "engagement": 300, "teksts": "📌Atzīmējot Starptautisko senioru dienu, Ventspils Kultūras centrā uz pusgada kopsapulci un senioru dienas balli pulcējās", "date": "2025-10-01", "url": "https://www.facebook.com/24612623208388987"}, {"page": "Ventspils Sociālais dienests", "type": "Photo", "likes": 103, "shares": 51, "comments": 3, "engagement": 157, "teksts": "📌Šodien svinīgi tika atklāta sociālā aprūpes nama \"Selga\" jaunā nodala.\n\n📸 O. Jūra", "date": "2025-05-27", "url": "https://www.facebook.com/1658554464438817_1145593624273607"}, {"page": "Ventspils Sociālais dienests", "type": "Photo", "likes": 108, "shares": 43, "comments": 0, "engagement": 151, "teksts": "Humors Ventspilī sit augstu vilni🤭\nMūsu kolēģītei aiz mašīnas logtīrītāja bija ielikta zīmīte.🤣", "date": "2025-06-10", "url": "https://www.facebook.com/1658554464438817_1157424246423878"}, {"page": "Ventspils Sociālais dienests", "type": "Photo", "likes": 100, "shares": 6, "comments": 7, "engagement": 113, "teksts": "🇱🇻Valsts svētku mēnesī mūsu kolēģe Zaiga Požarska saņēma pateicību no Valsts probācijas dienesta.\n\n🎉Lepojamies ar augsta", "date": "2025-12-03", "url": "https://www.facebook.com/1658554464438817_1313122817520686"}, {"page": "Ventspils Sociālais dienests", "type": "Photo", "likes": 18, "shares": 82, "comments": 0, "engagement": 100, "teksts": "👕👞👟🥾Aicinam ziedot apģērbu (īpaši vīriešu), kas pašiem nav nepieciešams, bet ir labā stāvoklī, tīrs un izmantojams", "date": "2025-10-03", "url": "https://www.facebook.com/1658554464438817_1258710629628572"}, {"page": "Ventspils Sociālais dienests", "type": "Photo", "likes": 17, "shares": 76, "comments": 0, "engagement": 93, "teksts": "❄️Ventspils patversme aicina ziedot siltas un praktiskas drēbes ziemas sezonai\n👔 Šobrīd visvairāk trūkst vīriešu apģērba", "date": "2025-12-01", "url": "https://www.facebook.com/1658554464438817_1311611074338527"}, {"page": "Ventspils Sociālais dienests", "type": "Photo", "likes": 81, "shares": 4, "comments": 4, "engagement": 89, "teksts": "Šodien mūsu saimē kūku diena!❤️\nMūsu kolektīvā ir Dāma, kura ir ilgstoši darbojusies jomā un piedzīvojusi daudz spilgtu ", "date": "2025-01-23", "url": "https://www.facebook.com/1658554464438817_1045129307653373"}, {"page": "Ventspils Sociālais dienests", "type": "Photo", "likes": 77, "shares": 2, "comments": 9, "engagement": 88, "teksts": "", "date": "2025-03-21", "url": "https://www.facebook.com/1658554464438817_1089791863187117"}, {"page": "Ventspils Sociālais dienests", "type": "Photo", "likes": 28, "shares": 53, "comments": 3, "engagement": 84, "teksts": "Sirsnīgs aicinājums ikvienam ventspilniekam un pilsētas viesim!\n\n🧑‍🤝‍🧑 Ventspils Sociālais dienests aicina atbalstīt Hos", "date": "2025-12-03", "url": "https://www.facebook.com/1658554464438817_1313246480841653"}, {"page": "Ventspils Sociālais dienests", "type": "Photo", "likes": 67, "shares": 9, "comments": 3, "engagement": 79, "teksts": "🎉 Šodien sveicām jubilāri Gaidu, kura sasniegusi skaisto 100 gadu jubileju💐\nSirsnīgā svētku vizītē jubilāri godināja Ven", "date": "2025-12-10", "url": "https://www.facebook.com/1658554464438817_1318698016963166"}, {"page": "Ventspils Sociālais dienests", "type": "Photo", "likes": 65, "shares": 5, "comments": 9, "engagement": 79, "teksts": "Šodien kūku diena💥\nMūsu šoferim Jurim šodien 33 gadu darba svētku jubileja! 🎉\nJuris ir mūsu drošā klints, kurš rūpējas p", "date": "2025-10-01", "url": "https://www.facebook.com/1658554464438817_1256889263144042"}, {"page": "Ventspils Sociālais dienests", "type": "Photo", "likes": 70, "shares": 1, "comments": 7, "engagement": 78, "teksts": "Lūk, tā izskatās laimīgs cilvēks saņemot diplomu par iegūto izglītību! 🎉\n\nArī mums tagad ir pašiem sava diplomēta Person", "date": "2025-02-14", "url": "https://www.facebook.com/1658554464438817_1061447059354931"}, {"page": "Ventspils Sociālais dienests", "type": "Video", "likes": 68, "shares": 1, "comments": 4, "engagement": 73, "teksts": "Mūsu kolektīvā ir Saulstariņš Kristīne Plešakova , kura ir ar ļoti izsmalcinātu humorizjūtu, precizitāti un lipīgu pozit", "date": "2025-04-16", "url": "https://www.facebook.com/1658554464438817_1112840774215559"}, {"page": "Ventspils Sociālais dienests", "type": "Photo", "likes": 64, "shares": 0, "comments": 7, "engagement": 71, "teksts": "Šodien, 6 gadu darba jubileju Ventspils Sociālajā dienestā svin mūsu vadītāja -  Una. 🥳 ledvesmas, drosmes, uzdrošināšan", "date": "2025-06-03", "url": "https://www.facebook.com/1658554464438817_1151476310352005"}, {"page": "Ventspils Sociālais dienests", "type": "Other", "likes": 58, "shares": 11, "comments": 2, "engagement": 71, "teksts": "Ventspils Sociālā dienesta kolektīvs dziļajās sērās ir kopā ar visiem, kuru sirdis ir skārusi milzīgā traģēdija. 🕊🤍", "date": "2025-01-11", "url": "https://www.facebook.com/1658554464438817_1036214495211521"}, {"page": "Ventspils Sociālais dienests", "type": "Photo", "likes": 34, "shares": 34, "comments": 0, "engagement": 68, "teksts": "📌Ventspils Sociālais dienests informē, ka ir uzsākta iesniegumu pieņemšana pašvaldības Ziemassvētku pabalsta – 50 € apmē", "date": "2025-11-24", "url": "https://www.facebook.com/1658554464438817_1306080948224873"}, {"page": "Ventspils Sociālais dienests", "type": "Video", "likes": 61, "shares": 4, "comments": 3, "engagement": 68, "teksts": "", "date": "2025-03-07", "url": "https://www.facebook.com/1658554464438817_1078567970976173"}], "worst_posts": [{"page": "Ventspils Sociālais dienests", "type": "Photo", "engagement": 1, "teksts": "👉Aicinām piedalīties un izteikt savus priekšlikumus, lai ģimenēm ar bērniem Vent", "date": "2025-03-26"}, {"page": "Ventspils Sociālais dienests", "type": "Photo", "engagement": 1, "teksts": "💗Namiņa jauniešu Valentīndiena!❤️Katrs no viņiem cer kastītē sagaidīt sev adresē", "date": "2025-02-14"}, {"page": "Ventspils Sociālais dienests", "type": "Link", "engagement": 0, "teksts": "", "date": "2025-10-12"}, {"page": "Ventspils Sociālais dienests", "type": "Photo", "engagement": 0, "teksts": "", "date": "2025-06-17"}, {"page": "Ventspils Sociālais dienests", "type": "Photo", "engagement": 0, "teksts": "📌 31. janvārī noslēdzās iesniegumu pieņemšana Ziemassvētku pabalsta saņemšanai.\n", "date": "2025-02-10"}], "video": {"has_data": true, "total": 67, "buckets": [{"name": "0-15s", "count": 34, "avg_eng": 53.8}, {"name": "16-30s", "count": 9, "avg_eng": 13.7}, {"name": "31-60s", "count": 10, "avg_eng": 30.4}, {"name": "61-120s", "count": 10, "avg_eng": 81.5}, {"name": "120s+", "count": 4, "avg_eng": 14.8}]}}, "Ziemeļkurzemes reģionālā slimnīca": {"kpi": {"page": "Ziemeļkurzemes reģionālā slimnīca", "total_posts": 346, "total_likes": 47414, "total_shares": 16037, "total_comments": 1449, "total_engagement": 64900, "avg_eng": 187.6, "median_eng": 120, "viral_count": 21, "viral_pct": 6.1}, "monthly": [{"month": 1, "name": "Jan", "posts": 29, "engagement": 3598, "avg_eng": 124.1}, {"month": 2, "name": "Feb", "posts": 23, "engagement": 2375, "avg_eng": 103.3}, {"month": 3, "name": "Mar", "posts": 28, "engagement": 4562, "avg_eng": 162.9}, {"month": 4, "name": "Apr", "posts": 25, "engagement": 2698, "avg_eng": 107.9}, {"month": 5, "name": "Mai", "posts": 28, "engagement": 5048, "avg_eng": 180.3}, {"month": 6, "name": "Jun", "posts": 34, "engagement": 6798, "avg_eng": 199.9}, {"month": 7, "name": "Jul", "posts": 26, "engagement": 6517, "avg_eng": 250.7}, {"month": 8, "name": "Aug", "posts": 28, "engagement": 6711, "avg_eng": 239.7}, {"month": 9, "name": "Sep", "posts": 27, "engagement": 5752, "avg_eng": 213.0}, {"month": 10, "name": "Okt", "posts": 35, "engagement": 8053, "avg_eng": 230.1}, {"month": 11, "name": "Nov", "posts": 24, "engagement": 4577, "avg_eng": 190.7}, {"month": 12, "name": "Dec", "posts": 39, "engagement": 8211, "avg_eng": 210.5}], "half_year": [{"name": "H1", "posts": 167, "avg_eng": 150.2}, {"name": "H2", "posts": 179, "avg_eng": 222.5}], "weekday": [{"day": 1, "name": "Pirmdiena", "posts": 50, "avg_eng": 134.3}, {"day": 2, "name": "Otrdiena", "posts": 68, "avg_eng": 217.8}, {"day": 3, "name": "Trešdiena", "posts": 55, "avg_eng": 157.4}, {"day": 4, "name": "Ceturtdiena", "posts": 51, "avg_eng": 159.4}, {"day": 5, "name": "Piektdiena", "posts": 57, "avg_eng": 170.9}, {"day": 6, "name": "Sestdiena", "posts": 48, "avg_eng": 284.5}, {"day": 7, "name": "Svētdiena", "posts": 17, "avg_eng": 187.9}], "work_weekend": {"work_posts": 281, "work_pct": 81.2, "work_avg": 171.0, "weekend_posts": 65, "weekend_pct": 18.8, "weekend_avg": 259.2}, "hourly": [{"hour": "00:00", "posts": 0, "avg_eng": 0}, {"hour": "01:00", "posts": 0, "avg_eng": 0}, {"hour": "02:00", "posts": 0, "avg_eng": 0}, {"hour": "03:00", "posts": 0, "avg_eng": 0}, {"hour": "04:00", "posts": 0, "avg_eng": 0}, {"hour": "05:00", "posts": 0, "avg_eng": 0}, {"hour": "06:00", "posts": 32, "avg_eng": 161.6}, {"hour": "07:00", "posts": 56, "avg_eng": 253.0}, {"hour": "08:00", "posts": 29, "avg_eng": 238.1}, {"hour": "09:00", "posts": 28, "avg_eng": 175.0}, {"hour": "10:00", "posts": 27, "avg_eng": 166.8}, {"hour": "11:00", "posts": 24, "avg_eng": 205.0}, {"hour": "12:00", "posts": 19, "avg_eng": 177.2}, {"hour": "13:00", "posts": 31, "avg_eng": 166.1}, {"hour": "14:00", "posts": 28, "avg_eng": 148.7}, {"hour": "15:00", "posts": 19, "avg_eng": 176.3}, {"hour": "16:00", "posts": 19, "avg_eng": 134.8}, {"hour": "17:00", "posts": 28, "avg_eng": 155.6}, {"hour": "18:00", "posts": 3, "avg_eng": 217.3}, {"hour": "19:00", "posts": 2, "avg_eng": 195.0}, {"hour": "20:00", "posts": 1, "avg_eng": 343.0}, {"hour": "21:00", "posts": 0, "avg_eng": 0}, {"hour": "22:00", "posts": 0, "avg_eng": 0}, {"hour": "23:00", "posts": 0, "avg_eng": 0}], "heatmap": [{"day": 1, "hour": 0, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 1, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 2, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 3, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 4, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 5, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 6, "posts": 4, "avg_eng": 34.2}, {"day": 1, "hour": 7, "posts": 2, "avg_eng": 487.5}, {"day": 1, "hour": 8, "posts": 2, "avg_eng": 539.0}, {"day": 1, "hour": 9, "posts": 2, "avg_eng": 114.5}, {"day": 1, "hour": 10, "posts": 5, "avg_eng": 146.4}, {"day": 1, "hour": 11, "posts": 3, "avg_eng": 70.7}, {"day": 1, "hour": 12, "posts": 7, "avg_eng": 113.4}, {"day": 1, "hour": 13, "posts": 5, "avg_eng": 81.4}, {"day": 1, "hour": 14, "posts": 6, "avg_eng": 72.8}, {"day": 1, "hour": 15, "posts": 7, "avg_eng": 132.9}, {"day": 1, "hour": 16, "posts": 1, "avg_eng": 70.0}, {"day": 1, "hour": 17, "posts": 4, "avg_eng": 80.8}, {"day": 1, "hour": 18, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 19, "posts": 2, "avg_eng": 195.0}, {"day": 1, "hour": 20, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 21, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 22, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 23, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 0, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 1, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 2, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 3, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 4, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 5, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 6, "posts": 2, "avg_eng": 139.0}, {"day": 2, "hour": 7, "posts": 9, "avg_eng": 115.8}, {"day": 2, "hour": 8, "posts": 7, "avg_eng": 139.9}, {"day": 2, "hour": 9, "posts": 7, "avg_eng": 194.9}, {"day": 2, "hour": 10, "posts": 7, "avg_eng": 202.4}, {"day": 2, "hour": 11, "posts": 4, "avg_eng": 552.8}, {"day": 2, "hour": 12, "posts": 1, "avg_eng": 692.0}, {"day": 2, "hour": 13, "posts": 7, "avg_eng": 305.1}, {"day": 2, "hour": 14, "posts": 8, "avg_eng": 242.4}, {"day": 2, "hour": 15, "posts": 3, "avg_eng": 148.3}, {"day": 2, "hour": 16, "posts": 7, "avg_eng": 215.1}, {"day": 2, "hour": 17, "posts": 5, "avg_eng": 118.0}, {"day": 2, "hour": 18, "posts": 1, "avg_eng": 213.0}, {"day": 2, "hour": 19, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 20, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 21, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 22, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 23, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 0, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 1, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 2, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 3, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 4, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 5, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 6, "posts": 5, "avg_eng": 184.0}, {"day": 3, "hour": 7, "posts": 3, "avg_eng": 86.7}, {"day": 3, "hour": 8, "posts": 5, "avg_eng": 191.6}, {"day": 3, "hour": 9, "posts": 5, "avg_eng": 160.2}, {"day": 3, "hour": 10, "posts": 5, "avg_eng": 90.4}, {"day": 3, "hour": 11, "posts": 8, "avg_eng": 169.5}, {"day": 3, "hour": 12, "posts": 6, "avg_eng": 194.7}, {"day": 3, "hour": 13, "posts": 1, "avg_eng": 101.0}, {"day": 3, "hour": 14, "posts": 4, "avg_eng": 108.8}, {"day": 3, "hour": 15, "posts": 3, "avg_eng": 342.3}, {"day": 3, "hour": 16, "posts": 3, "avg_eng": 82.3}, {"day": 3, "hour": 17, "posts": 5, "avg_eng": 98.4}, {"day": 3, "hour": 18, "posts": 1, "avg_eng": 95.0}, {"day": 3, "hour": 19, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 20, "posts": 1, "avg_eng": 343.0}, {"day": 3, "hour": 21, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 22, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 23, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 0, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 1, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 2, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 3, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 4, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 5, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 6, "posts": 6, "avg_eng": 114.5}, {"day": 4, "hour": 7, "posts": 5, "avg_eng": 296.6}, {"day": 4, "hour": 8, "posts": 3, "avg_eng": 264.3}, {"day": 4, "hour": 9, "posts": 3, "avg_eng": 229.7}, {"day": 4, "hour": 10, "posts": 6, "avg_eng": 214.0}, {"day": 4, "hour": 11, "posts": 5, "avg_eng": 127.2}, {"day": 4, "hour": 12, "posts": 2, "avg_eng": 85.0}, {"day": 4, "hour": 13, "posts": 4, "avg_eng": 154.5}, {"day": 4, "hour": 14, "posts": 6, "avg_eng": 121.2}, {"day": 4, "hour": 15, "posts": 2, "avg_eng": 104.5}, {"day": 4, "hour": 16, "posts": 4, "avg_eng": 69.2}, {"day": 4, "hour": 17, "posts": 5, "avg_eng": 110.8}, {"day": 4, "hour": 18, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 19, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 20, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 21, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 22, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 23, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 0, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 1, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 2, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 3, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 4, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 5, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 6, "posts": 6, "avg_eng": 113.7}, {"day": 5, "hour": 7, "posts": 8, "avg_eng": 164.0}, {"day": 5, "hour": 8, "posts": 4, "avg_eng": 146.5}, {"day": 5, "hour": 9, "posts": 5, "avg_eng": 136.0}, {"day": 5, "hour": 10, "posts": 3, "avg_eng": 83.3}, {"day": 5, "hour": 11, "posts": 4, "avg_eng": 126.5}, {"day": 5, "hour": 12, "posts": 3, "avg_eng": 181.0}, {"day": 5, "hour": 13, "posts": 11, "avg_eng": 141.7}, {"day": 5, "hour": 14, "posts": 3, "avg_eng": 162.0}, {"day": 5, "hour": 15, "posts": 3, "avg_eng": 232.0}, {"day": 5, "hour": 16, "posts": 3, "avg_eng": 132.7}, {"day": 5, "hour": 17, "posts": 3, "avg_eng": 567.3}, {"day": 5, "hour": 18, "posts": 1, "avg_eng": 344.0}, {"day": 5, "hour": 19, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 20, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 21, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 22, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 23, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 0, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 1, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 2, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 3, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 4, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 5, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 6, "posts": 7, "avg_eng": 298.4}, {"day": 6, "hour": 7, "posts": 22, "avg_eng": 333.5}, {"day": 6, "hour": 8, "posts": 5, "avg_eng": 415.6}, {"day": 6, "hour": 9, "posts": 4, "avg_eng": 193.2}, {"day": 6, "hour": 10, "posts": 1, "avg_eng": 369.0}, {"day": 6, "hour": 11, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 12, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 13, "posts": 2, "avg_eng": 118.0}, {"day": 6, "hour": 14, "posts": 1, "avg_eng": 139.0}, {"day": 6, "hour": 15, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 16, "posts": 1, "avg_eng": 63.0}, {"day": 6, "hour": 17, "posts": 5, "avg_eng": 114.2}, {"day": 6, "hour": 18, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 19, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 20, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 21, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 22, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 23, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 0, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 1, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 2, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 3, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 4, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 5, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 6, "posts": 2, "avg_eng": 189.0}, {"day": 7, "hour": 7, "posts": 7, "avg_eng": 251.6}, {"day": 7, "hour": 8, "posts": 3, "avg_eng": 144.7}, {"day": 7, "hour": 9, "posts": 2, "avg_eng": 182.0}, {"day": 7, "hour": 10, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 11, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 12, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 13, "posts": 1, "avg_eng": 91.0}, {"day": 7, "hour": 14, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 15, "posts": 1, "avg_eng": 42.0}, {"day": 7, "hour": 16, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 17, "posts": 1, "avg_eng": 124.0}, {"day": 7, "hour": 18, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 19, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 20, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 21, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 22, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 23, "posts": 0, "avg_eng": 0}], "formats": [{"type": "Photo", "count": 275, "pct": 79.5, "avg_eng": 184.0}, {"type": "Video", "count": 29, "pct": 8.4, "avg_eng": 251.1}, {"type": "Reel", "count": 29, "pct": 8.4, "avg_eng": 187.6}, {"type": "Link", "count": 13, "pct": 3.8, "avg_eng": 121.8}], "orientation": [{"name": "Horizontāli", "count": 73, "pct": 21.3, "avg_eng": 170.3}, {"name": "Vertikāli", "count": 18, "pct": 5.3, "avg_eng": 241.8}, {"name": "Kvadrāts", "count": 0, "pct": 0.0, "avg_eng": 0}], "caption_length": [{"name": "Nav teksta", "count": 1, "pct": 0.3, "avg_eng": 93.0}, {"name": "1-120", "count": 8, "pct": 2.3, "avg_eng": 150.8}, {"name": "121-240", "count": 9, "pct": 2.6, "avg_eng": 73.2}, {"name": "241+", "count": 328, "pct": 94.8, "avg_eng": 191.9}], "eng_dist": [{"bucket": "0", "count": 0, "pct": 0.0}, {"bucket": "1-50", "count": 60, "pct": 17.3}, {"bucket": "51-100", "count": 85, "pct": 24.6}, {"bucket": "101-200", "count": 101, "pct": 29.2}, {"bucket": "201-500", "count": 75, "pct": 21.7}, {"bucket": "500+", "count": 25, "pct": 7.2}], "contest": {"count": 7, "pct": 2.0, "avg_eng": 147.9, "non_avg": 188.4}, "themes": [{"name": "Daba/Vide", "count": 284, "pct": 82.1, "avg_eng": 187.4}, {"name": "Pasākumi", "count": 220, "pct": 63.6, "avg_eng": 168.6}, {"name": "Sociālais", "count": 196, "pct": 56.6, "avg_eng": 178.9}, {"name": "Uzņēmējdarbība", "count": 103, "pct": 29.8, "avg_eng": 209.1}, {"name": "Izglītība", "count": 57, "pct": 16.5, "avg_eng": 173.8}, {"name": "Infrastruktūra", "count": 47, "pct": 13.6, "avg_eng": 176.5}, {"name": "Sports", "count": 36, "pct": 10.4, "avg_eng": 249.5}, {"name": "Kultūra", "count": 35, "pct": 10.1, "avg_eng": 228.5}], "bigrams": [{"phrase": "ziemelkurzemesslimnica zinas", "count": 166}, {"phrase": "raksti mums", "count": 77}, {"phrase": "kurzemes rehabilitācijas", "count": 62}, {"phrase": "ziemeļkurzemes reģionālās", "count": 57}, {"phrase": "reģionālās slimnīcas", "count": 56}, {"phrase": "ārstniecības iestāde", "count": 51}, {"phrase": "ārstniecības iestāžu", "count": 50}, {"phrase": "iestāžu reģistra", "count": 49}, {"phrase": "reģistra kods", "count": 49}, {"phrase": "kods ārstniecības", "count": 49}], "top_posts": [{"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "likes": 1600, "shares": 314, "comments": 107, "engagement": 2021, "teksts": "Dziļās skumjās paziņojam, ka 41 gada vecumā mūžībā devusies SIA “Ziemeļkurzemes reģionālā slimnīca” ķirurģe Nora Kārkliņ", "date": "2025-06-03", "url": "https://www.facebook.com/1603247203265217_1313003300830349"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "likes": 882, "shares": 331, "comments": 53, "engagement": 1266, "teksts": "💬 \"Ja pacienta apmierinātības līmenis ir augsts, viņš atstāj pozitīvas atsauksmes – tas nozīmē, ka visa komanda ir nostr", "date": "2025-09-02", "url": "https://www.facebook.com/1603247203265217_1396646922465986"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "likes": 953, "shares": 89, "comments": 35, "engagement": 1077, "teksts": "👶👶Otrdienas, 1.jūlija, rītā Ventspils slimnīcas Dzemdību nodaļā sagaidīti šī gada trešie dvīnīši – puisīši Emīls un Gust", "date": "2025-07-01", "url": "https://www.facebook.com/1603247203265217_1338601171603895"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "likes": 855, "shares": 118, "comments": 42, "engagement": 1015, "teksts": "🙏Esam saņēmuši sirsnīgus pateicības vārdus par Ventspils slimnīcas Traumatoloģijas nodaļas vadītāju Dr. Igoru Kolosovu. ", "date": "2025-09-13", "url": "https://www.facebook.com/1603247203265217_1406770671453611"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Video", "likes": 645, "shares": 242, "comments": 66, "engagement": 953, "teksts": "Vai zināji, ka agrāk Ventspils slimnīcā bija liftniece un garderobiste? Tāpat bija laiks, kad māsas valkāja halātus, atc", "date": "2025-03-28", "url": "https://www.facebook.com/1603247203265217_1250599677070712"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "likes": 484, "shares": 379, "comments": 31, "engagement": 894, "teksts": "Jaunums Ventspils slimnīcā – PRP injekcijas locītavu, cīpslu, muskuļu bojājumu ārstēšanai un sāpju mazināšanai.💉\n\n👉 PRP ", "date": "2025-12-17", "url": "https://www.facebook.com/1603247203265217_1498867355577275"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Video", "likes": 589, "shares": 210, "comments": 32, "engagement": 831, "teksts": "👨‍⚕️💬  Kāda bija viņu pirmā darba diena Ventspils slimnīcā, spilgtākās atmiņas iz dzīves slimnīcā, kā izvēlējās kļūt par", "date": "2025-08-23", "url": "https://www.facebook.com/1603247203265217_1387018366762175"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Video", "likes": 631, "shares": 122, "comments": 17, "engagement": 770, "teksts": "Šodien Ventspils slimnīcā valdīja īpaši sirsnīga un priecīga noskaņa. Pie pacientiem un darbiniekiem ciemos ieradās rūķi", "date": "2025-12-23", "url": "https://www.facebook.com/1603247203265217_1504107148386629"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "likes": 610, "shares": 127, "comments": 33, "engagement": 770, "teksts": "🙏Ar gandarījumu dalāmies ar vēl kādu sirsnīgu pacienta pieredzi, kas apliecina Kurzemes Mugurkaula ķirurģijas speciālist", "date": "2025-11-15", "url": "https://www.facebook.com/1603247203265217_1470325355098142"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "likes": 608, "shares": 58, "comments": 26, "engagement": 692, "teksts": "🩷Šī gada 200. bērniņš Ventspils slimnīcas Dzemdību nodaļā ieradās pirmdienas, 7. jūlija, pievakarē – mīļi sveicam pasaul", "date": "2025-07-08", "url": "https://www.facebook.com/1603247203265217_1344838930980119"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "likes": 568, "shares": 84, "comments": 28, "engagement": 680, "teksts": "Dalāmies ar pateicību, kas veltīta Neiroloģijas nodaļas vadītājai, neiroloģei Dr. Baibai Leimanei. Šādi pateicības vārdi", "date": "2025-12-06", "url": "https://www.facebook.com/1603247203265217_1488894976574513"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "likes": 558, "shares": 109, "comments": 5, "engagement": 672, "teksts": "🙏 Pacientu pateicība un darba novērtējums ir speciālistu lielākā motivācija. Paldies par pateicību Ventspils slimnīcas N", "date": "2025-05-31", "url": "https://www.facebook.com/1603247203265217_1310242541106425"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "likes": 317, "shares": 305, "comments": 11, "engagement": 633, "teksts": "👨‍⚕️Lai uzlabotu pakalpojuma pieejamību un atsaucoties uz pieaugošo pieprasījumu, Ziemeļkurzemes reģionālās slimnīcas Am", "date": "2025-10-29", "url": "https://www.facebook.com/1603247203265217_1453529323444412"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Reel", "likes": 540, "shares": 0, "comments": 66, "engagement": 606, "teksts": "Vai zināji, ka agrāk Ventspils slimnīcā bija liftniece un garderobiste? Tāpat bija laiks, kad māsas valkāja halātus, atc", "date": "2025-03-28", "url": "https://www.facebook.com/1202259197965478"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "likes": 478, "shares": 107, "comments": 18, "engagement": 603, "teksts": "🙏Esam saņēmuši sirsnīgus vārdus, kas vēlreiz apliecina, cik nozīmīgs ir cilvēcīgums un profesionāla attieksme pacientu a", "date": "2025-08-09", "url": "https://www.facebook.com/1603247203265217_1373877058076306"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "likes": 276, "shares": 319, "comments": 6, "engagement": 601, "teksts": "👨‍⚕️Ziemeļkurzemes reģionālajā slimnīcā Ventspilī pacientiem iespējams pieteikties uz vizīti pie ķirurga Dr. Sergeja Rod", "date": "2025-07-03", "url": "https://www.facebook.com/1603247203265217_1340142124783133"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Reel", "likes": 566, "shares": 0, "comments": 17, "engagement": 583, "teksts": "Šodien Ventspils slimnīcā valdīja īpaši sirsnīga un priecīga noskaņa. Pie pacientiem un darbiniekiem ciemos ieradās rūķi", "date": "2025-12-23", "url": "https://www.facebook.com/1298662965093485"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Reel", "likes": 551, "shares": 0, "comments": 32, "engagement": 583, "teksts": "👨‍⚕️💬  Kāda bija viņu pirmā darba diena Ventspils slimnīcā, spilgtākās atmiņas iz dzīves slimnīcā, kā izvēlējās kļūt par", "date": "2025-08-23", "url": "https://www.facebook.com/1820739668843222"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "likes": 241, "shares": 310, "comments": 28, "engagement": 579, "teksts": "🏥Ventspils slimnīcā pieejamas brīvas vietas uz maksas magnētiskās rezonanses (MR) izmeklējumiem. Aicinām iedzīvotājus iz", "date": "2025-10-27", "url": "https://www.facebook.com/1603247203265217_1451661453631199"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "likes": 477, "shares": 88, "comments": 11, "engagement": 576, "teksts": "🙏 Pacientu pateicība un darba novērtējums ir speciālistu lielākā motivācija. Paldies par pateicību Ventspils slimnīcas m", "date": "2025-06-07", "url": "https://www.facebook.com/1603247203265217_1316463110484368"}], "worst_posts": [{"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Reel", "engagement": 12, "teksts": "💉Vēl pirms vasaras – ērču aktīvās sezonas – vari pagūt vakcinēties pret ērču enc", "date": "2025-04-07"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Link", "engagement": 11, "teksts": "⏳ Vēl tikai 4 dienas!\n📸 Ja Tavs mazulītis ir dzimis Ventspils slimnīcā no 2019. ", "date": "2025-06-05"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "engagement": 11, "teksts": "📞 Saziņa ar reģistratūru atjaunota.\nTehniskā problēma ir novērsta un Ventspils s", "date": "2025-05-15"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "engagement": 11, "teksts": "📚Janvārī topošie vecāki tiek gaidīti uz klātienes lekcijām Ventspils slimnīcā. K", "date": "2025-01-06"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "engagement": 8, "teksts": "🌳 Ventspilniek, piedalies! Vai esi aizdomājies par to, kādas ir Tavas ģimenes vē", "date": "2025-05-16"}], "video": {"has_data": true, "total": 57, "buckets": [{"name": "0-15s", "count": 4, "avg_eng": 182.2}, {"name": "16-30s", "count": 6, "avg_eng": 172.7}, {"name": "31-60s", "count": 3, "avg_eng": 245.7}, {"name": "61-120s", "count": 8, "avg_eng": 225.2}, {"name": "120s+", "count": 36, "avg_eng": 233.0}]}}, "Ventspils poliklīnika": {"kpi": {"page": "Ventspils poliklīnika", "total_posts": 140, "total_likes": 3039, "total_shares": 973, "total_comments": 157, "total_engagement": 4169, "avg_eng": 29.8, "median_eng": 17, "viral_count": 7, "viral_pct": 5.0}, "monthly": [{"month": 1, "name": "Jan", "posts": 8, "engagement": 229, "avg_eng": 28.6}, {"month": 2, "name": "Feb", "posts": 8, "engagement": 219, "avg_eng": 27.4}, {"month": 3, "name": "Mar", "posts": 12, "engagement": 141, "avg_eng": 11.8}, {"month": 4, "name": "Apr", "posts": 12, "engagement": 259, "avg_eng": 21.6}, {"month": 5, "name": "Mai", "posts": 13, "engagement": 255, "avg_eng": 19.6}, {"month": 6, "name": "Jun", "posts": 14, "engagement": 387, "avg_eng": 27.6}, {"month": 7, "name": "Jul", "posts": 13, "engagement": 213, "avg_eng": 16.4}, {"month": 8, "name": "Aug", "posts": 11, "engagement": 260, "avg_eng": 23.6}, {"month": 9, "name": "Sep", "posts": 12, "engagement": 519, "avg_eng": 43.2}, {"month": 10, "name": "Okt", "posts": 14, "engagement": 1178, "avg_eng": 84.1}, {"month": 11, "name": "Nov", "posts": 9, "engagement": 254, "avg_eng": 28.2}, {"month": 12, "name": "Dec", "posts": 14, "engagement": 255, "avg_eng": 18.2}], "half_year": [{"name": "H1", "posts": 67, "avg_eng": 22.2}, {"name": "H2", "posts": 73, "avg_eng": 36.7}], "weekday": [{"day": 1, "name": "Pirmdiena", "posts": 27, "avg_eng": 42.0}, {"day": 2, "name": "Otrdiena", "posts": 27, "avg_eng": 19.7}, {"day": 3, "name": "Trešdiena", "posts": 21, "avg_eng": 37.0}, {"day": 4, "name": "Ceturtdiena", "posts": 24, "avg_eng": 24.8}, {"day": 5, "name": "Piektdiena", "posts": 24, "avg_eng": 30.5}, {"day": 6, "name": "Sestdiena", "posts": 8, "avg_eng": 16.0}, {"day": 7, "name": "Svētdiena", "posts": 9, "avg_eng": 30.1}], "work_weekend": {"work_posts": 123, "work_pct": 87.9, "work_avg": 30.7, "weekend_posts": 17, "weekend_pct": 12.1, "weekend_avg": 23.5}, "hourly": [{"hour": "00:00", "posts": 0, "avg_eng": 0}, {"hour": "01:00", "posts": 0, "avg_eng": 0}, {"hour": "02:00", "posts": 0, "avg_eng": 0}, {"hour": "03:00", "posts": 0, "avg_eng": 0}, {"hour": "04:00", "posts": 0, "avg_eng": 0}, {"hour": "05:00", "posts": 3, "avg_eng": 27.0}, {"hour": "06:00", "posts": 12, "avg_eng": 47.0}, {"hour": "07:00", "posts": 17, "avg_eng": 24.1}, {"hour": "08:00", "posts": 15, "avg_eng": 23.3}, {"hour": "09:00", "posts": 5, "avg_eng": 20.8}, {"hour": "10:00", "posts": 14, "avg_eng": 27.3}, {"hour": "11:00", "posts": 14, "avg_eng": 23.5}, {"hour": "12:00", "posts": 14, "avg_eng": 23.7}, {"hour": "13:00", "posts": 6, "avg_eng": 23.5}, {"hour": "14:00", "posts": 11, "avg_eng": 25.6}, {"hour": "15:00", "posts": 4, "avg_eng": 14.5}, {"hour": "16:00", "posts": 6, "avg_eng": 25.2}, {"hour": "17:00", "posts": 8, "avg_eng": 31.2}, {"hour": "18:00", "posts": 3, "avg_eng": 197.0}, {"hour": "19:00", "posts": 1, "avg_eng": 41.0}, {"hour": "20:00", "posts": 1, "avg_eng": 16.0}, {"hour": "21:00", "posts": 2, "avg_eng": 17.0}, {"hour": "22:00", "posts": 3, "avg_eng": 16.0}, {"hour": "23:00", "posts": 1, "avg_eng": 6.0}], "heatmap": [{"day": 1, "hour": 0, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 1, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 2, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 3, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 4, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 5, "posts": 3, "avg_eng": 27.0}, {"day": 1, "hour": 6, "posts": 4, "avg_eng": 41.5}, {"day": 1, "hour": 7, "posts": 2, "avg_eng": 19.5}, {"day": 1, "hour": 8, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 9, "posts": 2, "avg_eng": 24.5}, {"day": 1, "hour": 10, "posts": 2, "avg_eng": 25.5}, {"day": 1, "hour": 11, "posts": 1, "avg_eng": 16.0}, {"day": 1, "hour": 12, "posts": 5, "avg_eng": 16.6}, {"day": 1, "hour": 13, "posts": 1, "avg_eng": 14.0}, {"day": 1, "hour": 14, "posts": 2, "avg_eng": 14.5}, {"day": 1, "hour": 15, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 16, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 17, "posts": 1, "avg_eng": 6.0}, {"day": 1, "hour": 18, "posts": 3, "avg_eng": 197.0}, {"day": 1, "hour": 19, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 20, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 21, "posts": 0, "avg_eng": 0}, {"day": 1, "hour": 22, "posts": 1, "avg_eng": 10.0}, {"day": 1, "hour": 23, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 0, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 1, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 2, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 3, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 4, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 5, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 6, "posts": 2, "avg_eng": 23.0}, {"day": 2, "hour": 7, "posts": 4, "avg_eng": 17.2}, {"day": 2, "hour": 8, "posts": 2, "avg_eng": 17.0}, {"day": 2, "hour": 9, "posts": 2, "avg_eng": 13.5}, {"day": 2, "hour": 10, "posts": 5, "avg_eng": 31.2}, {"day": 2, "hour": 11, "posts": 2, "avg_eng": 9.5}, {"day": 2, "hour": 12, "posts": 2, "avg_eng": 12.5}, {"day": 2, "hour": 13, "posts": 1, "avg_eng": 34.0}, {"day": 2, "hour": 14, "posts": 2, "avg_eng": 13.0}, {"day": 2, "hour": 15, "posts": 1, "avg_eng": 20.0}, {"day": 2, "hour": 16, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 17, "posts": 2, "avg_eng": 13.5}, {"day": 2, "hour": 18, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 19, "posts": 1, "avg_eng": 41.0}, {"day": 2, "hour": 20, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 21, "posts": 1, "avg_eng": 9.0}, {"day": 2, "hour": 22, "posts": 0, "avg_eng": 0}, {"day": 2, "hour": 23, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 0, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 1, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 2, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 3, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 4, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 5, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 6, "posts": 3, "avg_eng": 92.3}, {"day": 3, "hour": 7, "posts": 2, "avg_eng": 45.5}, {"day": 3, "hour": 8, "posts": 4, "avg_eng": 25.2}, {"day": 3, "hour": 9, "posts": 1, "avg_eng": 28.0}, {"day": 3, "hour": 10, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 11, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 12, "posts": 1, "avg_eng": 7.0}, {"day": 3, "hour": 13, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 14, "posts": 3, "avg_eng": 39.7}, {"day": 3, "hour": 15, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 16, "posts": 4, "avg_eng": 25.5}, {"day": 3, "hour": 17, "posts": 2, "avg_eng": 17.0}, {"day": 3, "hour": 18, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 19, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 20, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 21, "posts": 0, "avg_eng": 0}, {"day": 3, "hour": 22, "posts": 1, "avg_eng": 17.0}, {"day": 3, "hour": 23, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 0, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 1, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 2, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 3, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 4, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 5, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 6, "posts": 1, "avg_eng": 18.0}, {"day": 4, "hour": 7, "posts": 5, "avg_eng": 20.4}, {"day": 4, "hour": 8, "posts": 2, "avg_eng": 12.0}, {"day": 4, "hour": 9, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 10, "posts": 2, "avg_eng": 53.5}, {"day": 4, "hour": 11, "posts": 4, "avg_eng": 24.5}, {"day": 4, "hour": 12, "posts": 2, "avg_eng": 18.0}, {"day": 4, "hour": 13, "posts": 2, "avg_eng": 17.0}, {"day": 4, "hour": 14, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 15, "posts": 3, "avg_eng": 12.7}, {"day": 4, "hour": 16, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 17, "posts": 2, "avg_eng": 58.5}, {"day": 4, "hour": 18, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 19, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 20, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 21, "posts": 0, "avg_eng": 0}, {"day": 4, "hour": 22, "posts": 1, "avg_eng": 21.0}, {"day": 4, "hour": 23, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 0, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 1, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 2, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 3, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 4, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 5, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 6, "posts": 1, "avg_eng": 26.0}, {"day": 5, "hour": 7, "posts": 2, "avg_eng": 44.5}, {"day": 5, "hour": 8, "posts": 5, "avg_eng": 28.8}, {"day": 5, "hour": 9, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 10, "posts": 2, "avg_eng": 14.0}, {"day": 5, "hour": 11, "posts": 5, "avg_eng": 28.8}, {"day": 5, "hour": 12, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 13, "posts": 2, "avg_eng": 29.5}, {"day": 5, "hour": 14, "posts": 3, "avg_eng": 35.3}, {"day": 5, "hour": 15, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 16, "posts": 1, "avg_eng": 28.0}, {"day": 5, "hour": 17, "posts": 1, "avg_eng": 66.0}, {"day": 5, "hour": 18, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 19, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 20, "posts": 1, "avg_eng": 16.0}, {"day": 5, "hour": 21, "posts": 1, "avg_eng": 25.0}, {"day": 5, "hour": 22, "posts": 0, "avg_eng": 0}, {"day": 5, "hour": 23, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 0, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 1, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 2, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 3, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 4, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 5, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 6, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 7, "posts": 2, "avg_eng": 10.0}, {"day": 6, "hour": 8, "posts": 1, "avg_eng": 10.0}, {"day": 6, "hour": 9, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 10, "posts": 1, "avg_eng": 19.0}, {"day": 6, "hour": 11, "posts": 2, "avg_eng": 26.0}, {"day": 6, "hour": 12, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 13, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 14, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 15, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 16, "posts": 1, "avg_eng": 21.0}, {"day": 6, "hour": 17, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 18, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 19, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 20, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 21, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 22, "posts": 0, "avg_eng": 0}, {"day": 6, "hour": 23, "posts": 1, "avg_eng": 6.0}, {"day": 7, "hour": 0, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 1, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 2, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 3, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 4, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 5, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 6, "posts": 1, "avg_eng": 31.0}, {"day": 7, "hour": 7, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 8, "posts": 1, "avg_eng": 36.0}, {"day": 7, "hour": 9, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 10, "posts": 2, "avg_eng": 10.5}, {"day": 7, "hour": 11, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 12, "posts": 4, "avg_eng": 45.2}, {"day": 7, "hour": 13, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 14, "posts": 1, "avg_eng": 2.0}, {"day": 7, "hour": 15, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 16, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 17, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 18, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 19, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 20, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 21, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 22, "posts": 0, "avg_eng": 0}, {"day": 7, "hour": 23, "posts": 0, "avg_eng": 0}], "formats": [{"type": "Photo", "count": 85, "pct": 60.7, "avg_eng": 29.9}, {"type": "Reel", "count": 26, "pct": 18.6, "avg_eng": 25.8}, {"type": "Video", "count": 16, "pct": 11.4, "avg_eng": 43.3}, {"type": "Link", "count": 13, "pct": 9.3, "avg_eng": 20.2}], "orientation": [{"name": "Horizontāli", "count": 14, "pct": 10.9, "avg_eng": 13.6}, {"name": "Vertikāli", "count": 102, "pct": 79.7, "avg_eng": 34.2}, {"name": "Kvadrāts", "count": 0, "pct": 0.0, "avg_eng": 0}], "caption_length": [{"name": "Nav teksta", "count": 1, "pct": 0.7, "avg_eng": 2.0}, {"name": "1-120", "count": 14, "pct": 10.0, "avg_eng": 25.2}, {"name": "121-240", "count": 27, "pct": 19.3, "avg_eng": 23.8}, {"name": "241+", "count": 98, "pct": 70.0, "avg_eng": 32.4}], "eng_dist": [{"bucket": "0", "count": 0, "pct": 0.0}, {"bucket": "1-50", "count": 123, "pct": 87.9}, {"bucket": "51-100", "count": 10, "pct": 7.1}, {"bucket": "101-200", "count": 4, "pct": 2.9}, {"bucket": "201-500", "count": 3, "pct": 2.1}, {"bucket": "500+", "count": 0, "pct": 0.0}], "contest": {"count": 0, "pct": 0.0, "avg_eng": 0, "non_avg": 29.8}, "themes": [{"name": "Sociālais", "count": 70, "pct": 50.0, "avg_eng": 28.7}, {"name": "Pasākumi", "count": 69, "pct": 49.3, "avg_eng": 34.6}, {"name": "Daba/Vide", "count": 25, "pct": 17.9, "avg_eng": 25.3}, {"name": "Infrastruktūra", "count": 17, "pct": 12.1, "avg_eng": 23.2}, {"name": "Uzņēmējdarbība", "count": 15, "pct": 10.7, "avg_eng": 23.5}, {"name": "Izglītība", "count": 10, "pct": 7.1, "avg_eng": 41.6}, {"name": "Kultūra", "count": 5, "pct": 3.6, "avg_eng": 55.6}, {"name": "Sports", "count": 2, "pct": 1.4, "avg_eng": 62.0}], "bigrams": [{"phrase": "registratura ventspilspoliklinika", "count": 35}, {"phrase": "zvanot tālruņa", "count": 28}, {"phrase": "tālruņa numuru", "count": 28}, {"phrase": "numuru rakstot", "count": 25}, {"phrase": "rakstot ziņu", "count": 25}, {"phrase": "poliklīnikas reģistratūru", "count": 23}, {"phrase": "reģistratūru zvanot", "count": 23}, {"phrase": "ziņu pastu", "count": 15}, {"phrase": "pastu registratura", "count": 15}, {"phrase": "komentāru sadaļā", "count": 13}], "top_posts": [{"page": "Ventspils poliklīnika", "type": "Video", "likes": 246, "shares": 36, "comments": 33, "engagement": 315, "teksts": "Šodien uz sarunu aicinājām radiologa asistenti, smaidīgo Ingu Papardi, kas pastāstīja, cik ļoti nozīmīga ir regulāra krū", "date": "2025-10-13", "url": "https://www.facebook.com/1305872069500866_1241062658047820"}, {"page": "Ventspils poliklīnika", "type": "Reel", "likes": 228, "shares": 0, "comments": 33, "engagement": 261, "teksts": "Šodien uz sarunu aicinājām radiologa asistenti, smaidīgo Ingu Papardi, kas pastāstīja, cik ļoti nozīmīga ir regulāra krū", "date": "2025-10-13", "url": "https://www.facebook.com/1185914163594820"}, {"page": "Ventspils poliklīnika", "type": "Photo", "likes": 210, "shares": 15, "comments": 26, "engagement": 251, "teksts": "Vienmēr esam priecīgi saņemt labās atsauksmes par mūsu personālu!🌿💚\n\nJa arī Tu vēlies pateikt paldies mūsu speciālistiem", "date": "2025-10-29", "url": "https://www.facebook.com/1305872069500866_1254994376654648"}, {"page": "Ventspils poliklīnika", "type": "Photo", "likes": 87, "shares": 48, "comments": 1, "engagement": 136, "teksts": "No oktobra Ventspils poliklīnikā atkal pieejamas lāzerprocedūras🤩\n\n✔️ Fotoatjaunošana sejas, kakla, dekoltē un roku zona", "date": "2025-09-14", "url": "https://www.facebook.com/1305872069500866_1214228970731189"}, {"page": "Ventspils poliklīnika", "type": "Photo", "likes": 80, "shares": 32, "comments": 3, "engagement": 115, "teksts": "Sveicam Vispasaules fizoterapijas dienā!🤸‍♀️💚\n\nLatvijas Fizioterapeitu Asociācija", "date": "2025-09-08", "url": "https://www.facebook.com/1305872069500866_1209103981243688"}, {"page": "Ventspils poliklīnika", "type": "Photo", "likes": 73, "shares": 39, "comments": 0, "engagement": 112, "teksts": "🎉 Ventspils poliklīnikā darbu atsāk fizioterapeite Laura Kupča!\n\nNo 27. oktobra atkal pieejamas fizioterapeites Lauras K", "date": "2025-10-02", "url": "https://www.facebook.com/1305872069500866_1230488789105207"}, {"page": "Ventspils poliklīnika", "type": "Photo", "likes": 61, "shares": 39, "comments": 1, "engagement": 101, "teksts": "👨🏼‍⚕️ Ventspils poliklīnikā darbu sāk pieredzējis asinsvadu un vispārējās ķirurģijas speciālists Algers Brūveris\n\nDr. Br", "date": "2025-02-07", "url": "https://www.facebook.com/1305872069500866_1039891981498223"}, {"page": "Ventspils poliklīnika", "type": "Link", "likes": 32, "shares": 56, "comments": 0, "engagement": 88, "teksts": "📢 Ventspils poliklīnika aicina komandā! #teirdarbs \n\nPrasības:\n✅ Augstākā medicīniskā izglītība\n✅ Sertifikāts specialitā", "date": "2025-09-02", "url": "https://www.facebook.com/1305872069500866_1204435358377217"}, {"page": "Ventspils poliklīnika", "type": "Photo", "likes": 65, "shares": 12, "comments": 0, "engagement": 77, "teksts": "🥼 Pieciem Ventspils poliklīnikas speciālistiem 4. aprīlis bija neierasta darba diena. Junior Achievement Latvia rīkotajā", "date": "2025-04-04", "url": "https://www.facebook.com/1305872069500866_1084718067015614"}, {"page": "Ventspils poliklīnika", "type": "Photo", "likes": 51, "shares": 23, "comments": 2, "engagement": 76, "teksts": "Atsaucīgs, ieinteresēts un zinošs – tāds ir mūsu fizioterapeits Kristaps! 💪🏻 Komentāru sadaļā meklē saiti uz anketu un a", "date": "2025-01-16", "url": "https://www.facebook.com/1305872069500866_1024145756406179"}, {"page": "Ventspils poliklīnika", "type": "Photo", "likes": 44, "shares": 26, "comments": 4, "engagement": 74, "teksts": "💡 Pacietība, neatlaidība un uzticēšanās – tās ir atslēgas veiksmīgam atveseļošanās procesam.\n\nFizioterapeits Kristaps Gr", "date": "2025-05-21", "url": "https://www.facebook.com/1305872069500866_1120574803429940"}, {"page": "Ventspils poliklīnika", "type": "Photo", "likes": 58, "shares": 10, "comments": 2, "engagement": 70, "teksts": "🎀 Profilakse, kas var glābt dzīvību!\n\nJaunākajā ventasbalss.lv numurā lasi interviju ar radiologa asistenti Ingu Papardi", "date": "2025-10-22", "url": "https://www.facebook.com/1305872069500866_1248888433931909"}, {"page": "Ventspils poliklīnika", "type": "Photo", "likes": 50, "shares": 19, "comments": 1, "engagement": 70, "teksts": "🌿  Ar Ventspils poliklīnikā pieejamajiem masāžas veidiem un cenām vari iepazīties mūsu mājaslapā. Saiti meklē komentāru ", "date": "2025-06-27", "url": "https://www.facebook.com/1305872069500866_1149480607206026"}, {"page": "Ventspils poliklīnika", "type": "Photo", "likes": 26, "shares": 40, "comments": 3, "engagement": 69, "teksts": "Cienījamie pacienti un apmeklētāji!\n\n❌Tehnisku iemeslu dēļ Ventspils poliklīnika šodien nestrādās.\nSakarā ar bojājumu el", "date": "2025-01-02", "url": "https://www.facebook.com/1305872069500866_1014180864069335"}, {"page": "Ventspils poliklīnika", "type": "Photo", "likes": 17, "shares": 49, "comments": 0, "engagement": 66, "teksts": "🥼 Ventspils poliklīnika aicina kolektīvam pievienoties medmāsu ģimenes ārsta kabinetā uz nenoteiktu laiku!\n\n📄 Vairāk inf", "date": "2025-10-24", "url": "https://www.facebook.com/1305872069500866_1250863703734382"}, {"page": "Ventspils poliklīnika", "type": "Photo", "likes": 25, "shares": 27, "comments": 4, "engagement": 56, "teksts": "❗️Atbrīvojušās 2 VIETAS fizioterapijas nodarbībām RĪT, 21. augustā!\n👉🏻 1 vieta plkst. 9.00\n👉🏻 1 vieta plkst. 9.45\n\nZvani", "date": "2025-06-12", "url": "https://www.facebook.com/1305872069500866_1137382558415831"}, {"page": "Ventspils poliklīnika", "type": "Video", "likes": 39, "shares": 13, "comments": 0, "engagement": 52, "teksts": "Kustības svaigā gaisā vienmēr ir laba ideja!💚\n🧘‍♂️💪🌿 Pasākums tiek finansēts no Eiropas Sociālā fonda Plus projekta Nr. ", "date": "2025-08-22", "url": "https://www.facebook.com/1305872069500866_1195313415956078"}, {"page": "Ventspils poliklīnika", "type": "Video", "likes": 32, "shares": 17, "comments": 1, "engagement": 50, "teksts": "🌿 Limfodrenāžu izmanto ne tikai medicīnisku problēmu risināšanā un to profilaksē, bet arī estētiskajā medicīnā! \n\n🔗 Vair", "date": "2025-08-13", "url": "https://www.facebook.com/1305872069500866_1187526166734803"}, {"page": "Ventspils poliklīnika", "type": "Video", "likes": 29, "shares": 6, "comments": 6, "engagement": 41, "teksts": "🎀Rūpējies par savu veselību visa gada garumā – krūts vēža atklāšana agrīnā stadijā palielina iespēju izveseļoties līdz p", "date": "2025-11-10", "url": "https://www.facebook.com/1305872069500866_1265578228929596"}, {"page": "Ventspils poliklīnika", "type": "Photo", "likes": 34, "shares": 7, "comments": 0, "engagement": 41, "teksts": "🌿Priecājamies, ka mūsu speciālisti palīdz atgūt veselību un labsajūtu!\n\nParūpējies par savu veselību arī Tu – izvēlies ā", "date": "2025-11-04", "url": "https://www.facebook.com/1305872069500866_1260168786137207"}], "worst_posts": [{"page": "Ventspils poliklīnika", "type": "Photo", "engagement": 4, "teksts": "🔔 Vai Tavam bērnam ir ilgstošas iesnas, izsitumi vai aizdomas par pārtikas alerģ", "date": "2025-04-10"}, {"page": "Ventspils poliklīnika", "type": "Reel", "engagement": 3, "teksts": "Nepalaid garām iespēju – ēno Ventspils poliklīnikas speciālistus 4. aprīlī! 🌿 #e", "date": "2025-03-15"}, {"page": "Ventspils poliklīnika", "type": "Link", "engagement": 2, "teksts": "", "date": "2025-03-30"}, {"page": "Ventspils poliklīnika", "type": "Video", "engagement": 1, "teksts": "🦠 Ērču encefalīts ir nopietna slimība, kuras ārstēšanai nav specifisku zāļu, tāp", "date": "2025-05-15"}, {"page": "Ventspils poliklīnika", "type": "Reel", "engagement": 1, "teksts": "🦠 Ērču encefalīts ir nopietna slimība, kuras ārstēšanai nav specifisku zāļu, tāp", "date": "2025-05-15"}], "video": {"has_data": true, "total": 42, "buckets": [{"name": "0-15s", "count": 21, "avg_eng": 16.7}, {"name": "16-30s", "count": 5, "avg_eng": 131.2}, {"name": "31-60s", "count": 2, "avg_eng": 10.0}, {"name": "61-120s", "count": 2, "avg_eng": 1.0}, {"name": "120s+", "count": 12, "avg_eng": 28.0}]}}}, "group_kpi": {"name": "Sociālie pakalpojumi un Veselības aprūpe", "total_pages": 3, "total_posts": 780, "total_engagement": 76939, "total_likes": 56860, "total_shares": 18302, "total_comments": 1777, "avg_eng": 98.6}, "research": {"followers": {"Ventspils Sociālais dienests": 1700, "Ziemeļkurzemes reģionālā slimnīca": 7883, "Ventspils poliklīnika": 2332}, "avg_likes": {"Ventspils Sociālais dienests": "0", "Ziemeļkurzemes reģionālā slimnīca": "0", "Ventspils poliklīnika": "0"}, "avg_comments": {"Ventspils Sociālais dienests": "0", "Ziemeļkurzemes reģionālā slimnīca": "0", "Ventspils poliklīnika": "0"}, "avg_shares": {"Ventspils Sociālais dienests": "0", "Ziemeļkurzemes reģionālā slimnīca": "0", "Ventspils poliklīnika": "0"}, "posts_per_day": {"Ventspils Sociālais dienests": "0.81", "Ziemeļkurzemes reģionālā slimnīca": "0.95", "Ventspils poliklīnika": "0.39"}, "workday_pct": {"Ventspils Sociālais dienests": "83%", "Ziemeļkurzemes reģionālā slimnīca": "81%", "Ventspils poliklīnika": "88%"}, "weekend_pct": {"Ventspils Sociālais dienests": "17%", "Ziemeļkurzemes reģionālā slimnīca": "19%", "Ventspils poliklīnika": "12%"}}, "saites": [{"domain": "ziemelkurzemesslimnica.lv", "count": 220, "pct": "28.21%"}, {"domain": "ventspilspoliklinika.lv", "count": 40, "pct": "5.13%"}, {"domain": "ventasbalss.lv", "count": 27, "pct": "3.46%"}, {"domain": "bit.ly", "count": 14, "pct": "1.79%"}, {"domain": "ventspils.lv", "count": 12, "pct": "1.54%"}, {"domain": "ej.uz", "count": 10, "pct": "1.28%"}, {"domain": "retalsi.lv", "count": 3, "pct": "0.38%"}, {"domain": "visidati.lv", "count": 2, "pct": "0.26%"}, {"domain": "cilveksnevisdiagnoze.lv", "count": 1, "pct": "0.13%"}, {"domain": "kurzemesnvo.lv", "count": 1, "pct": "0.13%"}, {"domain": "digitalworksforyouth.eu", "count": 1, "pct": "0.13%"}, {"domain": "whydonate.com", "count": 1, "pct": "0.13%"}, {"domain": "enudiena.lv", "count": 1, "pct": "0.13%"}, {"domain": "drklauns.lv", "count": 1, "pct": "0.13%"}, {"domain": "eveseliba.gov.lv", "count": 1, "pct": "0.13%"}, {"domain": "ventspilspolikinika.lv", "count": 1, "pct": "0.13%"}, {"domain": "facebook.com", "count": 1, "pct": "0.13%"}, {"domain": "hospiss.lv", "count": 1, "pct": "0.13%"}, {"domain": "lu.lv", "count": 1, "pct": "0.13%"}, {"domain": "darbnesis.lv", "count": 1, "pct": "0.13%"}], "top_posts": [{"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "likes": 1600, "shares": 314, "comments": 107, "engagement": 2021, "teksts": "Dziļās skumjās paziņojam, ka 41 gada vecumā mūžībā devusies SIA “Ziemeļkurzemes reģionālā slimnīca” ķirurģe Nora Kārkliņ", "date": "2025-06-03", "url": "https://www.facebook.com/1603247203265217_1313003300830349"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "likes": 882, "shares": 331, "comments": 53, "engagement": 1266, "teksts": "💬 \"Ja pacienta apmierinātības līmenis ir augsts, viņš atstāj pozitīvas atsauksmes – tas nozīmē, ka visa komanda ir nostr", "date": "2025-09-02", "url": "https://www.facebook.com/1603247203265217_1396646922465986"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "likes": 953, "shares": 89, "comments": 35, "engagement": 1077, "teksts": "👶👶Otrdienas, 1.jūlija, rītā Ventspils slimnīcas Dzemdību nodaļā sagaidīti šī gada trešie dvīnīši – puisīši Emīls un Gust", "date": "2025-07-01", "url": "https://www.facebook.com/1603247203265217_1338601171603895"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "likes": 855, "shares": 118, "comments": 42, "engagement": 1015, "teksts": "🙏Esam saņēmuši sirsnīgus pateicības vārdus par Ventspils slimnīcas Traumatoloģijas nodaļas vadītāju Dr. Igoru Kolosovu. ", "date": "2025-09-13", "url": "https://www.facebook.com/1603247203265217_1406770671453611"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Video", "likes": 645, "shares": 242, "comments": 66, "engagement": 953, "teksts": "Vai zināji, ka agrāk Ventspils slimnīcā bija liftniece un garderobiste? Tāpat bija laiks, kad māsas valkāja halātus, atc", "date": "2025-03-28", "url": "https://www.facebook.com/1603247203265217_1250599677070712"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "likes": 484, "shares": 379, "comments": 31, "engagement": 894, "teksts": "Jaunums Ventspils slimnīcā – PRP injekcijas locītavu, cīpslu, muskuļu bojājumu ārstēšanai un sāpju mazināšanai.💉\n\n👉 PRP ", "date": "2025-12-17", "url": "https://www.facebook.com/1603247203265217_1498867355577275"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Video", "likes": 589, "shares": 210, "comments": 32, "engagement": 831, "teksts": "👨‍⚕️💬  Kāda bija viņu pirmā darba diena Ventspils slimnīcā, spilgtākās atmiņas iz dzīves slimnīcā, kā izvēlējās kļūt par", "date": "2025-08-23", "url": "https://www.facebook.com/1603247203265217_1387018366762175"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Video", "likes": 631, "shares": 122, "comments": 17, "engagement": 770, "teksts": "Šodien Ventspils slimnīcā valdīja īpaši sirsnīga un priecīga noskaņa. Pie pacientiem un darbiniekiem ciemos ieradās rūķi", "date": "2025-12-23", "url": "https://www.facebook.com/1603247203265217_1504107148386629"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "likes": 610, "shares": 127, "comments": 33, "engagement": 770, "teksts": "🙏Ar gandarījumu dalāmies ar vēl kādu sirsnīgu pacienta pieredzi, kas apliecina Kurzemes Mugurkaula ķirurģijas speciālist", "date": "2025-11-15", "url": "https://www.facebook.com/1603247203265217_1470325355098142"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "likes": 608, "shares": 58, "comments": 26, "engagement": 692, "teksts": "🩷Šī gada 200. bērniņš Ventspils slimnīcas Dzemdību nodaļā ieradās pirmdienas, 7. jūlija, pievakarē – mīļi sveicam pasaul", "date": "2025-07-08", "url": "https://www.facebook.com/1603247203265217_1344838930980119"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "likes": 568, "shares": 84, "comments": 28, "engagement": 680, "teksts": "Dalāmies ar pateicību, kas veltīta Neiroloģijas nodaļas vadītājai, neiroloģei Dr. Baibai Leimanei. Šādi pateicības vārdi", "date": "2025-12-06", "url": "https://www.facebook.com/1603247203265217_1488894976574513"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "likes": 558, "shares": 109, "comments": 5, "engagement": 672, "teksts": "🙏 Pacientu pateicība un darba novērtējums ir speciālistu lielākā motivācija. Paldies par pateicību Ventspils slimnīcas N", "date": "2025-05-31", "url": "https://www.facebook.com/1603247203265217_1310242541106425"}, {"page": "Ventspils Sociālais dienests", "type": "Video", "likes": 632, "shares": 24, "comments": 4, "engagement": 660, "teksts": "📌Nodevām pēdējo -  sesto, mobilo ratiņkrēslu kāpurķēžu pacēlāju klientei un veicam ierīces lietošanas apmācību.\n✅Atveseļ", "date": "2025-09-19", "url": "https://www.facebook.com/1658554464438817_1245701234262845"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "likes": 317, "shares": 305, "comments": 11, "engagement": 633, "teksts": "👨‍⚕️Lai uzlabotu pakalpojuma pieejamību un atsaucoties uz pieaugošo pieprasījumu, Ziemeļkurzemes reģionālās slimnīcas Am", "date": "2025-10-29", "url": "https://www.facebook.com/1603247203265217_1453529323444412"}, {"page": "Ventspils Sociālais dienests", "type": "Reel", "likes": 617, "shares": 0, "comments": 4, "engagement": 621, "teksts": "📌Nodevām pēdējo -  sesto, mobilo ratiņkrēslu kāpurķēžu pacēlāju klientei un veicam ierīces lietošanas apmācību.\n✅Atveseļ", "date": "2025-09-19", "url": "https://www.facebook.com/1119200053727693"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Reel", "likes": 540, "shares": 0, "comments": 66, "engagement": 606, "teksts": "Vai zināji, ka agrāk Ventspils slimnīcā bija liftniece un garderobiste? Tāpat bija laiks, kad māsas valkāja halātus, atc", "date": "2025-03-28", "url": "https://www.facebook.com/1202259197965478"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "likes": 478, "shares": 107, "comments": 18, "engagement": 603, "teksts": "🙏Esam saņēmuši sirsnīgus vārdus, kas vēlreiz apliecina, cik nozīmīgs ir cilvēcīgums un profesionāla attieksme pacientu a", "date": "2025-08-09", "url": "https://www.facebook.com/1603247203265217_1373877058076306"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Photo", "likes": 276, "shares": 319, "comments": 6, "engagement": 601, "teksts": "👨‍⚕️Ziemeļkurzemes reģionālajā slimnīcā Ventspilī pacientiem iespējams pieteikties uz vizīti pie ķirurga Dr. Sergeja Rod", "date": "2025-07-03", "url": "https://www.facebook.com/1603247203265217_1340142124783133"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Reel", "likes": 566, "shares": 0, "comments": 17, "engagement": 583, "teksts": "Šodien Ventspils slimnīcā valdīja īpaši sirsnīga un priecīga noskaņa. Pie pacientiem un darbiniekiem ciemos ieradās rūķi", "date": "2025-12-23", "url": "https://www.facebook.com/1298662965093485"}, {"page": "Ziemeļkurzemes reģionālā slimnīca", "type": "Reel", "likes": 551, "shares": 0, "comments": 32, "engagement": 583, "teksts": "👨‍⚕️💬  Kāda bija viņu pirmā darba diena Ventspils slimnīcā, spilgtākās atmiņas iz dzīves slimnīcā, kā izvēlējās kļūt par", "date": "2025-08-23", "url": "https://www.facebook.com/1820739668843222"}], "worst_posts": [{"page": "Ventspils Sociālais dienests", "type": "Photo", "engagement": 1, "teksts": "Aicinām atbalstīt studenus🌷", "date": "2025-05-09"}, {"page": "Ventspils Sociālais dienests", "type": "Reel", "engagement": 1, "teksts": "Lieldienu pabalsta izmaksa Sociālā dienesta kasē, Raiņa ielā 10,  sākusies💪\n\nKad", "date": "2025-04-15"}, {"page": "Ventspils Sociālais dienests", "type": "Reel", "engagement": 1, "teksts": "🚌Tikāmies ar kolēģiem no Pašvaldības SIA Ventspils Reiss , lai pārrunātu kārtību", "date": "2025-04-09"}, {"page": "Ventspils Sociālais dienests", "type": "Photo", "engagement": 1, "teksts": "👉Aicinām piedalīties un izteikt savus priekšlikumus, lai ģimenēm ar bērniem Vent", "date": "2025-03-26"}, {"page": "Ventspils Sociālais dienests", "type": "Photo", "engagement": 1, "teksts": "💗Namiņa jauniešu Valentīndiena!❤️Katrs no viņiem cer kastītē sagaidīt sev adresē", "date": "2025-02-14"}, {"page": "Ventspils poliklīnika", "type": "Video", "engagement": 1, "teksts": "🦠 Ērču encefalīts ir nopietna slimība, kuras ārstēšanai nav specifisku zāļu, tāp", "date": "2025-05-15"}, {"page": "Ventspils poliklīnika", "type": "Reel", "engagement": 1, "teksts": "🦠 Ērču encefalīts ir nopietna slimība, kuras ārstēšanai nav specifisku zāļu, tāp", "date": "2025-05-15"}, {"page": "Ventspils Sociālais dienests", "type": "Link", "engagement": 0, "teksts": "", "date": "2025-10-12"}, {"page": "Ventspils Sociālais dienests", "type": "Photo", "engagement": 0, "teksts": "", "date": "2025-06-17"}, {"page": "Ventspils Sociālais dienests", "type": "Photo", "engagement": 0, "teksts": "📌 31. janvārī noslēdzās iesniegumu pieņemšana Ziemassvētku pabalsta saņemšanai.\n", "date": "2025-02-10"}]};
+const PAGES=["Ventspils Sociālais dienests", "Ziemeļkurzemes reģionālā slimnīca", "Ventspils poliklīnika"];
+const SHORT={"Ventspils Sociālais dienests": "Soc. dienests", "Ziemeļkurzemes reģionālā slimnīca": "Slimnīca", "Ventspils poliklīnika": "Poliklīnika"};
+const COLORS={"Ventspils Sociālais dienests": "#1877F2", "Ziemeļkurzemes reģionālā slimnīca": "#34D399", "Ventspils poliklīnika": "#FBBF24"};
+const PD=PAGES.map(function(p){return D.pages[p]});
+
+function nf(n){return n.toString()}
+function sn(p){return SHORT[p]||p}
+
+Chart.defaults.color='#8B95A5';
+Chart.defaults.borderColor='rgba(255,255,255,0.04)';
+Chart.defaults.font.family="'Inter',system-ui,sans-serif";
+Chart.defaults.font.size=12;
+Chart.defaults.plugins.legend.labels.padding=16;
+Chart.defaults.plugins.legend.labels.usePointStyle=true;
+Chart.defaults.plugins.legend.labels.pointStyle='circle';
+Chart.defaults.plugins.tooltip.backgroundColor='#1A2030';
+Chart.defaults.plugins.tooltip.borderColor='rgba(255,255,255,0.08)';
+Chart.defaults.plugins.tooltip.borderWidth=1;
+Chart.defaults.plugins.tooltip.cornerRadius=10;
+Chart.defaults.plugins.tooltip.padding=12;
+Chart.defaults.plugins.tooltip.titleFont={weight:'600',size:13};
+Chart.defaults.elements.bar.borderRadius=8;
+Chart.defaults.elements.bar.borderSkipped=false;
+Chart.defaults.elements.line.borderWidth=2;
+Chart.defaults.elements.point.radius=3;
+Chart.defaults.elements.point.hoverRadius=6;
+
+function scOpts(){return{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#8B95A5',font:{size:11}}}}
+var CH={};
+function makeChart(cid,cfg){var el=document.getElementById(cid);if(!el)return;if(CH[cid])CH[cid].destroy();CH[cid]=new Chart(el,cfg)}
+function alpha(hex,a){var r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);return 'rgba('+r+','+g+','+b+','+a+')'}
+
+// ── KPI ──
+function buildKPI(){
+  var g=D.group_kpi;
+  var postParts=PAGES.map(function(p){return sn(p)+': '+D.pages[p].kpi.total_posts}).join(' · ');
+  var engParts=PAGES.map(function(p){return sn(p)+': '+nf(D.pages[p].kpi.total_engagement)}).join(' · ');
+  var avgParts=PAGES.map(function(p){return sn(p)+': '+D.pages[p].kpi.avg_eng}).join(' · ');
+  var items=[
+    ['Lapas grupā',g.total_pages,'Sociālie pakalpojumi un Veselības aprūpe'],
+    ['Publikācijas',nf(g.total_posts),postParts],
+    ['Kopējā iesaiste',nf(g.total_engagement),engParts],
+    ['Vid. iesaiste',g.avg_eng,avgParts],
+    ['Likes',nf(g.total_likes),'Shares: '+nf(g.total_shares)+' · Comments: '+nf(g.total_comments)],
+  ];
+  document.getElementById('kpiG').innerHTML=items.map(function(it){
+    return '<div class="kpi"><div class="label">'+it[0]+'</div><div class="value">'+it[1]+'</div><div class="sub">'+it[2]+'</div></div>';
+  }).join('');
+}
+
+// ── COMPARE TABLE ──
+function buildCompare(){
+  var r=D.research||{};
+  var fol=r.followers||{};
+  var ppd=r.posts_per_day||{};
+  var wkd=r.workday_pct||{};
+  var wke=r.weekend_pct||{};
+
+  var metrics=[
+    {label:'Sekotāji',fn:function(p,d){return fol[p]||'-'},higher:true,format:'nf'},
+    {label:'Publikācijas',fn:function(p,d){return d.kpi.total_posts},higher:true},
+    {label:'Kopējā iesaiste',fn:function(p,d){return d.kpi.total_engagement},higher:true,format:'nf'},
+    {label:'Vid. iesaiste',fn:function(p,d){return d.kpi.avg_eng},higher:true},
+    {label:'Mediāna',fn:function(p,d){return d.kpi.median_eng},higher:true},
+    {label:'Virālie posti',fn:function(p,d){return d.kpi.viral_count+' ('+d.kpi.viral_pct+'%)'},higher:true,raw:true},
+    {label:'Posti/dienā',fn:function(p,d){return ppd[p]||'-'},higher:false,raw:true},
+    {label:'Darba dienās',fn:function(p,d){return wkd[p]||'-'},higher:false,raw:true},
+    {label:'Brīvdienās',fn:function(p,d){return wke[p]||'-'},higher:false,raw:true},
+  ];
+
+  var h='<table class="compare-table"><tr><th></th>';
+  PAGES.forEach(function(p){h+='<th style="color:'+COLORS[p]+';font-weight:700">'+sn(p)+'</th>'});
+  h+='</tr>';
+
+  metrics.forEach(function(m){
+    h+='<tr><td class="cm-label">'+m.label+'</td>';
+    var vals=PAGES.map(function(p){return {p:p,v:m.fn(p,D.pages[p])}});
+    // Find best value for winner badge
+    var numVals=vals.map(function(x){return parseFloat(String(x.v).replace(/[^0-9.]/g,''))});
+    var bestIdx=-1;
+    if(!m.raw){
+      var best=m.higher?Math.max.apply(null,numVals):Math.min.apply(null,numVals);
+      bestIdx=numVals.indexOf(best);
+    }
+    vals.forEach(function(x,i){
+      var v=m.format==='nf'?nf(x.v):x.v;
+      var badge=i===bestIdx?' <span class="winner winner-yes">★</span>':'';
+      h+='<td style="font-weight:600;color:'+COLORS[x.p]+'">'+v+badge+'</td>';
+    });
+    h+='</tr>';
+  });
+  h+='</table>';
+  document.getElementById('compareG').innerHTML=h;
+}
+
+// ── MONTHLY ENGAGEMENT ──
+function buildMonthlyEng(){
+  var labels=PD[0].monthly.map(function(x){return x.name});
+  var datasets=PAGES.map(function(p,i){
+    return {label:sn(p),data:D.pages[p].monthly.map(function(x){return x.engagement}),backgroundColor:alpha(COLORS[p],0.4),borderColor:COLORS[p],borderWidth:2};
+  });
+  makeChart('mEngC',{type:'bar',data:{labels:labels,datasets:datasets},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},scales:{x:scOpts(),y:scOpts()}}});
+}
+
+// ── MONTHLY AVG ──
+function buildMonthlyAvg(){
+  var labels=PD[0].monthly.map(function(x){return x.name});
+  var datasets=PAGES.map(function(p,i){
+    return {label:sn(p),data:D.pages[p].monthly.map(function(x){return x.avg_eng}),borderColor:COLORS[p],backgroundColor:alpha(COLORS[p],0.06),fill:true,borderWidth:3,pointRadius:4,pointBackgroundColor:COLORS[p],tension:.4};
+  });
+  makeChart('mAvgC',{type:'line',data:{labels:labels,datasets:datasets},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},scales:{x:scOpts(),y:scOpts()}}});
+}
+
+// ── FORMATS ──
+function buildFormats(){
+  var allTypes={};
+  PAGES.forEach(function(p){D.pages[p].formats.forEach(function(f){allTypes[f.type]=true})});
+  var types=Object.keys(allTypes);
+  function getVal(fmts,t,key){var f=fmts.find(function(x){return x.type===t});return f?f[key]:0}
+  var ds1=PAGES.map(function(p){return {label:sn(p),data:types.map(function(t){return getVal(D.pages[p].formats,t,'count')}),backgroundColor:alpha(COLORS[p],0.5),borderColor:COLORS[p],borderWidth:2}});
+  makeChart('fmtC',{type:'bar',data:{labels:types,datasets:ds1},options:{responsive:true,maintainAspectRatio:false,scales:{x:scOpts(),y:scOpts()}}});
+  var ds2=PAGES.map(function(p){return {label:sn(p),data:types.map(function(t){return getVal(D.pages[p].formats,t,'avg_eng')}),backgroundColor:alpha(COLORS[p],0.5),borderColor:COLORS[p],borderWidth:2}});
+  makeChart('fmtEffC',{type:'bar',data:{labels:types,datasets:ds2},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',scales:{x:scOpts(),y:scOpts()}}});
+}
+
+// ── ORIENTATION ──
+function buildOri(){
+  var names=['Horizontāli','Vertikāli','Kvadrāts'];
+  function getAvg(oris,n){var o=oris.find(function(x){return x.name===n});return o?o.avg_eng:0}
+  var ds=PAGES.map(function(p){return {label:sn(p),data:names.map(function(n){return getAvg(D.pages[p].orientation,n)}),backgroundColor:alpha(COLORS[p],0.5),borderColor:COLORS[p],borderWidth:2}});
+  makeChart('oriC',{type:'bar',data:{labels:names,datasets:ds},options:{responsive:true,maintainAspectRatio:false,scales:{x:scOpts(),y:scOpts()}}});
+}
+
+// ── CAPTION LENGTH ──
+function buildCaption(){
+  var names=PD[0].caption_length.map(function(x){return x.name});
+  function getAvg(caps,n){var c=caps.find(function(x){return x.name===n});return c?c.avg_eng:0}
+  var ds=PAGES.map(function(p){return {label:sn(p),data:names.map(function(n){return getAvg(D.pages[p].caption_length,n)}),backgroundColor:alpha(COLORS[p],0.5),borderColor:COLORS[p],borderWidth:2}});
+  makeChart('capC',{type:'bar',data:{labels:names,datasets:ds},options:{responsive:true,maintainAspectRatio:false,scales:{x:scOpts(),y:scOpts()}}});
+}
+
+// ── WEEKDAY ──
+function buildWeekday(){
+  var labels=PD[0].weekday.map(function(x){return x.name});
+  var ds=PAGES.map(function(p){return {label:sn(p),data:D.pages[p].weekday.map(function(x){return x.avg_eng}),borderColor:COLORS[p],backgroundColor:alpha(COLORS[p],0.06),fill:false,borderWidth:3,pointRadius:4,pointBackgroundColor:COLORS[p],tension:.4}});
+  makeChart('wdayC',{type:'line',data:{labels:labels,datasets:ds},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},scales:{x:scOpts(),y:scOpts()}}});
+}
+
+// ── HOURLY ──
+function buildHourly(){
+  var labels=PD[0].hourly.map(function(x){return x.hour});
+  var ds=PAGES.map(function(p){return {label:sn(p),data:D.pages[p].hourly.map(function(x){return x.avg_eng}),borderColor:COLORS[p],backgroundColor:'transparent',fill:false,borderWidth:2,pointRadius:2,pointBackgroundColor:COLORS[p],tension:.4}});
+  makeChart('hourC',{type:'line',data:{labels:labels,datasets:ds},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},scales:{x:scOpts(),y:scOpts()}}});
+}
+
+// ── WORK vs WEEKEND ──
+function buildWW(){
+  var ds=PAGES.map(function(p){return {label:sn(p),data:[D.pages[p].work_weekend.work_avg,D.pages[p].work_weekend.weekend_avg],backgroundColor:[alpha(COLORS[p],0.5),alpha(COLORS[p],0.3)],borderColor:COLORS[p],borderWidth:2}});
+  makeChart('wwC',{type:'bar',data:{labels:['Darba dienas','Brīvdienas'],datasets:ds},options:{responsive:true,maintainAspectRatio:false,scales:{x:scOpts(),y:scOpts()}}});
+}
+
+// ── HEATMAPS ──
+function buildHeatmap(hm,elId){
+  var days=['','P','O','T','C','Pk','S','Sv'];
+  var vals=hm.filter(function(x){return x.avg_eng>0}).map(function(x){return x.avg_eng});
+  vals.sort(function(a,b){return b-a});
+  var top5=vals.length>=5?vals[4]:vals[vals.length-1]||0;
+  var bot5vals=vals.slice().sort(function(a,b){return a-b});
+  var bot5=bot5vals.length>=5?bot5vals[4]:bot5vals[bot5vals.length-1]||0;
+  var html='<div class="hm-label"></div>';
+  for(var h=0;h<24;h++) html+='<div class="hm-label">'+h+'</div>';
+  for(var d=1;d<=7;d++){
+    html+='<div class="hm-label">'+days[d]+'</div>';
+    for(var h=0;h<24;h++){
+      var cell=hm.find(function(x){return x.day===d&&x.hour===h});
+      var val=cell?cell.avg_eng:0;
+      var bg;
+      if(val<=0){bg='rgba(255,255,255,0.02)'}
+      else if(val>=top5){bg='rgba(52,211,153,0.75)'}
+      else if(val<=bot5){bg='rgba(239,68,68,0.65)'}
+      else{var mid=(val-bot5)/(top5-bot5);bg='rgba(251,191,36,'+(0.2+mid*0.5)+')'}
+      html+='<div class="hm-cell" style="background:'+bg+'" title="'+days[d]+' '+h+':00 — vid. '+val+'">'+(val>0?Math.round(val):'')+'</div>';
+    }
+  }
+  document.getElementById(elId).innerHTML=html;
+}
+
+// ── ENGAGEMENT DIST ──
+function buildEngDist(){
+  var labels=PD[0].eng_dist.map(function(x){return x.bucket});
+  var ds=PAGES.map(function(p){return {label:sn(p),data:D.pages[p].eng_dist.map(function(x){return x.pct}),backgroundColor:alpha(COLORS[p],0.5),borderColor:COLORS[p],borderWidth:2}});
+  makeChart('engDistC',{type:'bar',data:{labels:labels,datasets:ds},options:{responsive:true,maintainAspectRatio:false,scales:{x:scOpts(),y:Object.assign(scOpts(),{title:{display:true,text:'% no publikācijām',color:'#8B95A5',font:{size:11}}})}}});
+}
+
+// ── H1 vs H2 ──
+function buildH1H2(){
+  var ds=PAGES.map(function(p){return {label:sn(p),data:[D.pages[p].half_year[0].avg_eng,D.pages[p].half_year[1].avg_eng],backgroundColor:[alpha(COLORS[p],0.5),alpha(COLORS[p],0.3)],borderColor:COLORS[p],borderWidth:2}});
+  makeChart('halfC',{type:'bar',data:{labels:['H1 (Jan-Jun)','H2 (Jul-Dec)'],datasets:ds},options:{responsive:true,maintainAspectRatio:false,scales:{x:scOpts(),y:scOpts()}}});
+}
+
+// ── CONTESTS ──
+function buildContest(){
+  var ds=PAGES.map(function(p){var c=D.pages[p].contest;return {label:sn(p),data:[c.avg_eng,c.non_avg],backgroundColor:[alpha(COLORS[p],0.5),alpha(COLORS[p],0.3)],borderColor:COLORS[p],borderWidth:2}});
+  makeChart('contestC',{type:'bar',data:{labels:['Konkursi vid.','Parastie vid.'],datasets:ds},options:{responsive:true,maintainAspectRatio:false,scales:{x:scOpts(),y:scOpts()}}});
+}
+
+// ── THEMES ──
+function buildThemes(){
+  var allTopics={};
+  PAGES.forEach(function(p){D.pages[p].themes.forEach(function(t){allTopics[t.name]=true})});
+  var topics=Object.keys(allTopics);
+  function getAvg(themes,n){var t=themes.find(function(x){return x.name===n});return t?t.avg_eng:0}
+  var ds=PAGES.map(function(p){return {label:sn(p),data:topics.map(function(n){return getAvg(D.pages[p].themes,n)}),backgroundColor:alpha(COLORS[p],0.5),borderColor:COLORS[p],borderWidth:2}});
+  makeChart('themesC',{type:'bar',data:{labels:topics,datasets:ds},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',scales:{x:scOpts(),y:scOpts()}}});
+}
+
+// ── BIGRAMS ──
+function buildBigrams(){
+  PAGES.forEach(function(p,i){
+    var bg=D.pages[p].bigrams;
+    if(!bg||!bg.length)return;
+    var maxC=bg[0].count;
+    var c=COLORS[p];
+    var html='<h4 style="color:'+c+';font-size:0.95em;margin-bottom:10px;font-family:Space Grotesk,sans-serif">'+sn(p)+'</h4>';
+    html+='<table><tr><th>#</th><th>Vārdu pāris</th><th style="text-align:right">Reizes</th><th style="width:35%"></th></tr>';
+    bg.forEach(function(b,j){
+      var pct=Math.round(b.count/maxC*100);
+      html+='<tr><td>'+(j+1)+'</td><td style="font-weight:600;color:var(--text-1)">'+b.phrase+'</td><td style="text-align:right;color:'+c+'">'+b.count+'</td><td><div style="background:'+c+'33;height:14px;border-radius:4px;width:'+pct+'%"></div></td></tr>';
+    });
+    html+='</table>';
+    document.getElementById('bg'+i).innerHTML=html;
+  });
+}
+
+// ── SAITES ──
+function buildSaites(){
+  var s=D.saites;
+  if(!s||!s.length)return;
+  var html='<table><tr><th>#</th><th>Domēns</th><th style="text-align:right">Reizes</th><th style="text-align:right">%</th></tr>';
+  s.forEach(function(x,i){
+    html+='<tr><td>'+(i+1)+'</td><td style="font-weight:600;color:var(--text-1)">'+x.domain+'</td><td style="text-align:right;color:var(--accent)">'+x.count+'</td><td style="text-align:right;color:var(--text-2)">'+x.pct+'</td></tr>';
+  });
+  html+='</table>';
+  document.getElementById('saitesG').innerHTML=html;
+}
+
+// ── TOP POSTS ──
+var topSortKey='engagement';
+function buildTopPosts(){
+  var t=D.top_posts.slice().sort(function(a,b){return b[topSortKey]-a[topSortKey]});
+  var h='<tr><th>#</th><th>Lapa</th><th>Datums</th><th>Tips</th><th>Likes</th><th>Shares</th><th>Comm.</th><th>Kopā</th><th>Teksts</th></tr>';
+  t.forEach(function(p,i){
+    var c=COLORS[p.page]||'#8B95A5';
+    h+='<tr><td>'+(i+1)+'</td><td><span class="b" style="background:'+c+'22;color:'+c+'">'+sn(p.page)+'</span></td><td>'+p.date+'</td><td><span class="b bb">'+p.type+'</span></td><td>'+nf(p.likes)+'</td><td>'+nf(p.shares)+'</td><td>'+nf(p.comments)+'</td><td><strong>'+nf(p.engagement)+'</strong></td><td style="max-width:200px;font-size:0.8em;color:var(--text-3)">'+(p.url?'<a href="'+p.url+'" target="_blank">':'')+p.teksts.substring(0,60)+'…'+(p.url?'</a>':'')+'</td></tr>';
+  });
+  document.getElementById('topT').innerHTML=h;
+}
+function sortTop(key,btn){topSortKey=key;btn.parentElement.querySelectorAll('button').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');buildTopPosts()}
+
+function buildWorstPosts(){
+  var t=D.worst_posts;
+  var h='<tr><th>#</th><th>Lapa</th><th>Datums</th><th>Tips</th><th>Iesaiste</th><th>Teksts</th></tr>';
+  t.forEach(function(p,i){
+    var c=COLORS[p.page]||'#8B95A5';
+    h+='<tr><td>'+(i+1)+'</td><td><span class="b" style="background:'+c+'22;color:'+c+'">'+sn(p.page)+'</span></td><td>'+p.date+'</td><td><span class="b br">'+p.type+'</span></td><td>'+p.engagement+'</td><td style="max-width:220px;font-size:0.8em;color:var(--text-3)">'+p.teksts.substring(0,50)+'…</td></tr>';
+  });
+  document.getElementById('worstT').innerHTML=h;
+}
+
+// ── CONCLUSIONS ──
+function buildConclusions(){
+  var items=[];
+  // Find best/worst by avg engagement
+  var sorted=PAGES.slice().sort(function(a,b){return D.pages[b].kpi.avg_eng-D.pages[a].kpi.avg_eng});
+  var best=sorted[0],worst=sorted[sorted.length-1];
+
+  items.push(['good','Lielākā vid. iesaiste: '+sn(best),'<span style="color:'+COLORS[best]+'">'+sn(best)+'</span> sasniedz augstāko vidējo iesaisti: <span class="st">'+D.pages[best].kpi.avg_eng+'</span>. Zemākā: <span style="color:'+COLORS[worst]+'">'+sn(worst)+'</span> ar <span class="st">'+D.pages[worst].kpi.avg_eng+'</span>.']);
+
+  // Most posts
+  var mostPosts=PAGES.slice().sort(function(a,b){return D.pages[b].kpi.total_posts-D.pages[a].kpi.total_posts})[0];
+  items.push(['tip','Visvairāk publikāciju: '+sn(mostPosts),'<span style="color:'+COLORS[mostPosts]+'">'+sn(mostPosts)+'</span> publicē visvairāk — <span class="st">'+D.pages[mostPosts].kpi.total_posts+'</span> ierakstu gadā.']);
+
+  // Viral comparison
+  var mostViral=PAGES.slice().sort(function(a,b){return D.pages[b].kpi.viral_pct-D.pages[a].kpi.viral_pct})[0];
+  items.push(['good','Virālākais saturs: '+sn(mostViral),'<span style="color:'+COLORS[mostViral]+'">'+sn(mostViral)+'</span> ģenerē visvairāk virālo saturu — <span class="st">'+D.pages[mostViral].kpi.viral_pct+'%</span> no visiem postiem.']);
+
+  // Best day per page
+  var dayInfo=PAGES.map(function(p){var bd=D.pages[p].weekday.reduce(function(a,b){return a.avg_eng>b.avg_eng?a:b});return '<span style="color:'+COLORS[p]+'">'+sn(p)+'</span>: '+bd.name+' ('+bd.avg_eng+')'}).join(', ');
+  items.push(['tip','Labākās dienas',dayInfo]);
+
+  // Best format per page
+  var fmtInfo=PAGES.map(function(p){var bf=D.pages[p].formats.reduce(function(a,b){return a.avg_eng>b.avg_eng?a:b});return '<span style="color:'+COLORS[p]+'">'+sn(p)+'</span>: '+bf.type+' ('+bf.avg_eng+')'}).join(', ');
+  items.push(['tip','Efektīvākais formāts',fmtInfo]);
+
+  // Text length
+  var capInfo=PAGES.map(function(p){var bc=D.pages[p].caption_length.reduce(function(a,b){return a.avg_eng>b.avg_eng?a:b});return '<span style="color:'+COLORS[p]+'">'+sn(p)+'</span>: '+bc.name+' ('+bc.avg_eng+')'}).join(', ');
+  items.push(['tip','Labākais teksta garums',capInfo]);
+
+  // Contest impact
+  var contestInfo=PAGES.map(function(p){var c=D.pages[p].contest;return '<span style="color:'+COLORS[p]+'">'+sn(p)+'</span>: konkursi '+c.avg_eng+' vs parastie '+c.non_avg}).join(', ');
+  items.push(['good','Konkursu efekts',contestInfo]);
+
+  // Theme insights
+  var themeInfo=PAGES.map(function(p){if(!D.pages[p].themes.length)return '';var bt=D.pages[p].themes.slice().sort(function(a,b){return b.avg_eng-a.avg_eng})[0];return '<span style="color:'+COLORS[p]+'">'+sn(p)+'</span>: '+bt.name+' ('+bt.avg_eng+')'}).filter(function(x){return x}).join(', ');
+  if(themeInfo)items.push(['good','Efektīvākā tēma',themeInfo]);
+
+  // Action plan
+  items.push(['tip','Ieteikumi grupai','<p>1. Dalīties ar labāko praksi — katrai lapai ir savas stiprās puses.</p><p>2. Optimizēt publicēšanas laiku uz labākajām dienām un stundām.</p><p>3. Testēt efektīvākos formātus no citām grupas lapām.</p><p>4. Palielināt brīvdienu saturu visās lapās.</p>']);
+
+  var g=document.getElementById('conG');
+  g.innerHTML=items.map(function(it){
+    return '<div class="con '+it[0]+'"><h3>'+it[1]+'</h3><p>'+it[2]+'</p></div>';
+  }).join('');
+}
+
+function initScroll(){
+  var obs=new IntersectionObserver(function(e){e.forEach(function(en){if(en.isIntersecting)en.target.classList.add('visible')})},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.section,.con').forEach(function(el){obs.observe(el)});
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  buildKPI();
+  buildCompare();
+  buildMonthlyEng();
+  buildMonthlyAvg();
+  buildFormats();
+  buildOri();
+  buildCaption();
+  buildWeekday();
+  buildHourly();
+  buildWW();
+  PAGES.forEach(function(p,i){buildHeatmap(D.pages[p].heatmap,'hm'+i)});
+  buildEngDist();
+  buildH1H2();
+  buildContest();
+  buildThemes();
+  buildBigrams();
+  buildSaites();
+  buildTopPosts();
+  buildWorstPosts();
+  buildConclusions();
+  document.querySelectorAll('.con').forEach(function(el,i){el.style.transitionDelay=(i*0.06)+'s'});
+  initScroll();
+});
+
+</script>
+</body></html>

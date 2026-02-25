@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="lv"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>@udens_piedzivojumu_parks — Instagram 2025 Analīze</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #0B0F14; --surface-1: #131820; --surface-2: #1A2030; --surface-3: #232B3B;
+  --border: rgba(255,255,255,0.06); --border-hover: rgba(255,255,255,0.12);
+  --text-1: #F0F2F5; --text-2: #8B95A5; --text-2b: #A8B2C1; --text-3: #5A6577;
+  --accent: #4F8CFF; --accent-hover: #6BA0FF; --accent-dim: rgba(79,140,255,0.12);
+  --green: #34D399; --green-dim: rgba(52,211,153,0.12);
+  --red: #F87171; --red-dim: rgba(248,113,113,0.12);
+  --orange: #FBBF24; --orange-dim: rgba(251,191,36,0.12);
+  --purple: #A78BFA; --purple-dim: rgba(167,139,250,0.12);
+  --chart-grid: rgba(255,255,255,0.04);
+  --shadow-1: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+  --shadow-2: 0 4px 16px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.3);
+  --shadow-glow: 0 0 40px rgba(79,140,255,0.08);
+  --radius-card: 20px; --radius-btn: 12px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text-1);line-height:1.6;-webkit-font-smoothing:antialiased}
+.container{max-width:1200px;margin:0 auto;padding:0 32px 80px}
+.nav{position:sticky;top:0;z-index:100;background:rgba(11,15,20,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 32px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.nav a{color:var(--accent);text-decoration:none;font-size:0.82em;font-weight:600;display:flex;align-items:center;gap:6px;transition:color .2s;white-space:nowrap}
+.nav a:hover{color:var(--accent-hover)}
+.nav .acc-name{color:var(--text-1);font-family:'Space Grotesk',sans-serif;font-size:1.05em;font-weight:700}
+.nav-pn{display:flex;gap:16px;align-items:center}
+.hero{padding:48px 32px 40px;text-align:center;position:relative}
+.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(79,140,255,0.08) 0%,transparent 70%);pointer-events:none}
+.hero h1{font-family:'Space Grotesk',sans-serif;font-size:2.4em;font-weight:700;letter-spacing:-0.04em;margin-bottom:8px}
+.hero h1 span{background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.subtitle{color:var(--text-2b);font-size:1em}
+.ig-link{display:inline-block;margin-top:12px;color:var(--accent);text-decoration:none;font-size:0.85em;font-weight:600;padding:6px 16px;border-radius:20px;border:1px solid var(--accent);transition:all .2s}
+.ig-link:hover{background:var(--accent);color:#fff}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:64px}
+.kpi{background:var(--surface-1);border-radius:var(--radius-card);padding:20px;text-align:center;border:1px solid var(--border);box-shadow:var(--shadow-1);transition:all .3s ease}
+.kpi:hover{border-color:var(--border-hover);box-shadow:var(--shadow-2);transform:translateY(-2px)}
+.kpi .label{font-size:0.62em;color:var(--text-3);text-transform:uppercase;letter-spacing:1.5px;font-weight:600}
+.kpi .value{font-size:1.7em;font-weight:800;margin:6px 0;letter-spacing:-0.02em;font-variant-numeric:tabular-nums}
+.kpi .sub{font-size:0.7em;color:var(--text-2)}
+.kpi .badge{display:inline-block;padding:2px 8px;border-radius:8px;font-size:0.68em;font-weight:700;margin-top:4px}
+.kpi .badge.up{background:var(--green-dim);color:var(--green)}
+.kpi .badge.down{background:var(--red-dim);color:var(--red)}
+.stitle{font-family:'Space Grotesk',sans-serif;font-size:1.35em;font-weight:700;color:var(--text-1);letter-spacing:-0.02em;margin-bottom:12px;padding-left:4px}
+.stitle .num{color:var(--accent);font-weight:800;font-size:0.85em;margin-right:6px}
+.sdesc{color:var(--text-2b);font-size:0.82em;line-height:1.55;max-width:700px;margin-bottom:14px;padding-left:4px}
+.section{opacity:0;transform:translateY(40px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);margin-bottom:80px}
+.section.visible{opacity:1;transform:translateY(0)}
+.cs{background:var(--surface-1);border-radius:var(--radius-card);padding:24px;border:1px solid var(--border);box-shadow:var(--shadow-1);transition:all .3s ease}
+.cs:hover{border-color:var(--border-hover);box-shadow:var(--shadow-2)}
+.ch{display:flex;justify-content:flex-end;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.cc button{padding:5px 12px;border-radius:var(--radius-btn);cursor:pointer;font-size:0.72em;font-weight:500;font-family:'Inter',system-ui,sans-serif;transition:all .2s;border:1px solid var(--border);background:var(--surface-2);color:var(--text-2)}
+.cc button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.cc button:hover:not(.active){border-color:var(--border-hover);color:var(--text-1)}
+.cw{position:relative;height:350px}.cw.tall{height:450px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:900px){.two-col{grid-template-columns:1fr}}
+table{width:100%;border-collapse:collapse;font-size:0.82em;margin-top:8px}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--border)}
+th{color:var(--text-3);font-weight:600;font-size:0.78em;text-transform:uppercase;letter-spacing:0.5px}
+td{font-variant-numeric:tabular-nums}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.b{display:inline-block;padding:3px 10px;border-radius:var(--radius-btn);font-size:0.73em;font-weight:600}
+.bg{background:var(--green-dim);color:var(--green)}
+.br{background:var(--red-dim);color:var(--red)}
+.bb{background:var(--accent-dim);color:var(--accent)}
+.bo{background:var(--orange-dim);color:var(--orange)}
+.sd2{font-family:'Space Grotesk',sans-serif;text-align:center;font-size:1.2em;font-weight:700;color:var(--text-2);letter-spacing:-0.01em;margin:60px 0 40px;padding:16px 0;position:relative}
+.sd2::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:60px;height:2px;background:var(--accent);border-radius:1px}
+.con-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:1200px;margin:0 auto}
+@media(max-width:900px){.con-grid{grid-template-columns:1fr}}
+.con{background:var(--surface-1);border-radius:var(--radius-card);padding:24px;border:1px solid var(--border);border-left:3px solid var(--accent);box-shadow:var(--shadow-1);transition:all .3s ease;opacity:0;transform:translateY(30px)}
+.con.visible{opacity:1;transform:translateY(0)}
+.con:hover{border-color:var(--border-hover);box-shadow:var(--shadow-2)}
+.con h3{margin-bottom:10px;color:var(--accent);font-size:1em;font-weight:700}
+.con p{color:var(--text-2b);font-size:0.85em;margin-bottom:8px;line-height:1.7}
+.hl{color:var(--text-1);font-weight:600}.st{color:var(--orange);font-weight:700}
+.good{border-left-color:var(--green)}.good h3{color:var(--green)}
+.bad{border-left-color:var(--red)}.bad h3{color:var(--red)}
+.tip{border-left-color:var(--orange)}.tip h3{color:var(--orange)}
+.hm-grid{display:grid;grid-template-columns:auto repeat(7,1fr);gap:2px;font-size:0.72em}
+.hm-cell{padding:6px 4px;text-align:center;border-radius:4px;font-weight:500;font-variant-numeric:tabular-nums}
+.hm-label{color:var(--text-3);font-weight:600;display:flex;align-items:center;justify-content:center}
+.footer{text-align:center;padding:48px 0 32px;color:var(--text-3);font-size:0.75em}
+.footer-nav{display:flex;justify-content:center;gap:32px;margin-top:16px;flex-wrap:wrap}
+.footer-nav a{color:var(--accent);font-size:0.9em;font-weight:600}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--surface-3);border-radius:3px}
+
+
+/* ===== 2026 PREMIUM WEBSITE OVERRIDES ===== */
+
+/* -- Background atmosphere -- */
+body{
+  background: #060911;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(79,140,255,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(167,139,250,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(52,211,153,0.03) 0%, transparent 60%);
+  background-attachment: fixed;
+}
+
+/* -- Subtle noise texture -- */
+body::after{
+  content:'';position:fixed;top:0;left:0;width:100%;height:100%;
+  opacity:0.015;pointer-events:none;z-index:9999;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* -- Premium container width -- */
+.container{max-width:1280px;padding:0 48px 120px}
+
+/* -- HERO: dramatic, website-like -- */
+.hero{
+  padding:100px 48px 80px;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  width:900px;height:600px;
+  background:radial-gradient(ellipse,rgba(79,140,255,0.12) 0%,rgba(167,139,250,0.06) 40%,transparent 70%);
+  animation: heroGlow 8s ease-in-out infinite alternate;
+}
+.hero::after{
+  content:'';position:absolute;top:-100px;right:-200px;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(167,139,250,0.08) 0%,transparent 70%);
+  pointer-events:none;
+  animation: heroOrb 12s ease-in-out infinite alternate;
+}
+@keyframes heroGlow{
+  0%{opacity:0.8;transform:translateX(-50%) scale(1)}
+  100%{opacity:1;transform:translateX(-50%) scale(1.15)}
+}
+@keyframes heroOrb{
+  0%{transform:translate(0,0)}
+  100%{transform:translate(-60px,40px)}
+}
+
+.hero h1{
+  font-size:3.4em;
+  letter-spacing:-0.05em;
+  line-height:1.1;
+  margin-bottom:16px;
+}
+
+.subtitle{
+  font-size:1.15em;
+  letter-spacing:0.02em;
+  opacity:0.7;
+}
+
+/* IG link button premium */
+.ig-link{
+  padding:8px 24px;
+  border-radius:24px;
+  font-size:0.9em;
+  backdrop-filter:blur(8px);
+  background:rgba(79,140,255,0.1);
+}
+
+/* -- NAV bar polish -- */
+.nav{
+  background:rgba(6,9,17,0.7);
+  backdrop-filter:blur(20px) saturate(1.5);
+  border-bottom:1px solid rgba(255,255,255,0.04);
+  padding:14px 48px;
+}
+
+/* -- KPI cards: glass morphism, larger -- */
+.kpi-grid{
+  gap:20px;margin-bottom:80px;
+}
+.kpi{
+  background:rgba(19,24,32,0.6);
+  backdrop-filter:blur(16px);
+  border-radius:20px;
+  padding:28px 24px;
+  border:1px solid rgba(255,255,255,0.05);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.03);
+  position:relative;
+  overflow:hidden;
+}
+.kpi::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(79,140,255,0.2),transparent);
+}
+.kpi:hover{
+  border-color:rgba(79,140,255,0.15);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 0 1px rgba(79,140,255,0.08), inset 0 1px 0 rgba(255,255,255,0.05);
+  transform:translateY(-4px);
+}
+.kpi .label{font-size:0.72em;letter-spacing:2px;color:var(--text-3)}
+.kpi .value{
+  font-size:2.2em;
+  font-weight:800;
+  margin:10px 0;
+  background:linear-gradient(135deg,var(--text-1),var(--text-2b));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.kpi .sub{font-size:0.78em}
+.kpi .badge{padding:3px 12px;border-radius:12px;font-size:0.72em}
+
+/* -- Section titles: bigger, editorial -- */
+.stitle{
+  font-size:1.8em !important;
+  margin-bottom:20px;
+  position:relative;
+}
+.stitle .num{
+  font-size:0.6em;
+  color:rgba(79,140,255,0.4);
+  margin-right:10px;
+  font-weight:700;
+}
+.sdesc{
+  font-size:0.92em;
+  max-width:600px;
+  margin-bottom:20px;
+  line-height:1.65;
+}
+
+/* -- Chart cards: glass effect, breathing room -- */
+.section{margin-bottom:100px}
+.cs{
+  background:rgba(19,24,32,0.5);
+  backdrop-filter:blur(12px);
+  border-radius:20px;
+  padding:32px;
+  border:1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.02);
+}
+.cs:hover{
+  border-color:rgba(255,255,255,0.08);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+/* -- Chart toggle buttons -- */
+.cc button,.cf button{
+  padding:6px 16px;
+  border-radius:12px;
+  font-size:0.76em;
+  letter-spacing:0.02em;
+}
+.cc button.active{
+  box-shadow:0 0 20px rgba(79,140,255,0.25);
+}
+.cf button.active{
+  box-shadow:0 0 20px rgba(167,139,250,0.25);
+}
+
+/* -- Chart heights: taller for impact -- */
+.cw{height:420px}
+.cw.tall{height:580px}
+.cw.xtall{height:740px}
+
+/* -- Two column spacing -- */
+.two-col{gap:32px}
+
+/* -- Tables: premium look -- */
+table{font-size:0.85em}
+th,td{padding:14px 16px}
+th{
+  font-size:0.72em;
+  letter-spacing:1px;
+  color:var(--text-3);
+  border-bottom:2px solid rgba(79,140,255,0.1);
+}
+td{color:var(--text-2b)}
+tr:hover td{background:rgba(79,140,255,0.03)}
+
+/* -- Badges glass -- */
+.b{padding:4px 14px;border-radius:14px;font-size:0.76em;backdrop-filter:blur(4px)}
+
+/* -- Section divider -- */
+.sd2{
+  font-size:1.5em !important;
+  margin:100px 0 60px;
+  padding:24px 0;
+}
+.sd2::after{width:80px;height:3px;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--purple))}
+
+/* -- Word & hashtag clouds -- */
+.wcloud,.htcloud{gap:10px 20px;padding:20px}
+.wcloud .wt{padding:4px 10px;border-radius:10px}
+.htcloud .ht{padding:4px 10px;border-radius:10px}
+
+/* -- Conclusion cards: editorial magazine -- */
+.con-grid{gap:28px}
+.con{
+  background:rgba(19,24,32,0.5);
+  backdrop-filter:blur(12px);
+  border-radius:20px;
+  padding:32px;
+  border:1px solid rgba(255,255,255,0.04);
+  border-left:4px solid var(--accent);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.02);
+}
+.con:hover{
+  border-color:rgba(255,255,255,0.06);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.04);
+  transform:translateY(-3px);
+}
+.con h3{font-size:1.15em;margin-bottom:14px}
+.con p{font-size:0.92em;margin-bottom:10px}
+
+/* -- Heatmap cells -- */
+.hm-grid{gap:3px;font-size:0.76em}
+.hm-cell{padding:8px 6px;border-radius:6px}
+
+/* -- Acc bar (summary page): premium pills -- */
+.acc-bar{
+  padding:24px 32px;
+  border-radius:20px;
+  background:rgba(19,24,32,0.5);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.04);
+  gap:10px 14px;
+}
+.acc-bar a{
+  font-size:0.76em;
+  padding:6px 14px 6px 8px;
+  border-radius:16px;
+  background:rgba(26,32,48,0.6);
+  border:1px solid rgba(255,255,255,0.04);
+}
+.acc-bar a:hover{
+  background:rgba(35,43,59,0.8);
+  border-color:rgba(79,140,255,0.15);
+  box-shadow:0 4px 16px rgba(0,0,0,0.2);
+  transform:translateY(-2px);
+}
+.acc-ava{width:24px;height:24px;font-size:0.7em}
+
+/* -- Unified footer: premium -- */
+.unified-footer{
+  margin-top:120px;
+  padding:64px 48px 40px;
+  background:rgba(10,13,20,0.8);
+  backdrop-filter:blur(20px);
+  border-top:1px solid rgba(255,255,255,0.04);
+}
+.unified-footer .uf-title{
+  font-size:1.3em;
+  margin-bottom:32px;
+  background:linear-gradient(135deg,var(--text-2),var(--text-3));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.unified-footer .uf-grid{
+  gap:10px 12px;
+  max-width:1280px;margin:0 auto 32px;
+}
+.unified-footer .uf-link{
+  font-size:0.78em;
+  padding:8px 16px 8px 10px;
+  border-radius:16px;
+  background:rgba(19,24,32,0.6);
+  backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,0.04);
+}
+.unified-footer .uf-link:hover{
+  background:rgba(35,43,59,0.8);
+  border-color:rgba(79,140,255,0.15);
+  box-shadow:0 4px 20px rgba(0,0,0,0.3);
+  transform:translateY(-3px);
+}
+.unified-footer .uf-dot{width:22px;height:22px;font-size:0.72em}
+.unified-footer .uf-copy{
+  font-size:0.75em;
+  padding-top:24px;
+  max-width:1280px;
+}
+
+/* -- Footer old -- */
+.footer{padding:64px 0 40px;font-size:0.8em}
+.footer-nav{gap:40px;margin-top:20px}
+.footer-nav a{font-size:1em}
+
+/* -- Scrollbar premium -- */
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-thumb{background:rgba(79,140,255,0.15);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:rgba(79,140,255,0.3)}
+
+/* -- Smooth animations enhancement -- */
+.section{
+  transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+}
+.con{
+  transition:all 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+
+/* -- KPI value number animation -- */
+@keyframes fadeInUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.kpi{animation:fadeInUp 0.6s ease-out both}
+.kpi:nth-child(1){animation-delay:0.05s}
+.kpi:nth-child(2){animation-delay:0.1s}
+.kpi:nth-child(3){animation-delay:0.15s}
+.kpi:nth-child(4){animation-delay:0.2s}
+.kpi:nth-child(5){animation-delay:0.25s}
+.kpi:nth-child(6){animation-delay:0.3s}
+
+/* -- Premium link hover -- */
+a{transition:color 0.2s ease}
+a:hover{text-decoration:none;color:var(--accent-hover)}
+
+/* -- Selection color -- */
+::selection{background:rgba(79,140,255,0.25);color:var(--text-1)}
+
+/* ===== UNIFIED NAVIGATION FOOTER ===== */
+.unified-footer{
+  margin-top:80px;
+  padding:48px 32px 32px;
+  background:var(--surface-1);
+  border-top:1px solid var(--border);
+}
+.unified-footer .uf-title{
+  font-family:'Space Grotesk','Inter',system-ui,sans-serif;
+  font-size:1.1em;font-weight:700;color:var(--text-2);
+  text-align:center;margin-bottom:24px;
+  letter-spacing:-0.01em;
+}
+.unified-footer .uf-grid{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:8px 10px;
+  max-width:1200px;margin:0 auto 24px;
+}
+.unified-footer .uf-link{
+  color:var(--text-2);font-size:0.74em;font-weight:500;
+  text-decoration:none;padding:6px 14px 6px 8px;border-radius:20px;
+  transition:all .25s ease;
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--surface-2);border:1px solid var(--border);
+}
+.unified-footer .uf-link:hover{
+  color:var(--text-1);background:var(--surface-3);
+  border-color:var(--border-hover);transform:translateY(-2px);
+  box-shadow:var(--shadow-2);text-decoration:none;
+}
+.unified-footer .uf-link.active{
+  background:var(--accent-dim);color:var(--accent);
+  border-color:rgba(79,140,255,0.3);
+  pointer-events:none;
+}
+.unified-footer .uf-link.summary-link{
+  background:linear-gradient(135deg,rgba(79,140,255,0.15),rgba(167,139,250,0.15));
+  border-color:rgba(79,140,255,0.25);
+  color:var(--text-1);font-weight:600;
+}
+.unified-footer .uf-link.summary-link:hover{
+  background:linear-gradient(135deg,rgba(79,140,255,0.25),rgba(167,139,250,0.25));
+  border-color:rgba(79,140,255,0.4);
+}
+.unified-footer .uf-link.summary-link.active{
+  background:linear-gradient(135deg,rgba(79,140,255,0.2),rgba(167,139,250,0.2));
+  color:var(--accent);pointer-events:none;
+}
+.unified-footer .uf-dot{
+  width:20px;height:20px;border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:0.7em;font-weight:700;color:#fff;flex-shrink:0;
+  text-transform:uppercase;
+}
+.unified-footer .uf-copy{
+  text-align:center;color:var(--text-3);font-size:0.7em;
+  padding-top:16px;border-top:1px solid var(--border);
+  max-width:1200px;margin:0 auto;
+}
+</style></head><body>
+<div class="nav"><a href="ventspils_social_media_2025.html">← Kopējais</a><div class="nav-pn"><a href="sporta_skola_spars_2025.html">← @sporta_skola_spars</a><span class="acc-name">@udens_piedzivojumu_parks</span><a href="vdcentrs_2025.html">@vdcentrs →</a></div><a href="https://www.instagram.com/udens_piedzivojumu_parks/" target="_blank">Instagram →</a></div><div class="hero"><h1><span>@udens_piedzivojumu_parks</span> Analīze</h1><p class="subtitle">Instagram 2025 · 35 ieraksti · Vid. iesaiste: 29.1 (-60.5% vs vid.)</p><a class="ig-link" href="https://www.instagram.com/udens_piedzivojumu_parks/" target="_blank">Instagram profils</a></div><div class="container"><div class="kpi-grid" id="kpiG"></div><div class="section"><h2 class="stitle"><span class="num">01</span>Iesaiste pa mēnešiem</h2><p class="sdesc">Labākais: Sep (104.0), zemākais: Jun (1.5).</p><div class="cs"><div class="ch"><div class="cc"><button class="active" onclick="sw('mEng','bar',this)">Bar</button><button onclick="sw('mEng','line',this)">Line</button></div></div><div class="cw"><canvas id="mEngC"></canvas></div></div></div><div class="section"><h2 class="stitle"><span class="num">02</span>Ierakstu skaits pa mēnešiem</h2><div class="cs"><div class="ch"><div class="cc"><button class="active" onclick="sw('mPosts','bar',this)">Bar</button><button onclick="sw('mPosts','line',this)">Line</button></div></div><div class="cw"><canvas id="mPostsC"></canvas></div></div></div><div class="section"><div class="two-col"><div class="section"><h2 class="stitle"><span class="num">03</span>Satura formāts</h2><p class="sdesc">Image: 24, Carousel: 6, Reel: 5.</p><div class="cs"><div class="ch"><div class="cc"><button class="active" onclick="sw('tChart','bar',this)">Bar</button><button onclick="sw('tChart','doughnut',this)">Doughnut</button></div></div><div class="cw"><canvas id="tChartC"></canvas></div></div></div><div class="section"><h2 class="stitle"><span class="num">04</span>Pašu vs Collab</h2><p class="sdesc">Avota sadalījums.</p><div class="cs"><div class="ch"><div class="cc"><button class="active" onclick="sw('sChart','doughnut',this)">Doughnut</button><button onclick="sw('sChart','bar',this)">Bar</button></div></div><div class="cw"><canvas id="sChartC"></canvas></div></div></div></div></div><div class="section"><div class="two-col"><div class="section"><h2 class="stitle"><span class="num">05</span>Vid. iesaiste pēc formāta</h2><div class="cs"><div class="ch"><div class="cc"><button class="active" onclick="sw('tAvg','bar',this)">Bar</button></div></div><div class="cw"><canvas id="tAvgC"></canvas></div></div></div><div class="section"><h2 class="stitle"><span class="num">06</span>Iesaiste pēc nedēļas dienas</h2><div class="cs"><div class="ch"><div class="cc"><button class="active" onclick="sw('wDay','bar',this)">Bar</button><button onclick="sw('wDay','line',this)">Line</button></div></div><div class="cw"><canvas id="wDayC"></canvas></div></div></div></div></div><div class="section"><h2 class="stitle"><span class="num">07</span>Publicēšanas laiks</h2><p class="sdesc">Vid. iesaiste pēc stundas. 00:00 izslēgts.</p><div class="cs"><div class="ch"><div class="cc"><button class="active" onclick="sw('hourC','bar',this)">Bar</button><button onclick="sw('hourC','line',this)">Line</button></div></div><div class="cw"><canvas id="hourCC"></canvas></div></div></div><div class="section"><h2 class="stitle"><span class="num">08</span>Apraksta garums</h2><p class="sdesc">Kā apraksta garums ietekmē iesaisti.</p><div class="cs"><div class="ch"><div class="cc"><button class="active" onclick="sw('capLen','bar',this)">Bar</button><button onclick="sw('capLen','line',this)">Line</button></div></div><div class="cw"><canvas id="capLenC"></canvas></div></div></div><div class="section"><div class="two-col"><div class="section"><h2 class="stitle"><span class="num">09</span>Emoji: ar vai bez</h2><div class="cs"><div class="ch"><div class="cc"><button class="active" onclick="sw('emBin','bar',this)">Bar</button><button onclick="sw('emBin','doughnut',this)">Doughnut</button></div></div><div class="cw"><canvas id="emBinC"></canvas></div></div></div><div class="section"><h2 class="stitle"><span class="num">10</span>Hashtagi: ar vai bez</h2><div class="cs"><div class="ch"><div class="cc"><button class="active" onclick="sw('htBin','bar',this)">Bar</button><button onclick="sw('htBin','doughnut',this)">Doughnut</button></div></div><div class="cw"><canvas id="htBinC"></canvas></div></div></div></div></div><div class="section"><h2 class="stitle"><span class="num">11</span>CTA ietekme</h2><div class="cs"><div class="ch"><div class="cc"><button class="active" onclick="sw('ctaC','bar',this)">Bar</button><button onclick="sw('ctaC','doughnut',this)">Doughnut</button></div></div><div class="cw"><canvas id="ctaCC"></canvas></div></div></div><div class="sd2">Papildu analīze</div><div class="section"><div class="two-col"><div class="section"><h2 class="stitle"><span class="num">12</span>Iesaistes sadalījums</h2><p class="sdesc">Cik ieraksti iekrīt katrā iesaistes diapazonā — cik "virālie" un cik "klusie".</p><div class="cs"><div class="ch"><div class="cc"><button class="active" onclick="sw('engDist','bar',this)">Bar</button></div></div><div class="cw"><canvas id="engDistC"></canvas></div></div></div><div class="section"><h2 class="stitle"><span class="num">13</span>H1 vs H2 (pusgadi)</h2><p class="sdesc">Pirma pusgada vs otra pusgada salīdzinājums. Izaugsme: +134.8%.</p><div class="cs"><div class="ch"><div class="cc"><button class="active" onclick="sw('halfC','bar',this)">Bar</button></div></div><div class="cw"><canvas id="halfCC"></canvas></div></div></div></div></div><div class="section"><h2 class="stitle"><span class="num">14</span>Komentāru/Likes attiecība pēc formāta</h2><p class="sdesc">Kurš formāts izraisa visvairāk diskusiju? Kopējais C/L: 0.69% (visi konti: 3.81%).</p><div class="cs"><div class="ch"><div class="cc"><button class="active" onclick="sw('clType','bar',this)">Bar</button></div></div><div class="cw"><canvas id="clTypeC"></canvas></div></div></div><div class="section"><h2 class="stitle"><span class="num">15</span>Publicēšanas karstuma karte</h2><p class="sdesc">Cik ierakstu publicēts katrā mēnesī x nedēļas dienā. Tumšākais = visvairāk.</p><div class="cs"><div id="heatmapG"></div></div></div><div class="section"><h2 class="stitle"><span class="num">16</span>Top 10 ieraksti</h2><div class="cs"><div style="overflow-x:auto"><table id="topT"></table></div></div></div><div class="section"><h2 class="stitle"><span class="num">17</span>Zemākā iesaiste</h2><div class="cs"><div style="overflow-x:auto"><table id="worstT"></table></div></div></div><div class="section"><h2 class="stitle"><span class="num">18</span>Collab partneri</h2><div class="cs"><div class="two-col"><div id="collabFreq"></div><div id="collabEng"></div></div></div></div><div class="section"><h2 class="stitle"><span class="num">19</span>Hashtagi</h2><div class="cs"><div id="hashtagList"></div></div></div><div class="sd2">Secinājumi un Ieteikumi</div><div class="con-grid"><div class="con bad"><h3>Iesaiste zem videja</h3><p>Vid. iesaiste <span class="st">29.1</span> ir <span class="st">-60.5%</span> zem kopējā vidējā (73.7). Nepieciesams uzlabot saturu.</p></div><div class="con tip"><h3>Tikai pašu saturs</h3><p>Visi ieraksti ir pasu. Collab var palielināt iesaisti un sasniegt jaunas auditorijas.</p></div><div class="con good"><h3>Labākais: Sep (104.0), zemākais: Jun (1.5)</h3><p>Sezonalitāte: labākais mēnesis <span class="hl">Sep</span> uzrāda <span class="st">104.0</span>, zemākais Jun (1.5).</p></div><div class="con tip"><h3>Reel — labākais formats</h3><p>Image: 24 (23.2), Carousel: 6 (25.3), Reel: 5 (61.4).</p><p><strong>Ieteikums:</strong> Fokuss uz <span class="hl">Reel</span> (vid. 61.4).</p></div><div class="con good"><h3>Augosa tendence: H2 +134.8%</h3><p>H1: vid. 18.4 (20 ier.) → H2: vid. <span class="st">43.2</span> (15 ier.). Iesaiste aug!</p></div><div class="con tip"><h3>Zema komentaru aktivitate (0.69%)</h3><p>C/L ratio tikai <span class="st">0.69%</span> (kopējais: 3.81%). Iesakam veltat diskusijas ar jautajumiem aprakatos.</p></div><div class="con bad"><h3>CTA samazina iesaisti</h3><p>Ar CTA: 18.2 (8 ier.). Bez: <span class="st">32.3</span> (27 ier.).</p><p><strong>Ieteikums:</strong> Samazinat formalu CTA vai integrēt organiskak.</p></div><div class="con tip"><h3>Rīcības plans 2026</h3><p>• Fokuss uz Reel (vid. 61.4)</p><p>• Uzlabot Jun saturu (vid. tikai 1.5)</p><p>• Samazinat kvalitates svārstības — konsekventaks saturs</p><p>• Veicinat diskusijas — jautajumi, aptaujas, viedokli</p></div></div><script>const D={"kpi": {"total_posts": 35, "total_engagement": 1017, "avg_engagement": 29.1, "median_engagement": 17.0, "total_likes": 1010, "total_comments": 7, "avg_likes": 28.9, "avg_comments": 0.2, "global_avg": 73.7, "global_median": 18.0, "vs_global_pct": -60.5, "eng_std": 40.3, "eng_cv": 1.39, "cl_ratio": 0.69, "global_cl_ratio": 3.81, "viral_count": 4, "viral_pct": 11.4, "h1_avg": 18.4, "h2_avg": 43.2, "h1_posts": 20, "h2_posts": 15, "growth_pct": 134.8, "global_cv": 2.74}, "monthly": [{"month": 1, "month_name": "Jan", "posts": 3, "likes": 32, "comments": 0, "engagement": 32, "avg_eng": 10.7}, {"month": 2, "month_name": "Feb", "posts": 5, "likes": 222, "comments": 4, "engagement": 226, "avg_eng": 45.2}, {"month": 3, "month_name": "Mar", "posts": 4, "likes": 51, "comments": 0, "engagement": 51, "avg_eng": 12.8}, {"month": 4, "month_name": "Apr", "posts": 5, "likes": 48, "comments": 0, "engagement": 48, "avg_eng": 9.6}, {"month": 5, "month_name": "May", "posts": 1, "likes": 9, "comments": 0, "engagement": 9, "avg_eng": 9.0}, {"month": 6, "month_name": "Jun", "posts": 2, "likes": 3, "comments": 0, "engagement": 3, "avg_eng": 1.5}, {"month": 7, "month_name": "Jul", "posts": 1, "likes": 28, "comments": 1, "engagement": 29, "avg_eng": 29.0}, {"month": 8, "month_name": "Aug", "posts": 4, "likes": 160, "comments": 0, "engagement": 160, "avg_eng": 40.0}, {"month": 9, "month_name": "Sep", "posts": 3, "likes": 310, "comments": 2, "engagement": 312, "avg_eng": 104.0}, {"month": 10, "month_name": "Oct", "posts": 2, "likes": 18, "comments": 0, "engagement": 18, "avg_eng": 9.0}, {"month": 11, "month_name": "Nov", "posts": 2, "likes": 39, "comments": 0, "engagement": 39, "avg_eng": 19.5}, {"month": 12, "month_name": "Dec", "posts": 3, "likes": 90, "comments": 0, "engagement": 90, "avg_eng": 30.0}], "type": [{"type": "Image", "count": 24, "pct": 68.6, "avg_eng": 23.2, "total_eng": 558}, {"type": "Carousel", "count": 6, "pct": 17.1, "avg_eng": 25.3, "total_eng": 152}, {"type": "Reel", "count": 5, "pct": 14.3, "avg_eng": 61.4, "total_eng": 307}], "source": [{"source_type": "pašu posts", "count": 35, "pct": 100.0, "avg_eng": 29.1, "total_eng": 1017}], "weekday": [{"day_name": "Pirmdiena", "count": 7, "avg_eng": 51.4}, {"day_name": "Otrdiena", "count": 3, "avg_eng": 41.3}, {"day_name": "Trešdiena", "count": 7, "avg_eng": 20.9}, {"day_name": "Ceturtdiena", "count": 3, "avg_eng": 21.7}, {"day_name": "Piektdiena", "count": 9, "avg_eng": 22.2}, {"day_name": "Sestdiena", "count": 5, "avg_eng": 23.8}, {"day_name": "Svētdiena", "count": 1, "avg_eng": 3.0}], "hour": [{"hour": "00:00", "hour_num": 0, "count": 0, "avg_eng": 0}, {"hour": "01:00", "hour_num": 1, "count": 0, "avg_eng": 0}, {"hour": "02:00", "hour_num": 2, "count": 0, "avg_eng": 0}, {"hour": "03:00", "hour_num": 3, "count": 0, "avg_eng": 0}, {"hour": "04:00", "hour_num": 4, "count": 0, "avg_eng": 0}, {"hour": "05:00", "hour_num": 5, "count": 1, "avg_eng": 2.0}, {"hour": "06:00", "hour_num": 6, "count": 3, "avg_eng": 9.7}, {"hour": "07:00", "hour_num": 7, "count": 3, "avg_eng": 42.3}, {"hour": "08:00", "hour_num": 8, "count": 4, "avg_eng": 13.5}, {"hour": "09:00", "hour_num": 9, "count": 2, "avg_eng": 13.5}, {"hour": "10:00", "hour_num": 10, "count": 0, "avg_eng": 0}, {"hour": "11:00", "hour_num": 11, "count": 2, "avg_eng": 18.5}, {"hour": "12:00", "hour_num": 12, "count": 7, "avg_eng": 21.3}, {"hour": "13:00", "hour_num": 13, "count": 4, "avg_eng": 48.0}, {"hour": "14:00", "hour_num": 14, "count": 6, "avg_eng": 60.3}, {"hour": "15:00", "hour_num": 15, "count": 0, "avg_eng": 0}, {"hour": "16:00", "hour_num": 16, "count": 2, "avg_eng": 14.0}, {"hour": "17:00", "hour_num": 17, "count": 0, "avg_eng": 0}, {"hour": "18:00", "hour_num": 18, "count": 1, "avg_eng": 10.0}, {"hour": "19:00", "hour_num": 19, "count": 0, "avg_eng": 0}, {"hour": "20:00", "hour_num": 20, "count": 0, "avg_eng": 0}, {"hour": "21:00", "hour_num": 21, "count": 0, "avg_eng": 0}, {"hour": "22:00", "hour_num": 22, "count": 0, "avg_eng": 0}, {"hour": "23:00", "hour_num": 23, "count": 0, "avg_eng": 0}], "caption": [{"bucket": "0-50", "count": 3, "avg_eng": 21.7}, {"bucket": "51-150", "count": 4, "avg_eng": 23.8}, {"bucket": "151-300", "count": 9, "avg_eng": 34.0}, {"bucket": "300+", "count": 19, "avg_eng": 29.0}], "emoji_binary": [{"bucket": "Ar emoji", "count": 0, "avg_eng": 0}, {"bucket": "Bez emoji", "count": 35, "avg_eng": 29.1}], "hashtag_binary": [{"bucket": "Ar hashtagiem", "count": 5, "avg_eng": 47.8}, {"bucket": "Bez hashtagiem", "count": 30, "avg_eng": 25.9}], "top_posts": [{"date": "2025-09-15", "type": "Reel", "source_type": "pašu posts", "likes": 216, "comments": 1, "engagement": 217, "url": "https://www.instagram.com/p/DOoG0JflQX7/", "caption_preview": "🌊✨ Ūdens atrakciju un SPA zona no 17.septembra ATKAL VAĻĀ! ✨🌊\n\nKā jau katru gadu"}, {"date": "2025-02-18", "type": "Image", "source_type": "pašu posts", "likes": 89, "comments": 3, "engagement": 92, "url": "https://www.instagram.com/p/DGNzScyOvBD/", "caption_preview": "🌊 Viss ir sagatavots lieliskai atpūtai – baseini, pirtis, atrakcijas un labs nos"}, {"date": "2025-02-01", "type": "Image", "source_type": "pašu posts", "likes": 90, "comments": 0, "engagement": 90, "url": "https://www.instagram.com/p/DFhc-hFunp3/", "caption_preview": "🌊 Lieliskas ziņas!\nNo šī brīža mūsu apmeklētājiem būs iespēja ne tikai izbaudīt "}, {"date": "2025-08-25", "type": "Reel", "source_type": "pašu posts", "likes": 72, "comments": 0, "engagement": 72, "url": "https://www.instagram.com/p/DNyDz3I1KNk/", "caption_preview": "Peldēt? \nPeldēt! 💯\nPēc vasaras pārtraukuma un remontdarbiem atkal ir pieejams Li"}, {"date": "2025-09-17", "type": "Image", "source_type": "pašu posts", "likes": 59, "comments": 0, "engagement": 59, "url": "https://www.instagram.com/p/DOtHFkhDeF4/", "caption_preview": "✨ Ūdens atrakciju un SPA komplekss no 17. septembra ATKAL ATVĒRTS!✨\nNāc sasildīt"}, {"date": "2025-08-15", "type": "Carousel", "source_type": "pašu posts", "likes": 46, "comments": 0, "engagement": 46, "url": "https://www.instagram.com/p/DNYAIQJuqUf/?img_index=1", "caption_preview": "Latvijas kamaniņu izlases @luge_lv sportisti treniņnometnes ietvaros Ventspilī i"}, {"date": "2025-12-19", "type": "Image", "source_type": "pašu posts", "likes": 36, "comments": 0, "engagement": 36, "url": "https://www.instagram.com/p/DScjAGWDkbu/?img_index=1", "caption_preview": ""}, {"date": "2025-09-25", "type": "Carousel", "source_type": "pašu posts", "likes": 35, "comments": 1, "engagement": 36, "url": "https://www.instagram.com/p/DPBlArvDsSR/?img_index=1", "caption_preview": "🌊 Nakts peldējums Ūdens piedzīvojumu parkā!\n27. septembrī plkst. 19:00–22:00 Eir"}, {"date": "2025-11-14", "type": "Image", "source_type": "pašu posts", "likes": 30, "comments": 0, "engagement": 30, "url": "https://www.instagram.com/p/DRCkApxDpir/", "caption_preview": "🇱🇻 Darba laiks svētku brīvdienās:\n🩵SPA, atrakciju daļa:\n17.11.2025  12.00-21.00 "}, {"date": "2025-07-02", "type": "Carousel", "source_type": "pašu posts", "likes": 28, "comments": 1, "engagement": 29, "url": "https://www.instagram.com/p/DLml8LosECG/?img_index=1", "caption_preview": "Šķir uz priekšu 👉 lai uzzinātu pašu galveno! \n\nVasarai piestāv ūdens prieki! 💙💦\n"}], "worst_posts": [{"date": "2025-10-09", "type": "Image", "source_type": "pašu posts", "likes": 1, "comments": 0, "engagement": 1, "url": "https://www.instagram.com/p/DPmCwTIiKjU/", "caption_preview": ""}, {"date": "2025-06-14", "type": "Image", "source_type": "pašu posts", "likes": 1, "comments": 0, "engagement": 1, "url": "https://www.instagram.com/p/DK3vhU3IBZg/", "caption_preview": "Ieplāno mierpilnu relaksāciju vai sprtiskas aktivitātes arī gaidāmajās Jāņu brīv"}, {"date": "2025-06-07", "type": "Image", "source_type": "pašu posts", "likes": 2, "comments": 0, "engagement": 2, "url": "https://www.instagram.com/p/DKlkqE0pNFF/", "caption_preview": "Vasarai piestāv ūdens prieki! 💙💦\n\nIzvēlies - baudīt tos brīvā dabā Pludmales akv"}, {"date": "2025-04-09", "type": "Image", "source_type": "pašu posts", "likes": 2, "comments": 0, "engagement": 2, "url": "https://www.instagram.com/p/DIN_h4LogfI/", "caption_preview": "Meklējat, kurp doties ar klasi? Ventspils Ūdens piedzīvojumu parks piedāvā neaiz"}, {"date": "2025-04-20", "type": "Image", "source_type": "pašu posts", "likes": 3, "comments": 0, "engagement": 3, "url": "https://www.instagram.com/p/DIqLAHsB6Sf/", "caption_preview": "💦 Lieliska ziņa ūdens prieku mīļotājiem! 🌊\n\nVentspils Ūdens piedzīvojumu parks b"}], "collab_partners": [], "collab_partners_by_eng": [], "top_hashtags": [{"tag": "#ūdenspiedzīvojumuparks", "count": 2}, {"tag": "#ūdensparks", "count": 1}, {"tag": "#skolēnuekskursijas", "count": 1}, {"tag": "#piedzīvojumi", "count": 1}, {"tag": "#ventspilsakvaparks", "count": 1}, {"tag": "#valentīndiena", "count": 1}, {"tag": "#ūdenspiedzīvojums", "count": 1}, {"tag": "#divatāvairākprieka", "count": 1}, {"tag": "#streetandmore", "count": 1}, {"tag": "#ventspils", "count": 1}], "monthly_trend": {"best_month": "Sep", "worst_month": "Jun", "best_month_avg": 104.0, "worst_month_avg": 1.5}, "cta": [{"bucket": "Ar CTA", "count": 8, "avg_eng": 18.2}, {"bucket": "Bez CTA", "count": 27, "avg_eng": 32.3}], "eng_dist": [{"bucket": "0-10", "count": 15}, {"bucket": "11-21", "count": 4}, {"bucket": "22-32", "count": 8}, {"bucket": "33-43", "count": 2}, {"bucket": "44-54", "count": 1}, {"bucket": "55-65", "count": 1}, {"bucket": "66-76", "count": 1}, {"bucket": "88-98", "count": 2}, {"bucket": "99+", "count": 1}], "heatmap": [{"month": "Jan", "Pirmdiena": 0, "Otrdiena": 0, "Trešdiena": 1, "Ceturtdiena": 0, "Piektdiena": 1, "Sestdiena": 1, "Svētdiena": 0}, {"month": "Feb", "Pirmdiena": 3, "Otrdiena": 1, "Trešdiena": 0, "Ceturtdiena": 0, "Piektdiena": 0, "Sestdiena": 1, "Svētdiena": 0}, {"month": "Mar", "Pirmdiena": 1, "Otrdiena": 1, "Trešdiena": 2, "Ceturtdiena": 0, "Piektdiena": 0, "Sestdiena": 0, "Svētdiena": 0}, {"month": "Apr", "Pirmdiena": 0, "Otrdiena": 0, "Trešdiena": 2, "Ceturtdiena": 0, "Piektdiena": 2, "Sestdiena": 0, "Svētdiena": 1}, {"month": "Mai", "Pirmdiena": 0, "Otrdiena": 0, "Trešdiena": 0, "Ceturtdiena": 0, "Piektdiena": 1, "Sestdiena": 0, "Svētdiena": 0}, {"month": "Jūn", "Pirmdiena": 0, "Otrdiena": 0, "Trešdiena": 0, "Ceturtdiena": 0, "Piektdiena": 0, "Sestdiena": 2, "Svētdiena": 0}, {"month": "Jūl", "Pirmdiena": 0, "Otrdiena": 0, "Trešdiena": 1, "Ceturtdiena": 0, "Piektdiena": 0, "Sestdiena": 0, "Svētdiena": 0}, {"month": "Aug", "Pirmdiena": 1, "Otrdiena": 1, "Trešdiena": 0, "Ceturtdiena": 0, "Piektdiena": 2, "Sestdiena": 0, "Svētdiena": 0}, {"month": "Sep", "Pirmdiena": 1, "Otrdiena": 0, "Trešdiena": 1, "Ceturtdiena": 1, "Piektdiena": 0, "Sestdiena": 0, "Svētdiena": 0}, {"month": "Okt", "Pirmdiena": 1, "Otrdiena": 0, "Trešdiena": 0, "Ceturtdiena": 1, "Piektdiena": 0, "Sestdiena": 0, "Svētdiena": 0}, {"month": "Nov", "Pirmdiena": 0, "Otrdiena": 0, "Trešdiena": 0, "Ceturtdiena": 0, "Piektdiena": 1, "Sestdiena": 1, "Svētdiena": 0}, {"month": "Dec", "Pirmdiena": 0, "Otrdiena": 0, "Trešdiena": 0, "Ceturtdiena": 1, "Piektdiena": 2, "Sestdiena": 0, "Svētdiena": 0}], "half_data": [{"half": "H1 (Jan-Jūn)", "posts": 20, "avg_eng": 18.4, "total_eng": 369}, {"half": "H2 (Jūl-Dec)", "posts": 15, "avg_eng": 43.2, "total_eng": 648}], "cl_by_type": [{"type": "Carousel", "cl_ratio": 1.33, "total_likes": 150, "total_comments": 2}, {"type": "Image", "cl_ratio": 0.72, "total_likes": 554, "total_comments": 4}, {"type": "Reel", "cl_ratio": 0.33, "total_likes": 306, "total_comments": 1}]};
+const CH={},CFG={},CT={};
+const CL=['#4F8CFF','#34D399','#FBBF24','#F87171','#A78BFA','#06b6d4','#ec4899','#14b8a6','#f97316','#6366f1'];
+Chart.defaults.color='#8B95A5';Chart.defaults.borderColor='rgba(255,255,255,0.04)';
+Chart.defaults.font.family="'Inter',system-ui,sans-serif";Chart.defaults.font.size=12;
+Chart.defaults.plugins.legend.labels.padding=16;Chart.defaults.plugins.legend.labels.usePointStyle=true;Chart.defaults.plugins.legend.labels.pointStyle='circle';
+Chart.defaults.plugins.tooltip.backgroundColor='#1A2030';Chart.defaults.plugins.tooltip.borderColor='rgba(255,255,255,0.08)';
+Chart.defaults.plugins.tooltip.borderWidth=1;Chart.defaults.plugins.tooltip.cornerRadius=10;Chart.defaults.plugins.tooltip.padding=12;
+Chart.defaults.elements.bar.borderRadius=8;Chart.defaults.elements.bar.borderSkipped=false;
+Chart.defaults.elements.line.borderWidth=2;Chart.defaults.elements.point.radius=3;Chart.defaults.elements.point.hoverRadius=6;
+
+function nf(n){return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,' ')}
+function scaleOpts(){return{grid:{color:'rgba(255,255,255,0.04)',lineWidth:1},ticks:{color:'#8B95A5',font:{size:11}}}}
+function dualScale(){return{x:scaleOpts(),y:Object.assign({},scaleOpts(),{type:'linear',position:'left',title:{display:true,color:'#8B95A5',font:{size:11}}}),y1:Object.assign({},scaleOpts(),{type:'linear',position:'right',grid:{drawOnChartArea:false},title:{display:true,color:'#8B95A5',font:{size:11}}})}}
+function sw(id,tp,btn){CT[id]=tp;btn.parentElement.querySelectorAll('button').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');rc(id);}
+function rc(id){if(CH[id])CH[id].destroy();var c=CFG[id](CT[id]||'bar');CH[id]=new Chart(document.getElementById(c.cid),c.cfg);}
+
+function updKPI(){
+  var k=D.kpi;var g=document.getElementById('kpiG');
+  var vg=k.vs_global_pct;var badge=vg>0?'<span class="badge up">+'+vg+'%</span>':'<span class="badge down">'+vg+'%</span>';
+  var gbadge=k.growth_pct>0?'<span class="badge up">+'+k.growth_pct+'%</span>':'<span class="badge down">'+k.growth_pct+'%</span>';
+  g.innerHTML=[
+    ['Ieraksti',k.total_posts,'',''],
+    ['Kopējā ies.',nf(k.total_engagement),nf(k.total_likes)+' L + '+nf(k.total_comments)+' K',''],
+    ['Vid. iesaiste',k.avg_engagement,'Med: '+k.median_engagement,badge],
+    ['Konsistence','CV '+k.eng_cv,k.eng_cv<1?'Stabils':'Mainigs',''],
+    ['Kom./Likes',k.cl_ratio+'%','Kopējais: '+k.global_cl_ratio+'%',k.cl_ratio>k.global_cl_ratio?'<span class="badge up">Virs vid.</span>':''],
+    ['H1→H2 trends',k.h2_avg,'H1: '+k.h1_avg,gbadge],
+    ['Virali ier.',k.viral_count,k.viral_pct+'% no kopeja',''],
+    ['Starpiba vs vid.',(k.avg_engagement>k.global_avg?'+':'')+Math.round(k.avg_engagement-k.global_avg),'',badge]
+  ].map(function(it){
+    return '<div class="kpi"><div class="label">'+it[0]+'</div><div class="value">'+it[1]+'</div><div class="sub">'+it[2]+'</div>'+(it[3]||'')+'</div>';
+  }).join('');
+}
+
+CFG.mEng=function(t){var d=D.monthly;return{cid:'mEngC',cfg:{type:t,data:{labels:d.map(function(m){return m.month_name}),datasets:[{label:'Likes',data:d.map(function(m){return m.likes}),backgroundColor:'rgba(79,140,255,0.6)',borderColor:'#4F8CFF',borderWidth:2,tension:.4,fill:t==='line'},{label:'Komentari',data:d.map(function(m){return m.comments}),backgroundColor:'rgba(251,191,36,0.6)',borderColor:'#FBBF24',borderWidth:2,tension:.4,fill:t==='line'}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:Object.assign({},scaleOpts(),{stacked:t==='bar'}),y:Object.assign({},scaleOpts(),{stacked:t==='bar'})}}}};};CT.mEng='bar';
+CFG.mPosts=function(t){var d=D.monthly;return{cid:'mPostsC',cfg:{type:t,data:{labels:d.map(function(m){return m.month_name}),datasets:[{label:'Ieraksti',data:d.map(function(m){return m.posts}),backgroundColor:'rgba(52,211,153,0.6)',borderColor:'#34D399',borderWidth:2,tension:.4}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:scaleOpts(),y:scaleOpts()}}}};};CT.mPosts='bar';
+CFG.tChart=function(t){var d=D.type;var ip=t==='doughnut';return{cid:'tChartC',cfg:{type:t,data:{labels:d.map(function(x){return x.type+' ('+x.count+', '+x.pct+'%)'}),datasets:[{label:'Ieraksti',data:d.map(function(x){return x.count}),backgroundColor:ip?CL.slice(0,d.length):CL.slice(0,d.length).map(function(c){return c+'99'}),borderColor:ip?'#131820':CL.slice(0,d.length),borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:ip}},scales:ip?{}:{x:scaleOpts(),y:scaleOpts()}}}};};CT.tChart='bar';
+CFG.sChart=function(t){var d=D.source;var ip=t==='doughnut';return{cid:'sChartC',cfg:{type:t,data:{labels:d.map(function(s){return s.source_type+' ('+s.count+', '+s.pct+'%)'}),datasets:[{label:'Ieraksti',data:d.map(function(s){return s.count}),backgroundColor:[CL[0]+'99',CL[1]+'99'],borderColor:ip?'#131820':[CL[0],CL[1]],borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:ip}},scales:ip?{}:{x:scaleOpts(),y:scaleOpts()}}}};};CT.sChart='doughnut';
+CFG.tAvg=function(t){var d=D.type;return{cid:'tAvgC',cfg:{type:t,data:{labels:d.map(function(x){return x.type}),datasets:[{label:'Vid. iesaiste',data:d.map(function(x){return x.avg_eng}),backgroundColor:CL.slice(0,d.length).map(function(c){return c+'99'}),borderColor:CL.slice(0,d.length),borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:scaleOpts(),y:scaleOpts()}}}};};CT.tAvg='bar';
+CFG.wDay=function(t){var d=D.weekday;return{cid:'wDayC',cfg:{type:t,data:{labels:d.map(function(w){return w.day_name}),datasets:[{label:'Vid. iesaiste',data:d.map(function(w){return w.avg_eng}),backgroundColor:'rgba(79,140,255,0.5)',borderColor:'#4F8CFF',borderWidth:2,tension:.4,fill:t!=='bar'}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:scaleOpts(),y:scaleOpts()}}}};};CT.wDay='bar';
+CFG.capLen=function(t){var d=D.caption;var sc=dualScale();sc.y.title.text='Vid. iesaiste';sc.y1.title.text='Skaits';return{cid:'capLenC',cfg:{type:t,data:{labels:d.map(function(c){return c.bucket+' rakstz.'}),datasets:[{label:'Vid. iesaiste',data:d.map(function(c){return c.avg_eng}),backgroundColor:'rgba(251,191,36,0.6)',borderColor:'#FBBF24',borderWidth:2,yAxisID:'y'},{label:'Ierakstu skaits',data:d.map(function(c){return c.count}),backgroundColor:'rgba(79,140,255,0.2)',borderColor:'#4F8CFF',borderWidth:1,type:t==='bar'?'bar':t,yAxisID:'y1'}]},options:{responsive:true,maintainAspectRatio:false,scales:sc}}};};CT.capLen='bar';
+CFG.emBin=function(t){var d=D.emoji_binary;var ip=t==='doughnut';return{cid:'emBinC',cfg:{type:t,data:{labels:d.map(function(x){return x.bucket+' (n='+x.count+')'}),datasets:[{label:'Vid. iesaiste',data:d.map(function(x){return x.avg_eng}),backgroundColor:['rgba(167,139,250,0.7)','rgba(79,140,255,0.7)'],borderColor:ip?'#131820':['#A78BFA','#4F8CFF'],borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:ip}},scales:ip?{}:{x:scaleOpts(),y:scaleOpts()}}}};};CT.emBin='bar';
+CFG.htBin=function(t){var d=D.hashtag_binary;var ip=t==='doughnut';return{cid:'htBinC',cfg:{type:t,data:{labels:d.map(function(x){return x.bucket+' (n='+x.count+')'}),datasets:[{label:'Vid. iesaiste',data:d.map(function(x){return x.avg_eng}),backgroundColor:['rgba(52,211,153,0.7)','rgba(79,140,255,0.7)'],borderColor:ip?'#131820':['#34D399','#4F8CFF'],borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:ip}},scales:ip?{}:{x:scaleOpts(),y:scaleOpts()}}}};};CT.htBin='bar';
+CFG.ctaC=function(t){var d=D.cta;var ip=t==='doughnut';return{cid:'ctaCC',cfg:{type:t,data:{labels:d.map(function(x){return x.bucket+' (n='+x.count+')'}),datasets:[{label:'Vid. iesaiste',data:d.map(function(x){return x.avg_eng}),backgroundColor:['rgba(248,113,113,0.7)','rgba(52,211,153,0.7)'],borderColor:ip?'#131820':['#F87171','#34D399'],borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:ip}},scales:ip?{}:{x:scaleOpts(),y:scaleOpts()}}}};};CT.ctaC='bar';
+
+// NEW: Engagement distribution histogram
+CFG.engDist=function(t){var d=D.eng_dist;return{cid:'engDistC',cfg:{type:'bar',data:{labels:d.map(function(x){return x.bucket}),datasets:[{label:'Ierakstu skaits',data:d.map(function(x){return x.count}),backgroundColor:'rgba(167,139,250,0.6)',borderColor:'#A78BFA',borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:Object.assign({},scaleOpts(),{title:{display:true,text:'Iesaiste',color:'#8B95A5'}}),y:Object.assign({},scaleOpts(),{title:{display:true,text:'Ierakstu skaits',color:'#8B95A5'}})}}}};};CT.engDist='bar';
+
+// NEW: H1 vs H2 comparison
+CFG.halfC=function(t){var d=D.half_data;return{cid:'halfCC',cfg:{type:t,data:{labels:d.map(function(h){return h.half}),datasets:[{label:'Vid. iesaiste',data:d.map(function(h){return h.avg_eng}),backgroundColor:['rgba(79,140,255,0.6)','rgba(52,211,153,0.6)'],borderColor:['#4F8CFF','#34D399'],borderWidth:2},{label:'Ieraksti',data:d.map(function(h){return h.posts}),backgroundColor:['rgba(79,140,255,0.15)','rgba(52,211,153,0.15)'],borderColor:['#4F8CFF','#34D399'],borderWidth:1,yAxisID:'y1'}]},options:{responsive:true,maintainAspectRatio:false,scales:function(){var s=dualScale();s.y.title.text='Vid. iesaiste';s.y1.title.text='Ieraksti';return s}()}}};};CT.halfC='bar';
+
+// NEW: C/L ratio by type
+CFG.clType=function(t){var d=D.cl_by_type;return{cid:'clTypeC',cfg:{type:'bar',data:{labels:d.map(function(x){return x.type}),datasets:[{label:'Kom./Likes %',data:d.map(function(x){return x.cl_ratio}),backgroundColor:CL.slice(0,d.length).map(function(c){return c+'99'}),borderColor:CL.slice(0,d.length),borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:scaleOpts(),y:Object.assign({},scaleOpts(),{title:{display:true,text:'Komentari/Likes %',color:'#8B95A5'}})}}}};};CT.clType='bar';
+
+function buildTopPosts(){var top=D.top_posts;var h='<thead><tr><th>#</th><th>Datums</th><th>Tips</th><th>Avots</th><th style="text-align:right">Likes</th><th style="text-align:right">Kom.</th><th style="text-align:right">Iesaiste</th><th>Saite</th></tr></thead><tbody>';top.forEach(function(p,i){h+='<tr><td>'+(i+1)+'</td><td>'+p.date+'</td><td><span class="b bb">'+p.type+'</span></td><td><span class="b '+(p.source_type.indexOf('collab')>=0?'bo':'bg')+'">'+p.source_type+'</span></td><td style="text-align:right">'+nf(p.likes)+'</td><td style="text-align:right">'+nf(p.comments)+'</td><td style="text-align:right;font-weight:700">'+nf(p.engagement)+'</td><td>'+(p.url?'<a href="'+p.url+'" target="_blank">Skatīt</a>':'')+'</td></tr>';});h+='</tbody>';document.getElementById('topT').innerHTML=h;}
+function buildWorstPosts(){var wp=D.worst_posts;var h='<thead><tr><th>#</th><th>Datums</th><th>Tips</th><th>Avots</th><th style="text-align:right">Iesaiste</th><th>Saite</th></tr></thead><tbody>';wp.forEach(function(p,i){h+='<tr><td>'+(i+1)+'</td><td>'+p.date+'</td><td><span class="b bb">'+p.type+'</span></td><td><span class="b '+(p.source_type.indexOf('collab')>=0?'bo':'bg')+'">'+p.source_type+'</span></td><td style="text-align:right;font-weight:700;color:var(--red)">'+nf(p.engagement)+'</td><td>'+(p.url?'<a href="'+p.url+'" target="_blank">Skatīt</a>':'')+'</td></tr>';});h+='</tbody>';document.getElementById('worstT').innerHTML=h;}
+function buildCollabs(){var cp=D.collab_partners||[];var ce=D.collab_partners_by_eng||[];function tbl(data,el,title,cols){if(!el||!data.length){if(el)el.innerHTML='<p style="color:var(--text-3);padding:8px">Nav datu.</p>';return;}var h='<h4 style="color:var(--text-2);font-size:.78em;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">'+title+'</h4><table><thead><tr><th>#</th>';cols.forEach(function(c){h+='<th style="'+(c.align?'text-align:'+c.align:'')+'">'+c.title+'</th>'});h+='</tr></thead><tbody>';data.forEach(function(d,i){h+='<tr><td style="color:var(--text-3)">'+(i+1)+'</td>';cols.forEach(function(c){var s=c.align?'text-align:'+c.align+';':'';if(c.bold)s+='font-weight:700;';if(c.color)s+='color:var(--'+c.color+');';h+='<td style="'+s+'">'+d[c.key]+'</td>';});h+='</tr>';});h+='</tbody></table>';el.innerHTML=h;}tbl(cp,document.getElementById('collabFreq'),'Biezakie partneri',[{key:'name',title:'Partneris'},{key:'count',title:'Ier.',align:'right',bold:true},{key:'avg_eng',title:'Vid.',align:'right',color:'green'}]);tbl(ce,document.getElementById('collabEng'),'Augstaka iesaiste',[{key:'name',title:'Partneris'},{key:'avg_eng',title:'Vid.',align:'right',bold:true,color:'green'},{key:'count',title:'n',align:'right'}]);}
+function buildHashtags(){var ht=D.top_hashtags||[];var el=document.getElementById('hashtagList');if(!el)return;if(!ht.length){el.innerHTML='<p style="color:var(--text-3);padding:16px">Nav hashtagu.</p>';return;}var h='<table><thead><tr><th>#</th><th>Hashtags</th><th style="text-align:right">Skaits</th></tr></thead><tbody>';ht.forEach(function(t,i){h+='<tr><td>'+(i+1)+'</td><td style="color:var(--purple)">'+t.tag+'</td><td style="text-align:right;font-weight:600">'+t.count+'</td></tr>'});h+='</tbody></table>';el.innerHTML=h;}
+
+// NEW: Posting heatmap
+function buildHeatmap(){
+  var hm=D.heatmap;var el=document.getElementById('heatmapG');if(!el||!hm.length)return;
+  var days=['Pirmdiena','Otrdiena','Trešdiena','Ceturtdiena','Piektdiena','Sestdiena','Svētdiena'];
+  var max=0;hm.forEach(function(r){days.forEach(function(d){if(r[d]>max)max=r[d]})});
+  var h='<div class="hm-grid">';
+  h+='<div class="hm-label"></div>';
+  days.forEach(function(d){h+='<div class="hm-label">'+d.substring(0,3)+'</div>'});
+  hm.forEach(function(r){
+    h+='<div class="hm-label">'+r.month+'</div>';
+    days.forEach(function(d){
+      var v=r[d]||0;var intensity=max>0?v/max:0;
+      var bg=v===0?'var(--surface-2)':'rgba(79,140,255,'+Math.max(0.1,intensity).toFixed(2)+')';
+      var clr=intensity>0.5?'#fff':'var(--text-2)';
+      h+='<div class="hm-cell" style="background:'+bg+';color:'+clr+'">'+v+'</div>';
+    });
+  });
+  h+='</div>';el.innerHTML=h;
+}
+
+function initScroll(){var obs=new IntersectionObserver(function(e){e.forEach(function(en){if(en.isIntersecting)en.target.classList.add('visible')})},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});document.querySelectorAll('.section,.con').forEach(function(el){obs.observe(el)});}
+document.addEventListener('DOMContentLoaded',function(){updKPI();Object.keys(CFG).forEach(function(id){rc(id)});buildTopPosts();buildWorstPosts();buildCollabs();buildHashtags();buildHeatmap();document.querySelectorAll('.con').forEach(function(el,i){el.style.transitionDelay=(i*0.06)+'s'});initScroll();});
+
+CFG.hourC=function(t){var d=D.hour.filter(function(h){return h.hour_num>0});if(!d.length)return{cid:'hourCC',cfg:{type:'bar',data:{labels:[],datasets:[]},options:{}}};var sc=dualScale();sc.y.title.text='Vid. iesaiste';sc.y1.title.text='Skaits';return{cid:'hourCC',cfg:{type:t,data:{labels:d.map(function(h){return h.hour}),datasets:[{label:'Vid. iesaiste',data:d.map(function(h){return h.avg_eng}),backgroundColor:'rgba(251,191,36,0.5)',borderColor:'#FBBF24',borderWidth:2,tension:.4,yAxisID:'y'},{label:'Skaits',data:d.map(function(h){return h.count}),backgroundColor:'rgba(79,140,255,0.15)',borderColor:'#4F8CFF',borderWidth:1,type:t==='bar'?'bar':t,yAxisID:'y1'}]},options:{responsive:true,maintainAspectRatio:false,scales:sc}}};};CT.hourC='bar';
+</script></div><div class="unified-footer"><div class="uf-title">Visi Instagram parskati 2025</div><div class="uf-grid"><a class="uf-link summary-link" href="ventspils_social_media_2025.html" title="Kopējais pārskats"><span class="uf-dot" style="background:linear-gradient(135deg,#4F8CFF,#A78BFA)">V</span>Kopējais pārskats</a><a class="uf-link" href="dzimis_ventspili_2025.html" title="Skatīt @dzimis_ventspili analizi"><span class="uf-dot" style="background:#4F8CFF">D</span>@dzimis_ventspili</a><a class="uf-link" href="jurasvarti_2025.html" title="Skatīt @jurasvarti analizi"><span class="uf-dot" style="background:#34D399">J</span>@jurasvarti</a><a class="uf-link" href="latvijahall_2025.html" title="Skatīt @latvijahall analizi"><span class="uf-dot" style="background:#FBBF24">L</span>@latvijahall</a><a class="uf-link" href="ocventspils_2025.html" title="Skatīt @ocventspils analizi"><span class="uf-dot" style="background:#F87171">O</span>@ocventspils</a><a class="uf-link" href="piedzivojumu_parks_2025.html" title="Skatīt @piedzivojumu_parks analizi"><span class="uf-dot" style="background:#A78BFA">P</span>@piedzivojumu_parks</a><a class="uf-link" href="piejuraskempings_2025.html" title="Skatīt @piejuraskempings analizi"><span class="uf-dot" style="background:#06b6d4">P</span>@piejuraskempings</a><a class="uf-link" href="sporta_skola_spars_2025.html" title="Skatīt @sporta_skola_spars analizi"><span class="uf-dot" style="background:#ec4899">S</span>@sporta_skola_spars</a><a class="uf-link active" href="udens_piedzivojumu_parks_2025.html" title="Skatīt @udens_piedzivojumu_parks analizi"><span class="uf-dot" style="background:#14b8a6">U</span>@udens_piedzivojumu_parks</a><a class="uf-link" href="vdcentrs_2025.html" title="Skatīt @vdcentrs analizi"><span class="uf-dot" style="background:#f97316">V</span>@vdcentrs</a><a class="uf-link" href="ventspils_augstskola_2025.html" title="Skatīt @ventspils_augstskola analizi"><span class="uf-dot" style="background:#6366f1">V</span>@ventspils_augstskola</a><a class="uf-link" href="ventspils_biblioteka_2025.html" title="Skatīt @ventspils_biblioteka analizi"><span class="uf-dot" style="background:#84cc16">V</span>@ventspils_biblioteka</a><a class="uf-link" href="ventspils_muzejs_2025.html" title="Skatīt @ventspils_muzejs analizi"><span class="uf-dot" style="background:#a855f7">V</span>@ventspils_muzejs</a><a class="uf-link" href="ventspilsjauniesi_2025.html" title="Skatīt @ventspilsjauniesi analizi"><span class="uf-dot" style="background:#0ea5e9">V</span>@ventspilsjauniesi</a><a class="uf-link" href="ventspilskulturascentrs_2025.html" title="Skatīt @ventspilskulturascentrs analizi"><span class="uf-dot" style="background:#e11d48">V</span>@ventspilskulturascentrs</a><a class="uf-link" href="ventspilslv_2025.html" title="Skatīt @ventspilslv analizi"><span class="uf-dot" style="background:#10b981">V</span>@ventspilslv</a><a class="uf-link" href="ventspilsreiss_2025.html" title="Skatīt @ventspilsreiss analizi"><span class="uf-dot" style="background:#fbbf24">V</span>@ventspilsreiss</a><a class="uf-link" href="ventspilssp_2025.html" title="Skatīt @ventspilssp analizi"><span class="uf-dot" style="background:#7c3aed">V</span>@ventspilssp</a><a class="uf-link" href="ventspilstehnikums_2025.html" title="Skatīt @ventspilstehnikums analizi"><span class="uf-dot" style="background:#2563eb">V</span>@ventspilstehnikums</a><a class="uf-link" href="visitventspils_2025.html" title="Skatīt @visitventspils analizi"><span class="uf-dot" style="background:#dc2626">V</span>@visitventspils</a><a class="uf-link" href="viziumventspils_2025.html" title="Skatīt @viziumventspils analizi"><span class="uf-dot" style="background:#059669">V</span>@viziumventspils</a><a class="uf-link" href="vmv_ventspils_2025.html" title="Skatīt @vmv.ventspils analizi"><span class="uf-dot" style="background:#d946ef">V</span>@vmv.ventspils</a></div><div class="uf-copy">Ventspils Instagram 2025 — 21 konts · Gada pārskats</div></div>
+</body></html>

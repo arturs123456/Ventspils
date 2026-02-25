@@ -1,0 +1,13 @@
+.DS_Store
+*.pyc
+__pycache__/
+ANALIZES_*
+DATU_KONTROLES_*
+KOPSAVILKUMS.md
+LABOJUMI.txt
+LINKU_PARBAUDE_*
+README_ANALIZES.md
+SALAUZTI_LINKI.csv
+fix_grammar_errors.sh
+validate_kpi_data.py
+PARBAUDES_*
