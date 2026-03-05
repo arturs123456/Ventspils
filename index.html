@@ -36,20 +36,25 @@ body{
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.015'/%3E%3C/svg%3E");
   pointer-events:none;z-index:0;
 }
+.top-logo{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:100;
+  text-align:center;
+  padding:18px 20px 14px;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:0.75em;
+  font-weight:600;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  color:var(--text-2);
+  background:linear-gradient(180deg, rgba(6,9,17,0.95) 0%, rgba(6,9,17,0) 100%);
+}
 .wrap{
   position:relative;z-index:1;
   text-align:center;
   max-width:700px;
-  padding:48px 32px;
-}
-.logo{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:0.85em;
-  font-weight:600;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  color:var(--text-2);
-  margin-bottom:20px;
+  padding:72px 32px 48px;
 }
 h1{
   font-family:'Space Grotesk',sans-serif;
@@ -132,9 +137,59 @@ h1 span{color:var(--accent)}
   color:var(--text-2);
   letter-spacing:0.5px;
 }
+
+/* All reports list */
+.all-reports{
+  margin-top:56px;
+  text-align:left;
+}
+.all-reports h2{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:1.15em;
+  font-weight:700;
+  letter-spacing:-0.02em;
+  margin-bottom:20px;
+  color:var(--text-2b);
+  text-align:center;
+}
+.report-group{
+  margin-bottom:28px;
+}
+.report-group-title{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:0.8em;
+  font-weight:600;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--text-2);
+  margin-bottom:10px;
+  padding-bottom:6px;
+  border-bottom:1px solid var(--border);
+}
+.report-list{
+  list-style:none;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:6px 20px;
+}
+.report-list a{
+  display:block;
+  padding:8px 12px;
+  border-radius:10px;
+  color:var(--text-2b);
+  text-decoration:none;
+  font-size:0.82em;
+  transition:all 0.2s ease;
+}
+.report-list a:hover{
+  background:rgba(79,140,255,0.08);
+  color:var(--text-1);
+}
+
 @media(max-width:600px){
   .cards{grid-template-columns:1fr}
   .wrap{padding:32px 20px}
+  .report-list{grid-template-columns:1fr}
 }
 
 /* Download buttons */
@@ -146,8 +201,8 @@ h1 span{color:var(--accent)}
 </head>
 <body>
 <div class="noise"></div>
+<div class="top-logo">Ventspils pašvaldība</div>
 <div class="wrap">
-  <div class="logo">Ventspils pašvaldība</div>
   <h1>Sociālo mediju<br><span>pārskats 2025</span></h1>
   <p class="sub">Ventspils pašvaldības sociālo mediju kontu analītika par 2025. gadu — detalizēti dati, grafiki un secinājumi.</p>
   <div class="cards">
@@ -168,6 +223,53 @@ h1 span{color:var(--accent)}
       <div class="card-desc">30+ lapas — KPI, grupu salīdzinājumi un individuālie pārskati</div>
     </a>
   </div>
+
+  <div class="all-reports">
+    <h2>Visi individuālie pārskati</h2>
+
+    <div class="report-group">
+      <div class="report-group-title">Facebook lapas</div>
+      <ul class="report-list">
+        <li><a href="Facebook_ventspils_2025.html">Ventspils pilsēta</a></li>
+        <li><a href="Facebook_parvalde_turisms_2025.html">Pārvalde &amp; Tūrisms</a></li>
+        <li><a href="Facebook_kultura_2025.html">Kultūra</a></li>
+        <li><a href="Facebook_izglitiba_2025.html">Izglītība</a></li>
+        <li><a href="Facebook_sports_2025.html">Sports</a></li>
+        <li><a href="Facebook_socialais_veseliba_2025.html">Sociālais &amp; Veselība</a></li>
+        <li><a href="Facebook_komunalie_2025.html">Komunālie</a></li>
+        <li><a href="Facebook_partneri_2025.html">Partneri</a></li>
+        <li><a href="Facebook_citi_2025.html">Citi</a></li>
+      </ul>
+    </div>
+
+    <div class="report-group">
+      <div class="report-group-title">Instagram konti</div>
+      <ul class="report-list">
+        <li><a href="ventspilslv_2025.html">ventspils.lv</a></li>
+        <li><a href="visitventspils_2025.html">Visit Ventspils</a></li>
+        <li><a href="ventspilskulturascentrs_2025.html">Kultūras centrs</a></li>
+        <li><a href="ventspils_muzejs_2025.html">Ventspils muzejs</a></li>
+        <li><a href="ventspils_biblioteka_2025.html">Ventspils bibliotēka</a></li>
+        <li><a href="ventspilsjauniesi_2025.html">Ventspils jaunieši</a></li>
+        <li><a href="ventspils_augstskola_2025.html">Ventspils augstskola</a></li>
+        <li><a href="ventspilstehnikums_2025.html">Ventspils tehnikums</a></li>
+        <li><a href="sporta_skola_spars_2025.html">Sporta skola Spars</a></li>
+        <li><a href="ventspilssp_2025.html">Ventspils SP</a></li>
+        <li><a href="ventspilsreiss_2025.html">Ventspils Reiss</a></li>
+        <li><a href="latvijahall_2025.html">Latvija Hall</a></li>
+        <li><a href="jurasvarti_2025.html">Jūras vārti</a></li>
+        <li><a href="dzimis_ventspili_2025.html">Dzimis Ventspilī</a></li>
+        <li><a href="ocventspils_2025.html">OC Ventspils</a></li>
+        <li><a href="piejuraskempings_2025.html">Piejūras kempings</a></li>
+        <li><a href="piedzivojumu_parks_2025.html">Piedzīvojumu parks</a></li>
+        <li><a href="udens_piedzivojumu_parks_2025.html">Ūdens piedzīvojumu parks</a></li>
+        <li><a href="vdcentrs_2025.html">VD Centrs</a></li>
+        <li><a href="viziumventspils_2025.html">Vizium Ventspils</a></li>
+        <li><a href="vmv_ventspils_2025.html">VMV Ventspils</a></li>
+      </ul>
+    </div>
+  </div>
+
   <div class="footer">Ventspils pašvaldība · 2025. gada sociālo mediju analītika</div>
 </div>
 
