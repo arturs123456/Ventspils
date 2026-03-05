@@ -5,6 +5,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 <style>
 :root {
   --bg: #060911;
@@ -133,6 +134,12 @@ a{color:var(--accent);text-decoration:none}a:hover{color:var(--accent-hover)}
 ::-webkit-scrollbar{width:8px}::-webkit-scrollbar-thumb{background:rgba(24,119,242,0.15);border-radius:4px}
 ::selection{background:rgba(24,119,242,0.25);color:var(--text-1)}
 @media(max-width:900px){.two-col,.con-grid,.hm-wrap,.bg-wrap{grid-template-columns:1fr}.container{padding:0 20px 80px}.hero{padding:60px 20px 40px}.hero h1{font-size:2em}.nav{padding:10px 16px;font-size:0.75em}.unified-footer{padding:40px 20px 30px}.unified-footer .uf-grid{gap:8px}}
+
+/* Download buttons */
+.dl-btn{position:absolute;top:8px;right:8px;z-index:10;background:rgba(24,119,242,0.85);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-size:0.72em;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;opacity:0;transition:opacity .25s ease,background .2s ease;display:flex;align-items:center;gap:5px;backdrop-filter:blur(6px);box-shadow:0 2px 8px rgba(0,0,0,0.3)}
+.cs:hover .dl-btn{opacity:1}
+.dl-btn:hover{background:rgba(24,119,242,1);box-shadow:0 4px 16px rgba(24,119,242,0.4)}
+.dl-btn svg{width:14px;height:14px;fill:currentColor}
 </style>
 </head><body>
 
@@ -288,7 +295,55 @@ Chart.defaults.elements.point.hoverRadius=6;
 
 function scOpts(){return{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#8B95A5',font:{size:11}}}}
 var CH={};
-function makeChart(cid,cfg){var el=document.getElementById(cid);if(!el)return;if(CH[cid])CH[cid].destroy();CH[cid]=new Chart(el,cfg)}
+
+Chart.register(ChartDataLabels);
+function addPctLabels(cfg){
+  if(!cfg||!cfg.type)return cfg;
+  if(!cfg.options)cfg.options={};
+  if(!cfg.options.plugins)cfg.options.plugins={};
+  if(cfg.type==='bar'){
+    var isHoriz=cfg.options.indexAxis==='y';
+    var multiDS=cfg.data&&cfg.data.datasets&&cfg.data.datasets.length>1;
+    cfg.options.plugins.datalabels={
+      display:function(ctx){if(ctx.dataset.type==='line')return false;if(multiDS&&ctx.datasetIndex>0)return false;return true},
+      anchor:isHoriz?'end':'end',
+      align:isHoriz?'end':'end',
+      offset:2,
+      color:'rgba(200,210,225,0.85)',
+      font:{size:10,weight:'600'},
+      formatter:function(value,ctx){
+        if(ctx.dataset.type==='line')return '';
+        var ds=ctx.dataset.data;
+        var sum=ds.reduce(function(a,b){return a+(Number(b)||0)},0);
+        if(sum===0||!value)return '';
+        var pct=((value/sum)*100).toFixed(1);
+        if(pct==='100.0')pct='100';
+        if(ds.length<=1)return value;
+        return value+'\n'+pct+'%';
+      },
+      textAlign:'center'
+    };
+    if(isHoriz){
+      cfg.options.plugins.datalabels.anchor='end';
+      cfg.options.plugins.datalabels.align='end';
+      cfg.options.plugins.datalabels.formatter=function(value,ctx){
+        if(ctx.dataset.type==='line')return '';
+        var ds=ctx.dataset.data;
+        var sum=ds.reduce(function(a,b){return a+(Number(b)||0)},0);
+        if(sum===0||!value)return '';
+        var pct=((value/sum)*100).toFixed(1);
+        if(pct==='100.0')pct='100';
+        if(ds.length<=1)return value;
+        return value+' ('+pct+'%)';
+      };
+    }
+  } else {
+    cfg.options.plugins.datalabels={display:false};
+  }
+  return cfg;
+}
+
+function makeChart(cid,cfg){var el=document.getElementById(cid);if(!el)return;if(CH[cid])CH[cid].destroy();addPctLabels(cfg);CH[cid]=new Chart(el,cfg)}
 function alpha(hex,a){var r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);return 'rgba('+r+','+g+','+b+','+a+')'}
 
 // ── KPI ──
@@ -604,5 +659,52 @@ document.addEventListener('DOMContentLoaded',function(){
   initScroll();
 });
 
+</script>
+<div style="text-align:center;padding:18px 0 28px;"><a href="index.html" style="color:#4F8CFF;text-decoration:none;font-size:0.95em;letter-spacing:0.5px;opacity:0.85;transition:opacity .2s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">← Uz sākumu</a></div>
+
+<script>
+/* Chart download helper */
+function dlChart(canvasId){
+  var ch=CH[canvasId];
+  if(!ch){
+    /* Fallback: try getting canvas directly */
+    var cv=document.getElementById(canvasId);
+    if(!cv)return;
+    var url=cv.toDataURL('image/png',1.0);
+  } else {
+    var url=ch.toBase64Image('image/png',1.0);
+  }
+  var a=document.createElement('a');
+  a.href=url;
+  /* Build filename from page title + chart id */
+  var t=document.title.replace(/[^a-zA-Z0-9āčēģīķļņšūžĀČĒĢĪĶĻŅŠŪŽ _-]/g,'').replace(/\s+/g,'_');
+  a.download=t+'__'+canvasId+'.png';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+/* Auto-inject download buttons for all charts */
+(function(){
+  var icon='<svg viewBox="0 0 24 24"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 2h14v2H5v-2z"/></svg>';
+  document.querySelectorAll('.cs').forEach(function(cs){
+    var cv=cs.querySelector('canvas');
+    if(!cv)return;
+    /* Find the .cw wrapper — button goes inside .cs but as sibling to .cw */
+    var btn=document.createElement('button');
+    btn.className='dl-btn';
+    btn.title='Lejupielādēt grafiku';
+    btn.innerHTML=icon+' PNG';
+    btn.onclick=function(e){e.stopPropagation();dlChart(cv.id)};
+    /* .cw is position:relative, so put button inside .cw for correct absolute positioning */
+    var cw=cs.querySelector('.cw');
+    if(cw){
+      cw.style.position='relative';
+      cw.insertBefore(btn,cw.firstChild);
+    } else {
+      cs.style.position='relative';
+      cs.insertBefore(btn,cs.firstChild);
+    }
+  });
+})();
 </script>
 </body></html>
